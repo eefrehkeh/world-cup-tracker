@@ -34,6 +34,7 @@ A running list of bugs, fixes, and feature ideas. Add new ideas to **Backlog** a
 - [x] Manual export/import "restore code" for watched list (kept as a cross-device backup option, no longer the primary persistence mechanism)
 - [x] **Deployed to Netlify**, linked to GitHub repo for auto-deploy on push
 - [x] **Real watched-list persistence** — Netlify Function (`netlify/functions/watched-state.mts`) + Netlify Blobs, keyed by an anonymous per-visitor cookie. No login needed; saves automatically (debounced) whenever watched state changes.
+- [x] Removed the old `DEFAULT_WATCHED_CODE` seed — it was leftover from before real persistence existed and was incorrectly pre-checking the same 40 historical matches for every new visitor (and overriding genuinely-empty saved states). New/empty states now correctly start at 0.
 - [x] "Clear All Watched Matches" button (tap-twice confirm pattern, can't be triggered by accident)
 - [x] YouTube highlight search links (Supersport, FIFA, ESPN FC, Fox Sports, Fox Soccer)
 - [x] Embedded video player slot per match (pending real video IDs; embed mechanism itself should now work since we're off Claude's sandbox)
