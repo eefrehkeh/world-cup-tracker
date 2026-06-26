@@ -1899,9 +1899,6 @@ let currentView = "group";
 // in-memory-only tracking if the API isn't reachable (e.g. viewing the raw
 // HTML file locally, or briefly during a deploy).
 const WATCHED_API = "/api/watched-state";
-// One-time seed used only if the API has nothing saved yet for this visitor
-// AND there's no local default — kept as a safety net from earlier sessions.
-const DEFAULT_WATCHED_CODE = "WC26-WyJ3YzI2LUEtTWV4aWNvLVNvdXRoX0FmcmljYS1KdW5fMTEiLCJ3YzI2LUEtU291dGhfS29yZWEtQ3plY2hpYS1KdW5fMTEiLCJ3YzI2LUItQ2FuYWRhLUJvc25pYV9hbmRfSGVyemVnb3ZpbmEtSnVuXzEyIiwid2MyNi1ELVVuaXRlZF9TdGF0ZXMtUGFyYWd1YXktSnVuXzEyIiwid2MyNi1CLVFhdGFyLVN3aXR6ZXJsYW5kLUp1bl8xMyIsIndjMjYtQy1CcmF6aWwtTW9yb2Njby1KdW5fMTMiLCJ3YzI2LUMtU2NvdGxhbmQtSGFpdGktSnVuXzEzIiwid2MyNi1ELUF1c3RyYWxpYS1Uw7xya2l5ZS1KdW5fMTMiLCJ3YzI2LUUtR2VybWFueS1DdXJhw6dhby1KdW5fMTQiLCJ3YzI2LUUtSXZvcnlfQ29hc3QtRWN1YWRvci1KdW5fMTQiLCJ3YzI2LUYtTmV0aGVybGFuZHMtSmFwYW4tSnVuXzE0Iiwid2MyNi1GLVN3ZWRlbi1UdW5pc2lhLUp1bl8xNCIsIndjMjYtRy1CZWxnaXVtLUVneXB0LUp1bl8xNSIsIndjMjYtRy1JcmFuLU5ld19aZWFsYW5kLUp1bl8xNSIsIndjMjYtSC1TcGFpbi1DYXBlX1ZlcmRlLUp1bl8xNSIsIndjMjYtSC1TYXVkaV9BcmFiaWEtVXJ1Z3VheS1KdW5fMTUiLCJ3YzI2LUktRnJhbmNlLVNlbmVnYWwtSnVuXzE2Iiwid2MyNi1JLUlyYXEtTm9yd2F5LUp1bl8xNiIsIndjMjYtSi1BcmdlbnRpbmEtQWxnZXJpYS1KdW5fMTYiLCJ3YzI2LUotQXVzdHJpYS1Kb3JkYW4tSnVuXzE2Iiwid2MyNi1LLVBvcnR1Z2FsLURSX0NvbmdvLUp1bl8xNyIsIndjMjYtSy1Db2xvbWJpYS1VemJla2lzdGFuLUp1bl8xNyIsIndjMjYtTC1FbmdsYW5kLUNyb2F0aWEtSnVuXzE3Iiwid2MyNi1MLUdoYW5hLVBhbmFtYS1KdW5fMTciLCJ3YzI2LUEtQ3plY2hpYS1Tb3V0aF9BZnJpY2EtSnVuXzE4Iiwid2MyNi1BLU1leGljby1Tb3V0aF9Lb3JlYS1KdW5fMTgiLCJ3YzI2LUItQ2FuYWRhLVFhdGFyLUp1bl8xOCIsIndjMjYtQy1TY290bGFuZC1Nb3JvY2NvLUp1bl8xOSIsIndjMjYtQy1CcmF6aWwtSGFpdGktSnVuXzE5Iiwid2MyNi1ELVVuaXRlZF9TdGF0ZXMtQXVzdHJhbGlhLUp1bl8xOSIsIndjMjYtRC1Uw7xya2l5ZS1QYXJhZ3VheS1KdW5fMTkiLCJ3YzI2LUUtR2VybWFueS1Jdm9yeV9Db2FzdC1KdW5fMjAiLCJ3YzI2LUUtRWN1YWRvci1DdXJhw6dhby1KdW5fMjAiLCJ3YzI2LUYtTmV0aGVybGFuZHMtU3dlZGVuLUp1bl8yMCIsIndjMjYtRi1UdW5pc2lhLUphcGFuLUp1bl8yMCIsIndjMjYtRy1CZWxnaXVtLUlyYW4tSnVuXzIxIiwid2MyNi1HLU5ld19aZWFsYW5kLUVneXB0LUp1bl8yMSIsIndjMjYtSC1TcGFpbi1TYXVkaV9BcmFiaWEtSnVuXzIxIiwid2MyNi1ILVVydWd1YXktQ2FwZV9WZXJkZS1KdW5fMjEiLCJ3YzI2LUktRnJhbmNlLUlyYXEtSnVuXzIyIl0=";
 
 let watchedSet = new Set();
 let watchedStorageReady = false;
@@ -1913,29 +1910,15 @@ async function loadWatchedState(){
     if(res.ok){
       const data = await res.json();
       apiAvailable = true;
-      if(Array.isArray(data.watched) && data.watched.length > 0){
-        watchedSet = new Set(data.watched);
-      } else {
-        // API works but has nothing saved yet for this visitor — seed from
-        // the legacy default code so earlier-session progress isn't lost.
-        try{
-          watchedSet = new Set(decodeWatchedCode(DEFAULT_WATCHED_CODE));
-        }catch(e){
-          watchedSet = new Set();
-        }
-      }
+      watchedSet = (Array.isArray(data.watched)) ? new Set(data.watched) : new Set();
     } else {
       throw new Error(`API responded ${res.status}`);
     }
   }catch(e){
     apiAvailable = false;
     // API unreachable (local file preview, function cold-start failure, etc.)
-    // Fall back to the seeded default so the tracker is still usable.
-    try{
-      watchedSet = new Set(decodeWatchedCode(DEFAULT_WATCHED_CODE));
-    }catch(err){
-      watchedSet = new Set();
-    }
+    // Start with an empty set rather than guessing at prior state.
+    watchedSet = new Set();
   }
   watchedStorageReady = true;
 }
