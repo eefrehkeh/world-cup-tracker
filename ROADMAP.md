@@ -8,14 +8,12 @@ A running list of bugs, fixes, and feature ideas. Add new ideas to **Backlog** a
 
 ## 🔴 Bugs
 
-- [ ] YouTube embeds show "content blocked" in Claude's artifact preview and Error 153 when the downloaded HTML is opened directly — root cause is referrer/sandbox related, not fixable from inside the HTML alone. Needs real hosting (see Deployment below) to resolve fully.
-- [ ] Watched-list persistence (`window.storage`) doesn't reliably save in the artifact sandbox — currently worked around with a manual export/import code. Needs real storage once hosted (see Storage Options below).
+- [ ] YouTube embeds show "content blocked" in Claude's artifact preview and Error 153 when the downloaded HTML is opened directly — root cause is referrer/sandbox related, not fixable from inside the HTML alone. Should be re-tested now that the site is live on a real domain (this was the actual root cause).
 
 ## 🟡 In Progress / Next Up
 
-- [ ] **Deploy to Netlify** — get the tracker live on a real URL instead of a downloaded file.
-- [ ] **Fix YouTube embeds on the deployed site** — once off Claude's sandbox, confirm embeds work normally (this should resolve itself once hosted for real, but verify).
-- [ ] **Real persistence for watched list** — swap the manual export/import code for actual saved storage (see options below).
+- [ ] **Verify YouTube embeds work now that we're deployed for real** — this was blocked by Claude's sandbox before; confirm on the live Netlify URL.
+- [ ] Fill in real Fox Soccer video IDs match by match.
 
 ## 🔵 Backlog (ideas, not yet started)
 
@@ -33,9 +31,12 @@ A running list of bugs, fixes, and feature ideas. Add new ideas to **Backlog** a
 - [x] By Group / By Date / By Team / Bracket views
 - [x] Progressive standings tables (group & date views)
 - [x] Watched-match tracking + session counter
-- [x] Manual export/import "restore code" for watched list (stopgap until real storage)
+- [x] Manual export/import "restore code" for watched list (kept as a cross-device backup option, no longer the primary persistence mechanism)
+- [x] **Deployed to Netlify**, linked to GitHub repo for auto-deploy on push
+- [x] **Real watched-list persistence** — Netlify Function (`netlify/functions/watched-state.mts`) + Netlify Blobs, keyed by an anonymous per-visitor cookie. No login needed; saves automatically (debounced) whenever watched state changes.
+- [x] "Clear All Watched Matches" button (tap-twice confirm pattern, can't be triggered by accident)
 - [x] YouTube highlight search links (Supersport, FIFA, ESPN FC, Fox Sports, Fox Soccer)
-- [x] Embedded video player slot per match (pending real video IDs + hosting fix)
+- [x] Embedded video player slot per match (pending real video IDs; embed mechanism itself should now work since we're off Claude's sandbox)
 - [x] Visual knockout bracket (Round of 32 → Final) with real connector lines
 - [x] Responsive bracket: full-width stretch on desktop, horizontal scroll mid-size, swipeable paging on mobile
 - [x] Full-bleed bracket layout on wide screens
@@ -44,8 +45,8 @@ A running list of bugs, fixes, and feature ideas. Add new ideas to **Backlog** a
 
 ## 📌 Research Notes (so far)
 
-### Storage options (no database needed)
-**Netlify Blobs** — included free on Netlify's free tier (10GB storage). This is almost certainly the right fix for the watched-list persistence bug — it's built into Netlify, requires no separate service, and replaces the manual export/import code with real automatic saving. Action: once deployed, wire up a small Netlify Function that reads/writes a blob per visitor (likely keyed by a random ID stored in a cookie, since there's no login yet).
+### Storage — now implemented
+Went with **Netlify Blobs**, accessed through a small serverless function (`/api/watched-state`, GET to load / POST to save). Visitors get an anonymous random ID in an httpOnly cookie on first visit — no accounts, no passwords, nothing for the user to set up. The client fetches saved state on page load and pushes updates automatically (debounced ~500ms after the last checkbox click) — no manual "save" step needed day to day. The old export/import code system is kept as a secondary option for moving watched-progress between browsers/devices, since the cookie is per-browser.
 
 ### Auth options (if/when we want accounts)
 - Netlify's own "Identity" product is **deprecated** — not an option.

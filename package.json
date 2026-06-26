@@ -1,0 +1,9 @@
+{
+  "name": "worldcup-tracker",
+  "private": true,
+  "version": "1.0.0",
+  "dependencies": {
+    "@netlify/blobs": "^8",
+    "@netlify/functions": "^2"
+  }
+}
