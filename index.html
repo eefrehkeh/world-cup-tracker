@@ -205,6 +205,17 @@
     transition:background .15s ease;
   }
   .btn-backup-action:hover{background:var(--pitch-light);}
+  .backup-section-danger{
+    border-color:rgba(185,78,44,0.35);
+    background:rgba(185,78,44,0.04);
+  }
+  .btn-backup-danger{
+    background:var(--rust);
+  }
+  .btn-backup-danger:hover{background:#9c3f22;}
+  .btn-backup-danger.confirming{
+    background:#7a2e15;
+  }
   .backup-feedback{
     font-family:'JetBrains Mono', monospace;
     font-size:11.5px;
@@ -1102,6 +1113,11 @@
     <div class="backup-label">Restore from a code</div>
     <textarea class="backup-code" id="backupCodeInput" rows="3" placeholder="Paste your saved code here…"></textarea>
     <button class="btn-backup-action" id="restoreCodeBtn">Restore</button>
+  </div>
+  <div class="backup-section backup-section-danger">
+    <div class="backup-label">Clear watched list</div>
+    <p class="backup-help">Unchecks every match you've marked as watched. This can't be undone — save your code above first if you want to keep a copy.</p>
+    <button class="btn-backup-action btn-backup-danger" id="clearWatchedBtn">Clear All Watched Matches</button>
   </div>
   <div class="backup-feedback" id="backupFeedback"></div>
 </div>
@@ -2156,6 +2172,43 @@ function setupBackupPanel(){
       feedback.textContent = "That code didn't look right — double check you copied the whole thing.";
       feedback.className = "backup-feedback";
     }
+  });
+
+  const clearBtn = document.getElementById('clearWatchedBtn');
+  let clearArmed = false;
+  let clearArmTimeout = null;
+
+  clearBtn.addEventListener('click', ()=>{
+    if(watchedSet.size === 0){
+      feedback.textContent = "Nothing watched yet — there's nothing to clear.";
+      feedback.className = "backup-feedback";
+      return;
+    }
+    if(!clearArmed){
+      clearArmed = true;
+      clearBtn.textContent = "Tap again to confirm — this can't be undone";
+      clearBtn.classList.add('confirming');
+      clearArmTimeout = setTimeout(()=>{
+        clearArmed = false;
+        clearBtn.textContent = "Clear All Watched Matches";
+        clearBtn.classList.remove('confirming');
+      }, 4000);
+      return;
+    }
+    // second click within the window — actually clear
+    clearTimeout(clearArmTimeout);
+    clearArmed = false;
+    clearBtn.textContent = "Clear All Watched Matches";
+    clearBtn.classList.remove('confirming');
+
+    const clearedCount = watchedSet.size;
+    watchedSet = new Set();
+    applyWatchedStateToDOM();
+    refreshBackupCodeOutput();
+    saveWatchedState();
+    input.value = "";
+    feedback.textContent = `Cleared ${clearedCount} watched match${clearedCount === 1 ? '' : 'es'}.`;
+    feedback.className = "backup-feedback success";
   });
 }
 
