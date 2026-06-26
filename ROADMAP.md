@@ -1,0 +1,65 @@
+# World Cup Tracker — Roadmap & Board
+
+_Last updated: June 26, 2026_
+
+A running list of bugs, fixes, and feature ideas. Add new ideas to **Backlog** as they come up; move things across columns as they progress.
+
+---
+
+## 🔴 Bugs
+
+- [ ] YouTube embeds show "content blocked" in Claude's artifact preview and Error 153 when the downloaded HTML is opened directly — root cause is referrer/sandbox related, not fixable from inside the HTML alone. Needs real hosting (see Deployment below) to resolve fully.
+- [ ] Watched-list persistence (`window.storage`) doesn't reliably save in the artifact sandbox — currently worked around with a manual export/import code. Needs real storage once hosted (see Storage Options below).
+
+## 🟡 In Progress / Next Up
+
+- [ ] **Deploy to Netlify** — get the tracker live on a real URL instead of a downloaded file.
+- [ ] **Fix YouTube embeds on the deployed site** — once off Claude's sandbox, confirm embeds work normally (this should resolve itself once hosted for real, but verify).
+- [ ] **Real persistence for watched list** — swap the manual export/import code for actual saved storage (see options below).
+
+## 🔵 Backlog (ideas, not yet started)
+
+- [ ] User accounts / login (Google, Apple, etc.) so watched progress follows a person across devices
+- [ ] Visual redesign pass — hero treatment, possibly a photo carousel of real World Cup moments
+- [ ] Stats tracker: top scorers, cards, clean sheets, historical World Cup facts
+- [ ] Ads / monetization — pending traffic realism (see notes below)
+- [ ] Real video IDs for Fox Soccer highlights, filled in match by match
+- [ ] Cross-check the knockout bracket's `from:[...]` feed mapping against FIFA's official Round of 16 draw once announced
+- [ ] Mobile app wrapper? (probably overkill for v1 — revisit if traffic justifies it)
+
+## ✅ Done
+
+- [x] Group stage tracker: all 12 groups, 71 matches, spoiler-protected scores
+- [x] By Group / By Date / By Team / Bracket views
+- [x] Progressive standings tables (group & date views)
+- [x] Watched-match tracking + session counter
+- [x] Manual export/import "restore code" for watched list (stopgap until real storage)
+- [x] YouTube highlight search links (Supersport, FIFA, ESPN FC, Fox Sports, Fox Soccer)
+- [x] Embedded video player slot per match (pending real video IDs + hosting fix)
+- [x] Visual knockout bracket (Round of 32 → Final) with real connector lines
+- [x] Responsive bracket: full-width stretch on desktop, horizontal scroll mid-size, swipeable paging on mobile
+- [x] Full-bleed bracket layout on wide screens
+
+---
+
+## 📌 Research Notes (so far)
+
+### Storage options (no database needed)
+**Netlify Blobs** — included free on Netlify's free tier (10GB storage). This is almost certainly the right fix for the watched-list persistence bug — it's built into Netlify, requires no separate service, and replaces the manual export/import code with real automatic saving. Action: once deployed, wire up a small Netlify Function that reads/writes a blob per visitor (likely keyed by a random ID stored in a cookie, since there's no login yet).
+
+### Auth options (if/when we want accounts)
+- Netlify's own "Identity" product is **deprecated** — not an option.
+- **Supabase Auth** — free tier, handles Google/Apple/etc. social login, and also gives us a real Postgres database + storage in one place if we ever outgrow Blobs. Has a direct connector available.
+- **Firebase Auth** — also free-tier friendly, deep Google ecosystem integration, slightly less appealing if we don't want to also adopt Firestore.
+- Recommendation: hold off on accounts until there's a reason (e.g., people actually asking to sync across devices). It's real scope — sign-up flows, password resets, session handling — not a small add-on.
+
+### Ads / monetization reality check
+Pulled current benchmarks (mid-2026):
+- Typical AdSense RPM (revenue per 1,000 pageviews) for a general-interest site: **$2–$10**, with sports/entertainment content usually on the lower end of that.
+- At a $5 RPM, **20,000 monthly pageviews ≈ $100/month**. At $10 RPM, same traffic ≈ $200/month.
+- To hit something like $3,000/month from ads alone, realistic estimates land around **300,000–600,000 monthly pageviews** — a lot of traffic for a single-tournament tracker.
+- Practical read: a World Cup tracker has a built-in problem for ad revenue — it's extremely seasonal (huge interest for ~6 weeks every 2–4 years, then nothing). That hurts both traffic consistency and advertiser demand outside the tournament window.
+- Bottom line: don't plan around meaningful ad income unless this grows into something with much bigger, more consistent traffic (e.g., expanding beyond just the World Cup to year-round soccer content). Worth tracking traffic for a few weeks post-launch to get real numbers before investing more time in monetization.
+
+### Hosting
+- Netlify free tier: 100GB bandwidth/month, 300 build minutes, 125k function calls, 10GB Blob storage — plenty for this project at any realistic traffic level for now.

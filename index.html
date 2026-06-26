@@ -1,0 +1,2166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026 World Cup — Group Stage Tracker</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Archivo:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+  :root{
+    --paper:#f6f1e4;
+    --paper-2:#efe8d4;
+    --ink:#1b2a1f;
+    --pitch:#1e5631;
+    --pitch-dark:#123a20;
+    --pitch-light:#2f7a45;
+    --gold:#d9a52c;
+    --gold-soft:#e8c878;
+    --rust:#b94e2c;
+    --line:#c9bd9b;
+    --card:#fffdf7;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--paper);
+    background-image:
+      radial-gradient(circle at 1px 1px, rgba(27,42,31,0.06) 1px, transparent 0);
+    background-size:18px 18px;
+    color:var(--ink);
+    font-family:'Archivo', sans-serif;
+    padding:0 0 60px;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .wrap{max-width:900px;margin:0 auto;padding:0 16px;}
+
+  /* HEADER */
+  header.hero{
+    background:
+      linear-gradient(160deg, var(--pitch) 0%, var(--pitch-dark) 100%);
+    color:var(--paper);
+    padding:36px 16px 28px;
+    position:relative;
+    overflow:hidden;
+    border-bottom:6px solid var(--gold);
+  }
+  header.hero::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image:
+      repeating-linear-gradient(90deg, rgba(255,255,255,0.05) 0 2px, transparent 2px 90px);
+    pointer-events:none;
+  }
+  .hero-inner{max-width:900px;margin:0 auto;position:relative;z-index:1;}
+  .eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:var(--gold-soft);
+    margin:0 0 10px;
+    display:flex; align-items:center; gap:8px;
+  }
+  .eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--rust);box-shadow:0 0 0 3px rgba(185,78,44,0.25);}
+  h1{
+    font-family:'Bebas Neue', sans-serif;
+    font-size:54px;
+    letter-spacing:.01em;
+    line-height:0.95;
+    margin:0 0 6px;
+    color:var(--paper);
+  }
+  h1 span{color:var(--gold-soft);}
+  .hero-sub{
+    font-size:14.5px;
+    max-width:560px;
+    color:#dfe6d6;
+    margin:0 0 20px;
+    line-height:1.5;
+  }
+  .stat-row{display:flex; gap:10px; flex-wrap:wrap;}
+  .stat-chip{
+    background:rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.18);
+    border-radius:3px;
+    padding:8px 14px;
+    font-family:'JetBrains Mono', monospace;
+  }
+  .stat-chip b{display:block; font-size:18px; color:var(--gold-soft);}
+  .stat-chip span{font-size:10px; letter-spacing:.08em; text-transform:uppercase; color:#c8d1bd;}
+  .stat-chip.watched-chip{border-color:rgba(217,165,44,0.5); position:relative;}
+  .stat-chip.watched-chip b{color:#9fd9ae;}
+  .save-status{
+    font-size:8.5px;
+    letter-spacing:.04em;
+    text-transform:none;
+    color:#e0b370;
+    margin-top:3px;
+    min-height:11px;
+  }
+
+  /* CONTROLS */
+  .controls{
+    max-width:900px;margin:0 auto;
+    padding:18px 16px 0;
+    display:flex; justify-content:space-between; align-items:center; gap:10px;
+    flex-wrap:wrap;
+  }
+  .view-toggle{
+    display:flex;
+    background:var(--card);
+    border:1.5px solid var(--ink);
+    border-radius:4px;
+    overflow:hidden;
+  }
+  .toggle-btn{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    letter-spacing:.03em;
+    text-transform:uppercase;
+    background:transparent;
+    border:none;
+    color:var(--ink);
+    padding:9px 12px;
+    cursor:pointer;
+    transition:background .15s ease, color .15s ease;
+    white-space:nowrap;
+  }
+  .toggle-btn + .toggle-btn{border-left:1.5px solid var(--ink);}
+  .toggle-btn.active{background:var(--pitch); color:var(--paper);}
+  .toggle-btn:hover:not(.active){background:var(--gold-soft);}
+
+  .backup-row{
+    max-width:900px;margin:10px auto 0;
+    padding:0 16px;
+  }
+  .btn-backup{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    letter-spacing:.04em;
+    background:transparent;
+    border:1px dashed var(--line);
+    color:#5b5443;
+    padding:7px 14px;
+    border-radius:4px;
+    cursor:pointer;
+    transition:background .15s ease, border-color .15s ease;
+  }
+  .btn-backup:hover{background:var(--paper-2); border-color:var(--ink);}
+
+  .backup-panel{
+    max-width:900px;margin:10px auto 0;
+    padding:0 16px;
+    display:none;
+  }
+  .backup-panel.open{display:block;}
+  .backup-section{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:14px;
+    margin-bottom:10px;
+  }
+  .backup-label{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    color:var(--pitch);
+    margin-bottom:6px;
+    font-weight:700;
+  }
+  .backup-help{
+    font-size:12.5px;
+    color:#5b5443;
+    margin:0 0 10px;
+    line-height:1.5;
+  }
+  .backup-code{
+    width:100%;
+    font-family:'JetBrains Mono', monospace;
+    font-size:11.5px;
+    color:var(--ink);
+    background:var(--paper-2);
+    border:1px solid var(--line);
+    border-radius:4px;
+    padding:10px;
+    resize:vertical;
+    box-sizing:border-box;
+    margin-bottom:8px;
+  }
+  .btn-backup-action{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11.5px;
+    letter-spacing:.04em;
+    text-transform:uppercase;
+    background:var(--pitch);
+    color:var(--paper);
+    border:none;
+    border-radius:4px;
+    padding:8px 16px;
+    cursor:pointer;
+    transition:background .15s ease;
+  }
+  .btn-backup-action:hover{background:var(--pitch-light);}
+  .backup-feedback{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11.5px;
+    color:var(--rust);
+    padding:0 2px;
+    min-height:16px;
+  }
+  .backup-feedback.success{color:var(--pitch);}
+  .btn-reveal-all{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11.5px;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    background:var(--card);
+    border:1.5px solid var(--ink);
+    color:var(--ink);
+    padding:9px 16px;
+    border-radius:3px;
+    cursor:pointer;
+    transition:transform .12s ease, background .15s ease;
+  }
+  .btn-reveal-all:hover{background:var(--gold-soft); transform:translateY(-1px);}
+  .btn-reveal-all:active{transform:translateY(0);}
+
+  /* GROUP NAV */
+  .group-nav{
+    max-width:900px;margin:18px auto 0;
+    padding:0 16px;
+    display:flex; flex-wrap:wrap; gap:6px;
+  }
+  .group-nav a{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    text-decoration:none;
+    color:var(--pitch);
+    border:1px solid var(--line);
+    background:var(--card);
+    padding:6px 10px;
+    border-radius:3px;
+    font-weight:600;
+  }
+  .group-nav a:hover{background:var(--pitch); color:var(--paper); border-color:var(--pitch);}
+
+  /* TEAM (COUNTRY) VIEW */
+  .team-chips{
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+    margin-bottom:22px;
+    padding-bottom:18px;
+    border-bottom:2px solid var(--line);
+  }
+  .team-chip{
+    font-family:'Archivo', sans-serif;
+    font-size:12.5px;
+    font-weight:600;
+    background:var(--card);
+    border:1px solid var(--line);
+    color:var(--ink);
+    padding:7px 12px;
+    border-radius:20px;
+    cursor:pointer;
+    transition:background .15s ease, color .15s ease, border-color .15s ease;
+  }
+  .team-chip:hover{background:var(--gold-soft); border-color:var(--gold);}
+  .team-chip.active{background:var(--pitch); color:var(--paper); border-color:var(--pitch);}
+  .team-letter{
+    font-size:30px !important;
+    color:var(--pitch);
+  }
+  .empty-note{
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px;
+    color:#8a8267;
+    padding:20px 4px;
+  }
+
+  /* BRACKET VIEW */
+  .bracket-note{
+    font-size:13px;
+    color:#5b5443;
+    line-height:1.6;
+    background:var(--paper-2);
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:12px 14px;
+    margin-bottom:18px;
+  }
+  /* Round quick-jump tabs */
+  .bk-round-tabs{
+    display:flex;
+    gap:6px;
+    overflow-x:auto;
+    padding-bottom:8px;
+    margin-bottom:14px;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+  }
+  .bk-round-tabs::-webkit-scrollbar{display:none;}
+  .bk-round-tab{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    letter-spacing:.03em;
+    text-transform:uppercase;
+    white-space:nowrap;
+    background:var(--card);
+    border:1.5px solid var(--line);
+    color:var(--ink);
+    padding:8px 13px;
+    border-radius:20px;
+    cursor:pointer;
+    flex-shrink:0;
+    transition:background .15s ease, color .15s ease, border-color .15s ease;
+  }
+  .bk-round-tab:hover{background:var(--gold-soft);}
+  .bk-round-tab.active{background:var(--pitch); color:var(--paper); border-color:var(--pitch);}
+
+  /* Horizontally-scrollable bracket tree */
+  .bk-scroll{
+    overflow-x:auto;
+    overflow-y:hidden;
+    width:100%;
+    border:1px solid var(--line);
+    border-radius:10px;
+    background:
+      linear-gradient(180deg, rgba(30,86,49,0.04), transparent 140px),
+      var(--card);
+    -webkit-overflow-scrolling:touch;
+    padding:14px 4px;
+    box-sizing:border-box;
+  }
+  /* Full-bleed breakout: on wider screens, let the bracket extend well beyond
+     the 900px content column to use the available horizontal space. */
+  @media (min-width:1000px){
+    body.bracket-view-active main{
+      max-width:none;
+      padding-left:24px;
+      padding-right:24px;
+    }
+    /* keep the text blocks readable & centered at content width */
+    body.bracket-view-active #bracket-section > .group-head,
+    body.bracket-view-active #bracket-section > .bracket-note,
+    body.bracket-view-active #bracket-section > .bk-round-tabs,
+    body.bracket-view-active #bracket-section > .bk-thirdplace,
+    body.bracket-view-active #bracket-section > .bracket-progress,
+    body.bracket-view-active .bracket-date-divider{
+      max-width:868px;
+      margin-left:auto;
+      margin-right:auto;
+    }
+    /* the date-view section below stays at content width */
+    body.bracket-view-active main > .group-section:not(#bracket-section){
+      max-width:868px;
+      margin-left:auto;
+      margin-right:auto;
+    }
+    /* give columns more breathing room when there's space */
+    body.bracket-view-active .bk-col{
+      width:200px;
+      flex-basis:200px;
+    }
+  }
+  /* On wide screens the five columns stretch equally to fill the full width
+     (no internal horizontal scroll). */
+  @media (min-width:1100px){
+    body.bracket-view-active .bk-scroll{
+      overflow-x:hidden;
+    }
+    body.bracket-view-active .bk-tree{
+      min-width:0;
+      width:100%;
+    }
+    body.bracket-view-active .bk-col{
+      flex:1 1 0;
+      width:auto;
+      min-width:0;
+    }
+  }
+  .bk-scroll::-webkit-scrollbar{height:8px;}
+  .bk-scroll::-webkit-scrollbar-thumb{background:var(--line); border-radius:4px;}
+
+  /* ---- Narrow-screen paging mode ----
+     Below 720px the tree becomes a swipeable pager: one round per screen,
+     connector lines hidden, navigation by swipe / tabs / dots. */
+  @media (max-width:719px){
+    .bk-scroll.bk-paged{
+      overflow:hidden;
+      padding:14px 0;
+    }
+    .bk-scroll.bk-paged .bk-tree{
+      min-width:0;
+      width:100%;
+      transition:transform .35s cubic-bezier(.4,0,.2,1);
+    }
+    .bk-scroll.bk-paged .bk-col{
+      flex:0 0 100%;
+      width:100%;
+      min-width:100%;
+      padding:0 14px;
+    }
+    /* hide connector elbows in paged mode (no adjacent column to connect to) */
+    .bk-scroll.bk-paged .bk-slot::after,
+    .bk-scroll.bk-paged .bk-match::before,
+    .bk-scroll.bk-paged .bk-match::after{
+      display:none;
+    }
+    /* give matches more room to breathe since there's vertical space to spare */
+    .bk-scroll.bk-paged .bk-slot{min-height:108px; padding:14px 0;}
+    .bk-scroll.bk-paged .bk-col-title{font-size:26px;}
+  }
+  /* position dots — only shown in paged mode */
+  .bk-dots{
+    display:none;
+    justify-content:center;
+    gap:8px;
+    margin:14px 0 0;
+  }
+  .bk-dots.bk-dots-visible{display:flex;}
+  .bk-dot{
+    width:9px; height:9px;
+    border-radius:50%;
+    background:var(--line);
+    cursor:pointer;
+    transition:background .15s ease, transform .15s ease;
+  }
+  .bk-dot.active{background:var(--pitch); transform:scale(1.25);}
+
+  .bk-tree{
+    display:flex;
+    align-items:stretch;
+    min-width:max-content;
+  }
+  .bk-col{
+    display:flex;
+    flex-direction:column;
+    width:172px;
+    flex:0 0 172px;
+    padding:0 6px;
+  }
+  .bk-col-head{
+    text-align:center;
+    border-bottom:2px solid var(--ink);
+    padding-bottom:6px;
+    margin-bottom:6px;
+  }
+  .bk-col-title{
+    font-family:'Bebas Neue', sans-serif;
+    font-size:20px;
+    line-height:1;
+    color:var(--pitch);
+  }
+  .bk-col-sub{
+    font-family:'JetBrains Mono', monospace;
+    font-size:9px;
+    color:var(--rust);
+    font-weight:700;
+    margin-top:2px;
+  }
+  /* The body distributes matches evenly so later rounds center between feeders */
+  .bk-col-body{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-around;
+  }
+  /* Each slot holds one match and grows to share vertical space equally */
+  .bk-slot{
+    flex:1;
+    display:flex;
+    align-items:center;
+    position:relative;
+    min-height:72px;
+    padding:12px 0;
+    box-sizing:border-box;
+  }
+
+  .bk-match{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:7px;
+    padding:7px 8px;
+    display:flex;
+    flex-direction:column;
+    gap:3px;
+    width:100%;
+    position:relative;
+    z-index:1;
+  }
+  .bk-match-meta{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-family:'JetBrains Mono', monospace;
+    font-size:8.5px;
+    letter-spacing:.03em;
+    text-transform:uppercase;
+    color:#9c9374;
+  }
+  .bk-match-date{color:var(--rust); font-weight:700;}
+  .bk-team{
+    font-family:'Archivo', sans-serif;
+    font-size:12.5px;
+    font-weight:700;
+    padding:5px 7px;
+    border-radius:4px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+  .bk-team.confirmed{
+    color:var(--ink);
+    background:rgba(30,86,49,0.09);
+    border-left:3px solid var(--pitch);
+  }
+  .bk-team.pending{
+    color:#8a8267;
+    background:var(--paper-2);
+    border-left:3px solid var(--line);
+    font-style:italic;
+    font-weight:600;
+    font-size:11px;
+  }
+
+  /* ---- Connector lines (classic bracket elbows) ----
+     Each column has horizontal padding (the gap between columns is 2× that
+     padding). We build one clean elbow per pair of feeder matches:
+       • each match in a non-last column extends a horizontal line to the RIGHT
+         edge of its column (into the gap), reaching the vertical.
+       • the top match of a pair drops a vertical line DOWN and the bottom match
+         runs one UP; both sit at the column's right edge and meet at the pair's
+         midpoint.
+       • each match in a non-first column extends a horizontal line to its LEFT
+         edge, picking up the feed from that midpoint.
+     Using the column's own padding (var) as the line width guarantees the
+     pieces meet exactly with no overlap, at any column width. */
+  .bk-col{ --bk-gap:6px; }  /* half the gap between columns = column side padding */
+
+  .bk-slot{ position:relative; }
+
+  /* horizontal feed INTO each match (left side), spanning the left half-gap */
+  .bk-col:not(:first-child) .bk-match::before{
+    content:"";
+    position:absolute;
+    top:50%;
+    right:100%;
+    width:var(--bk-gap);
+    height:2px;
+    background:var(--line);
+    transform:translateY(-1px);
+  }
+  /* horizontal line OUT of each match (right side), spanning the right half-gap
+     to reach the vertical that joins the pair */
+  .bk-col:not(:last-child) .bk-match::after{
+    content:"";
+    position:absolute;
+    top:50%;
+    left:100%;
+    width:var(--bk-gap);
+    height:2px;
+    background:var(--line);
+    transform:translateY(-1px);
+  }
+  /* vertical line joining each pair, sitting at the midpoint of the column gap */
+  .bk-col:not(:last-child) .bk-slot::after{
+    content:"";
+    position:absolute;
+    right:calc(-1 * var(--bk-gap));
+    width:2px;
+    background:var(--line);
+  }
+  /* top match of a pair: vertical runs from its centre down to the midpoint */
+  .bk-col:not(:last-child) .bk-slot:nth-child(odd)::after{
+    top:50%;
+    height:50%;
+  }
+  /* bottom match of a pair: vertical runs from the midpoint up to its centre */
+  .bk-col:not(:last-child) .bk-slot:nth-child(even)::after{
+    top:0;
+    height:50%;
+  }
+
+  .bk-scroll-hint{
+    text-align:center;
+    font-family:'JetBrains Mono', monospace;
+    font-size:10px;
+    color:#9c9374;
+    margin:8px 0 18px;
+  }
+
+  /* Third-place playoff block */
+  .bk-thirdplace{
+    margin:18px 0 24px;
+    padding:14px;
+    background:var(--card);
+    border:1px dashed var(--line);
+    border-radius:8px;
+  }
+  .bk-thirdplace-label{
+    font-family:'JetBrains Mono', monospace;
+    font-size:10.5px;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    color:#8a8267;
+    margin-bottom:8px;
+  }
+  .bk-thirdplace .bk-match{max-width:280px;}
+
+  .bracket-progress{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:16px;
+    margin-bottom:10px;
+  }
+  .bracket-progress-label{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    color:var(--pitch);
+    font-weight:700;
+    margin-bottom:10px;
+  }
+  .bracket-progress-chips{
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+  }
+  .qualified-chip{
+    font-family:'Archivo', sans-serif;
+    font-size:12px;
+    font-weight:600;
+    background:rgba(30,86,49,0.08);
+    border:1px solid var(--pitch-light);
+    color:var(--pitch-dark);
+    padding:4px 10px;
+    border-radius:14px;
+  }
+  .bracket-progress-note{
+    font-family:'JetBrains Mono', monospace;
+    font-size:10.5px;
+    color:#9c9374;
+    margin-top:10px;
+  }
+  .bracket-date-divider{
+    display:flex;
+    align-items:center;
+    margin:10px 0 24px;
+  }
+  .bracket-date-divider span{
+    font-family:'Bebas Neue', sans-serif;
+    font-size:26px;
+    color:var(--pitch);
+    letter-spacing:.02em;
+    white-space:nowrap;
+    padding-right:14px;
+  }
+  .bracket-date-divider::after{
+    content:"";
+    flex:1;
+    height:3px;
+    background:var(--ink);
+  }
+
+  /* GROUP SECTIONS */
+  main{max-width:900px;margin:0 auto; padding:30px 16px 0;}
+
+  .group-section{margin-bottom:38px;}
+  .group-head{
+    display:flex; align-items:baseline; gap:14px;
+    border-bottom:3px solid var(--ink);
+    padding-bottom:8px;
+    margin-bottom:14px;
+  }
+  .group-letter{
+    font-family:'Bebas Neue', sans-serif;
+    font-size:42px;
+    line-height:1;
+    color:var(--pitch);
+  }
+  .group-teams{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    color:#5b5443;
+    letter-spacing:.02em;
+  }
+
+  /* MATCH CARD */
+  .match{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:6px;
+    margin-bottom:12px;
+    overflow:hidden;
+    box-shadow:0 1px 0 rgba(27,42,31,0.04);
+  }
+  .match-top{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:14px 16px 10px;
+    gap:12px;
+  }
+  .teams{
+    font-family:'Archivo', sans-serif;
+    font-weight:700;
+    font-size:16.5px;
+    color:var(--ink);
+    flex:1;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    flex-wrap:wrap;
+  }
+  .teams .vs{
+    font-family:'JetBrains Mono', monospace;
+    font-weight:500;
+    font-size:11px;
+    color:#9c9374;
+    text-transform:uppercase;
+  }
+  .match-meta{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    white-space:nowrap;
+  }
+  .card-group-tag{
+    font-family:'JetBrains Mono', monospace;
+    font-size:9.5px;
+    letter-spacing:.06em;
+    color:var(--pitch);
+    background:var(--paper-2);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:2px 8px;
+  }
+  .match-date{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    color:#9c9374;
+    white-space:nowrap;
+  }
+  .date-head .date-letter{
+    font-size:34px;
+    color:var(--rust);
+  }
+
+  .venue-row{
+    display:flex;
+    align-items:baseline;
+    gap:6px;
+    padding:0 16px 12px;
+    font-family:'Archivo', sans-serif;
+    font-size:12.5px;
+    color:#5b5443;
+  }
+  .venue-icon{font-size:11px; opacity:.8;}
+  .venue-text strong{color:var(--ink); font-weight:700;}
+
+  .watched-row{
+    padding:0 16px 12px;
+  }
+  .watched-toggle{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    cursor:pointer;
+    font-family:'JetBrains Mono', monospace;
+    font-size:11.5px;
+    color:#5b5443;
+    user-select:none;
+    width:fit-content;
+  }
+  .watched-checkbox{
+    position:absolute;
+    opacity:0;
+    width:1px; height:1px;
+  }
+  .watched-box{
+    width:17px; height:17px;
+    border:1.5px solid var(--line);
+    border-radius:3px;
+    background:var(--card);
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    flex-shrink:0;
+    transition:background .15s ease, border-color .15s ease;
+  }
+  .watched-box::after{
+    content:"";
+    width:9px; height:9px;
+    border-radius:1px;
+    background:transparent;
+    transition:background .15s ease;
+  }
+  .watched-checkbox:checked + .watched-box{
+    background:var(--pitch);
+    border-color:var(--pitch);
+  }
+  .watched-checkbox:checked + .watched-box::after{
+    background:var(--paper);
+    clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+  }
+  .watched-checkbox:checked ~ .watched-label-text{
+    color:var(--pitch);
+    font-weight:700;
+  }
+  .match.is-watched{
+    border-color:var(--pitch);
+    background:linear-gradient(180deg, rgba(30,86,49,0.05), var(--card) 40px);
+  }
+  .match.is-watched .match-top .teams{color:var(--pitch-dark);}
+
+  .standings-block{
+    margin-top:12px;
+    padding-top:12px;
+    border-top:1px dashed var(--line);
+  }
+  .standings-label{
+    font-family:'JetBrains Mono', monospace;
+    font-size:10.5px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:#8a8267;
+    margin-bottom:8px;
+  }
+  .standings-table{
+    width:100%;
+    border-collapse:collapse;
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    background:var(--card);
+    border-radius:4px;
+    overflow:hidden;
+  }
+  .standings-table th{
+    background:var(--pitch);
+    color:var(--paper);
+    font-size:10px;
+    letter-spacing:.05em;
+    text-transform:uppercase;
+    padding:6px 6px;
+    text-align:center;
+  }
+  .standings-table th:nth-child(2){text-align:left; padding-left:10px;}
+  .standings-table td{
+    padding:6px 6px;
+    text-align:center;
+    border-bottom:1px solid var(--paper-2);
+    color:var(--ink);
+  }
+  .standings-table td.team-name{
+    text-align:left;
+    padding-left:10px;
+    font-family:'Archivo', sans-serif;
+    font-weight:600;
+    font-size:12.5px;
+  }
+  .standings-table td.pos{
+    color:#9c9374;
+    font-weight:700;
+  }
+  .standings-table td.pts{
+    font-weight:700;
+    color:var(--rust);
+  }
+  .standings-table tr:last-child td{border-bottom:none;}
+  .standings-table tr.qualified td.pos{color:var(--pitch); }
+  .standings-table tr.qualified{background:rgba(30,86,49,0.06);}
+  .standings-note{
+    font-family:'JetBrains Mono', monospace;
+    font-size:10px;
+    color:#9c9374;
+    margin-top:6px;
+    line-height:1.5;
+  }
+
+  .video-block{
+    margin-top:12px;
+    padding-top:12px;
+    border-top:1px dashed var(--line);
+  }
+  .video-label{
+    font-family:'JetBrains Mono', monospace;
+    font-size:10.5px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:#8a8267;
+    margin-bottom:8px;
+  }
+  .video-frame-wrap{
+    position:relative;
+    width:100%;
+    padding-top:56.25%; /* 16:9 */
+    background:#000;
+    border-radius:6px;
+    overflow:hidden;
+    border:1px solid var(--line);
+  }
+  .video-frame-wrap iframe{
+    position:absolute;
+    top:0; left:0;
+    width:100%; height:100%;
+    border:0;
+  }
+  .video-fallback-link{
+    display:block;
+    margin-top:8px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    text-align:center;
+    color:var(--pitch);
+    text-decoration:none;
+    padding:6px;
+    border-radius:4px;
+    transition:background .15s ease;
+  }
+  .video-fallback-link:hover{background:var(--paper-2);}
+  .video-block-empty .video-placeholder{
+    font-family:'Archivo', sans-serif;
+    font-size:12.5px;
+    color:#8a8267;
+    background:var(--paper-2);
+    border:1px dashed var(--line);
+    border-radius:6px;
+    padding:18px 14px;
+    text-align:center;
+    line-height:1.6;
+  }
+  .video-block-empty .video-placeholder code{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    background:rgba(27,42,31,0.08);
+    padding:1px 5px;
+    border-radius:3px;
+    color:var(--ink);
+  }
+
+  .score-zone{
+    padding:0 16px 14px;
+  }
+  .spoiler-btn{
+    width:100%;
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    background:var(--pitch);
+    color:var(--paper);
+    border:none;
+    border-radius:4px;
+    padding:10px 12px;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    transition:background .15s ease;
+  }
+  .spoiler-btn:hover{background:var(--pitch-light);}
+  .spoiler-btn .icon{font-size:14px;}
+
+  .score-reveal{
+    display:none;
+    background:var(--paper-2);
+    border:1px dashed var(--line);
+    border-radius:4px;
+    padding:12px 14px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px;
+  }
+  .score-reveal.shown{display:block;}
+  .score-reveal .final-score{
+    font-size:20px;
+    font-weight:700;
+    color:var(--rust);
+    margin-bottom:4px;
+  }
+  .score-reveal .note{color:#5b5443; font-size:12px; line-height:1.5;}
+
+  /* HIGHLIGHT LINKS */
+  .hl-block{
+    border-top:1px solid var(--line);
+    padding:12px 16px 14px;
+    background:#fbf8ee;
+  }
+  .hl-label{
+    font-family:'JetBrains Mono', monospace;
+    font-size:10.5px;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:#8a8267;
+    margin-bottom:8px;
+  }
+  .hl-options{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+  }
+  .hl-link{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    text-decoration:none;
+    font-family:'Archivo', sans-serif;
+    font-size:12.5px;
+    font-weight:600;
+    color:var(--ink);
+    background:var(--card);
+    border:1px solid var(--ink);
+    border-radius:20px;
+    padding:6px 12px 6px 10px;
+    transition:background .15s ease, color .15s ease;
+  }
+  .hl-link.short{border-color:var(--gold); }
+  .hl-link.long{border-color:var(--rust); }
+  .hl-link:hover{background:var(--ink); color:var(--paper);}
+  .hl-tag{
+    font-family:'JetBrains Mono', monospace;
+    font-size:9px;
+    letter-spacing:.05em;
+    text-transform:uppercase;
+    padding:2px 6px;
+    border-radius:10px;
+    background:var(--gold-soft);
+    color:#3a2e0e;
+  }
+  .hl-link.long .hl-tag{background:#ecc6b6; color:#5e2410;}
+
+  footer{
+    max-width:900px;margin:30px auto 0;
+    padding:18px 16px 0;
+    border-top:1px solid var(--line);
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    color:#8a8267;
+    line-height:1.6;
+  }
+
+  @media (max-width:560px){
+    h1{font-size:40px;}
+    .group-letter{font-size:34px;}
+    .teams{font-size:15px;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{transition:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <p class="eyebrow"><span class="dot"></span>Canada · Mexico · USA — June 11 to July 19</p>
+    <h1>WORLD CUP 2026<br><span>HIGHLIGHT TRACKER</span></h1>
+    <p class="hero-sub">Every match so far, sorted by group. Scores stay hidden until you tap the reveal button — browse the highlight links spoiler-free if you want to watch first.</p>
+    <div class="stat-row">
+      <div class="stat-chip"><b id="stat-games">—</b><span>Games Played</span></div>
+      <div class="stat-chip watched-chip">
+        <b id="stat-watched">0</b><span>You've Watched</span>
+        <div class="save-status" id="saveStatus"></div>
+      </div>
+      <div class="stat-chip"><b>12</b><span>Groups</span></div>
+      <div class="stat-chip"><b>48</b><span>Teams</span></div>
+      <div class="stat-chip"><b>Jun 27</b><span>Group Stage Ends</span></div>
+    </div>
+  </div>
+</header>
+
+<div class="controls">
+  <div class="view-toggle" id="viewToggle">
+    <button class="toggle-btn active" data-view="group">By Group</button>
+    <button class="toggle-btn" data-view="date">By Date</button>
+    <button class="toggle-btn" data-view="country">By Team</button>
+    <button class="toggle-btn" data-view="bracket">Bracket</button>
+  </div>
+  <button class="btn-reveal-all" id="revealAllBtn">Reveal All Scores</button>
+</div>
+
+<div class="backup-row">
+  <button class="btn-backup" id="backupToggleBtn">📋 Save / Restore Watched List</button>
+</div>
+
+<div class="backup-panel" id="backupPanel">
+  <div class="backup-section">
+    <div class="backup-label">Your watched-list code</div>
+    <p class="backup-help">Copy this code somewhere safe (Notes, a message to yourself). Paste it back in below next time to restore your progress.</p>
+    <textarea class="backup-code" id="backupCodeOutput" readonly rows="3"></textarea>
+    <button class="btn-backup-action" id="copyCodeBtn">Copy Code</button>
+  </div>
+  <div class="backup-section">
+    <div class="backup-label">Restore from a code</div>
+    <textarea class="backup-code" id="backupCodeInput" rows="3" placeholder="Paste your saved code here…"></textarea>
+    <button class="btn-backup-action" id="restoreCodeBtn">Restore</button>
+  </div>
+  <div class="backup-feedback" id="backupFeedback"></div>
+</div>
+
+<nav class="group-nav" id="groupNav"></nav>
+
+<main id="main"></main>
+
+<footer>
+  Highlight sources: Supersport · FIFA · ESPN FC · Fox Sports · Fox Soccer — links open a YouTube search for that match on the selected channel.<br>
+  Built for personal tracking. Scores and dates reflect results as of June 21, 2026 and will need manual updates as the group stage continues.
+</footer>
+
+<script>
+const CHANNELS = ["Supersport","FIFA","ESPN FC","Fox Sports","Fox Soccer"];
+
+// Each match: group, teams, date, score (hidden until revealed), note, venue, city
+const DATA = [
+  {
+    group:"A",
+    teams:["Mexico","South Africa","South Korea","Czechia"],
+    matches:[
+      {home:"Mexico", away:"South Africa", date:"Jun 11", score:"2–0", note:"Jiménez and Quiñones scored; two South Africa players and one Mexico player were sent off.", venue:"Estadio Azteca", city:"Mexico City, Mexico", videoId:""},
+      {home:"South Korea", away:"Czechia", date:"Jun 11", score:"2–1", note:"Czechia led at halftime before South Korea completed the comeback in the second half.", venue:"Estadio Akron", city:"Guadalajara/Zapopan, Mexico", videoId:""},
+      {home:"Czechia", away:"South Africa", date:"Jun 18", score:"1–1", note:"A late penalty let South Africa snatch a draw after trailing for most of the match.", venue:"Mercedes-Benz Stadium", city:"Atlanta, USA", videoId:""},
+      {home:"Mexico", away:"South Korea", date:"Jun 18", score:"1–0", note:"A goalkeeping error gifted Mexico the only goal — first team through to the knockout round.", venue:"Estadio Akron", city:"Guadalajara/Zapopan, Mexico", videoId:""},
+      {home:"Czechia", away:"Mexico", date:"Jun 24", score:"0–3", note:"Mexico finished group play unbeaten, eliminating Czechia in the process.", venue:"Estadio Azteca", city:"Mexico City, Mexico", videoId:""},
+      {home:"South Africa", away:"South Korea", date:"Jun 24", score:"1–0", note:"South Africa edged into the knockout rounds for the first time, finishing second in Group A.", venue:"Estadio BBVA", city:"Monterrey, Mexico", videoId:""},
+    ]
+  },
+  {
+    group:"B",
+    teams:["Canada","Bosnia and Herzegovina","Qatar","Switzerland"],
+    matches:[
+      {home:"Canada", away:"Bosnia and Herzegovina", date:"Jun 12", score:"1–1", note:"Canada equalized just over two minutes after a substitution.", venue:"BMO Field", city:"Toronto, Canada", videoId:""},
+      {home:"Qatar", away:"Switzerland", date:"Jun 13", score:"1–1", note:"Switzerland and Qatar shared the points in a tight opener.", venue:"Levi's Stadium", city:"San Francisco Bay Area, USA", videoId:""},
+      {home:"Canada", away:"Qatar", date:"Jun 18", score:"6–0", note:"A dominant co-host performance to take control of the group.", venue:"BC Place", city:"Vancouver, Canada", videoId:""},
+      {home:"Switzerland", away:"Canada", date:"Jun 24", score:"2–1", note:"Switzerland topped the group; Canada advance in second after a tense finish.", venue:"BC Place", city:"Vancouver, Canada", videoId:""},
+      {home:"Qatar", away:"Bosnia and Herzegovina", date:"Jun 24", score:"3–1", note:"Qatar ended their campaign with a win, but it wasn't enough to catch the top two.", venue:"Lumen Field", city:"Seattle, USA", videoId:""},
+    ]
+  },
+  {
+    group:"C",
+    teams:["Brazil","Morocco","Scotland","Haiti"],
+    matches:[
+      {home:"Brazil", away:"Morocco", date:"Jun 13", score:"1–1", note:"Morocco struck early; Vinícius Júnior leveled it minutes later.", venue:"New York New Jersey Stadium", city:"East Rutherford, NJ, USA", videoId:""},
+      {home:"Scotland", away:"Haiti", date:"Jun 13", score:"1–0", note:"Scotland's first World Cup win since 1990.", venue:"Gillette Stadium", city:"Foxborough, MA, USA", videoId:""},
+      {home:"Scotland", away:"Morocco", date:"Jun 19", score:"0–1", note:"An early Morocco goal held up for the win.", venue:"Gillette Stadium", city:"Foxborough, MA, USA", videoId:""},
+      {home:"Brazil", away:"Haiti", date:"Jun 19", score:"3–0", note:"Vinícius Júnior and Matheus Cunha led Brazil to a comfortable win, eliminating Haiti.", venue:"Lincoln Financial Field", city:"Philadelphia, USA", videoId:""},
+      {home:"Scotland", away:"Brazil", date:"Jun 24", score:"0–3", note:"Brazil finished top of the group, eliminating Scotland on the final matchday.", venue:"Hard Rock Stadium", city:"Miami Gardens, USA", videoId:""},
+      {home:"Morocco", away:"Haiti", date:"Jun 24", score:"4–2", note:"Morocco finished second in the group despite a spirited Haiti comeback attempt.", venue:"Mercedes-Benz Stadium", city:"Atlanta, USA", videoId:""},
+    ]
+  },
+  {
+    group:"D",
+    teams:["United States","Paraguay","Australia","Türkiye"],
+    matches:[
+      {home:"United States", away:"Paraguay", date:"Jun 12", score:"4–1", note:"Folarin Balogun's brace headlined the USA's biggest World Cup goal haul since 1930.", venue:"SoFi Stadium", city:"Inglewood, CA, USA", videoId:""},
+      {home:"Australia", away:"Türkiye", date:"Jun 13", score:"2–0", note:"An upset win — Australia's first World Cup opener victory since 2006.", venue:"BC Place", city:"Vancouver, Canada", videoId:""},
+      {home:"United States", away:"Australia", date:"Jun 19", score:"2–0", note:"USA clinched the group and a knockout-stage spot without Christian Pulisic.", venue:"Lumen Field", city:"Seattle, USA", videoId:""},
+      {home:"Türkiye", away:"Paraguay", date:"Jun 19", score:"0–1", note:"The result eliminated Türkiye via the head-to-head tiebreaker.", venue:"Levi's Stadium", city:"San Francisco Bay Area, USA", videoId:""},
+      {home:"Türkiye", away:"United States", date:"Jun 26", score:"3–2", note:"Türkiye closed out group play with a win in a dead-rubber finale; the USA had already clinched the group.", venue:"SoFi Stadium", city:"Inglewood, CA, USA", videoId:""},
+      {home:"Paraguay", away:"Australia", date:"Jun 26", score:"0–0", note:"A draw was enough for Australia to clinch second place and a knockout-stage berth.", venue:"Levi's Stadium", city:"San Francisco Bay Area, USA", videoId:""},
+    ]
+  },
+  {
+    group:"E",
+    teams:["Germany","Curaçao","Ivory Coast","Ecuador"],
+    matches:[
+      {home:"Germany", away:"Curaçao", date:"Jun 14", score:"7–1", note:"Germany's biggest World Cup scoreline since the 2014 semifinal rout of Brazil.", venue:"Houston Stadium (NRG Stadium)", city:"Houston, USA", videoId:""},
+      {home:"Ivory Coast", away:"Ecuador", date:"Jun 14", score:"1–0", note:"A late Amad Diallo winner sealed it.", venue:"Lincoln Financial Field", city:"Philadelphia, USA", videoId:""},
+      {home:"Germany", away:"Ivory Coast", date:"Jun 20", score:"2–1", note:"Germany backed up its opener with a second straight win.", venue:"BMO Field", city:"Toronto, Canada", videoId:""},
+      {home:"Ecuador", away:"Curaçao", date:"Jun 20", score:"0–0", note:"Curaçao goalkeeper Eloy Room made a string of saves to earn the nation's first-ever World Cup point.", venue:"Arrowhead Stadium", city:"Kansas City, USA", videoId:""},
+      {home:"Ecuador", away:"Germany", date:"Jun 25", score:"2–1", note:"A stunning upset — Ecuador came back to beat Germany and finish second in the group.", venue:"New York New Jersey Stadium", city:"East Rutherford, NJ, USA", videoId:""},
+      {home:"Curaçao", away:"Ivory Coast", date:"Jun 25", score:"0–2", note:"Curaçao's historic debut World Cup run ends in the group stage.", venue:"Lincoln Financial Field", city:"Philadelphia, USA", videoId:""},
+    ]
+  },
+  {
+    group:"F",
+    teams:["Netherlands","Japan","Sweden","Tunisia"],
+    matches:[
+      {home:"Netherlands", away:"Japan", date:"Jun 14", score:"2–2", note:"Japan came back from a goal down twice to snatch a draw late.", venue:"AT&T Stadium", city:"Arlington, TX, USA", videoId:""},
+      {home:"Sweden", away:"Tunisia", date:"Jun 14", score:"5–1", note:"Isak, Gyökeres, Ayari and Svanberg all found the net.", venue:"Estadio Akron", city:"Guadalajara/Zapopan, Mexico", videoId:""},
+      {home:"Netherlands", away:"Sweden", date:"Jun 20", score:"5–1", note:"Gakpo and Brobbey both scored twice as the Dutch ran riot.", venue:"Houston Stadium (NRG Stadium)", city:"Houston, USA", videoId:""},
+      {home:"Tunisia", away:"Japan", date:"Jun 20", score:"0–4", note:"Japan cruised after their dramatic opening draw, eliminating Tunisia's coach mid-tournament.", venue:"Estadio BBVA", city:"Monterrey, Mexico", videoId:""},
+      {home:"Tunisia", away:"Netherlands", date:"Jun 26", score:"1–3", note:"Netherlands finished top of Group F unbeaten.", venue:"Arrowhead Stadium", city:"Kansas City, USA", videoId:""},
+      {home:"Japan", away:"Sweden", date:"Jun 26", score:"1–1", note:"A draw was enough for both sides to advance from Group F.", venue:"AT&T Stadium", city:"Arlington, TX, USA", videoId:""},
+    ]
+  },
+  {
+    group:"G",
+    teams:["Belgium","Egypt","Iran","New Zealand"],
+    matches:[
+      {home:"Belgium", away:"Egypt", date:"Jun 15", score:"1–1", note:"A controversial own-goal call denied Lukaku what looked like an equalizer — it leveled anyway.", venue:"Lumen Field", city:"Seattle, USA", videoId:""},
+      {home:"Iran", away:"New Zealand", date:"Jun 15", score:"2–2", note:"Iran came back from behind twice; Elijah Just scored a brace for New Zealand.", venue:"SoFi Stadium", city:"Inglewood, CA, USA", videoId:""},
+      {home:"Belgium", away:"Iran", date:"Jun 21", score:"0–0", note:"A cagey, goalless draw left Group G still wide open with one round to play.", venue:"SoFi Stadium", city:"Inglewood, CA, USA", videoId:""},
+      {home:"New Zealand", away:"Egypt", date:"Jun 21", score:"1–3", note:"Egypt's win put them in control of the group heading into the final matchday.", venue:"BC Place", city:"Vancouver, Canada", videoId:""},
+      {home:"Egypt", away:"Iran", date:"Jun 26", score:"—", note:"Final matchday — Egypt need just a draw to reach the knockout rounds.", venue:"Lumen Field", city:"Seattle, USA", videoId:""},
+      {home:"New Zealand", away:"Belgium", date:"Jun 26", score:"—", note:"Final matchday — New Zealand are already eliminated; Belgium need a win.", venue:"BC Place", city:"Vancouver, Canada", videoId:""},
+    ]
+  },
+  {
+    group:"H",
+    teams:["Spain","Cape Verde","Saudi Arabia","Uruguay"],
+    matches:[
+      {home:"Spain", away:"Cape Verde", date:"Jun 15", score:"0–0", note:"Cape Verde's defense and goalkeeping held off the heavy favorite in its World Cup debut.", venue:"Mercedes-Benz Stadium", city:"Atlanta, USA", videoId:""},
+      {home:"Saudi Arabia", away:"Uruguay", date:"Jun 15", score:"1–1", note:"Saudi Arabia held Uruguay to a draw in their opener.", venue:"Hard Rock Stadium", city:"Miami Gardens, USA", videoId:""},
+      {home:"Spain", away:"Saudi Arabia", date:"Jun 21", score:"4–0", note:"Spain bounced back from their scoreless opener in dominant fashion.", venue:"Mercedes-Benz Stadium", city:"Atlanta, USA", videoId:""},
+      {home:"Uruguay", away:"Cape Verde", date:"Jun 21", score:"2–2", note:"Cape Verde's giant-killing run continued with a draw against Uruguay.", venue:"Hard Rock Stadium", city:"Miami Gardens, USA", videoId:""},
+      {home:"Cape Verde", away:"Saudi Arabia", date:"Jun 26", score:"—", note:"Final matchday — Cape Verde need a win to reach the knockout rounds in their World Cup debut.", venue:"Houston Stadium (NRG Stadium)", city:"Houston, USA", videoId:""},
+      {home:"Uruguay", away:"Spain", date:"Jun 26", score:"—", note:"Final matchday — both sides still have something to play for in Group H.", venue:"Estadio Akron", city:"Guadalajara/Zapopan, Mexico", videoId:""},
+    ]
+  },
+  {
+    group:"I",
+    teams:["France","Senegal","Iraq","Norway"],
+    matches:[
+      {home:"France", away:"Senegal", date:"Jun 16", score:"3–1", note:"Mbappé scored twice to become France's all-time leading scorer; Barcola also scored before Senegal's late consolation goal.", venue:"New York New Jersey Stadium", city:"East Rutherford, NJ, USA", videoId:""},
+      {home:"Iraq", away:"Norway", date:"Jun 16", score:"1–4", note:"Haaland scored twice (one a forced own-goal) in Norway's opening win.", venue:"Gillette Stadium", city:"Foxborough, MA, USA", videoId:""},
+      {home:"France", away:"Iraq", date:"Jun 22", score:"3–0", note:"Mbappé scored twice through a weather-delayed match to send France into the knockouts.", venue:"Lincoln Financial Field", city:"Philadelphia, USA", videoId:""},
+      {home:"Norway", away:"Senegal", date:"Jun 22", score:"3–2", note:"Haaland scored twice as Norway held on to also clinch a knockout-stage spot.", venue:"New York New Jersey Stadium", city:"East Rutherford, NJ, USA", videoId:"vcgzGgM4uJg"},
+      {home:"Norway", away:"France", date:"Jun 26", score:"—", note:"Final matchday — both sides have already qualified; this decides top spot in the group.", venue:"Boston Stadium (Gillette Stadium)", city:"Foxborough, MA, USA", videoId:""},
+      {home:"Senegal", away:"Iraq", date:"Jun 26", score:"—", note:"Final matchday — a dead-rubber finale with both teams already eliminated.", venue:"BMO Field", city:"Toronto, Canada", videoId:""},
+    ]
+  },
+  {
+    group:"J",
+    teams:["Argentina","Algeria","Austria","Jordan"],
+    matches:[
+      {home:"Argentina", away:"Algeria", date:"Jun 16", score:"3–0", note:"Messi's hat-trick moved him level with Klose as the World Cup's all-time leading scorer.", venue:"Arrowhead Stadium", city:"Kansas City, USA", videoId:""},
+      {home:"Austria", away:"Jordan", date:"Jun 16", score:"3–1", note:"Austria controlled the game against World Cup debutants Jordan.", venue:"Levi's Stadium", city:"San Francisco Bay Area, USA", videoId:""},
+      {home:"Argentina", away:"Austria", date:"Jun 22", score:"2–0", note:"Messi's brace made him the World Cup's all-time leading scorer as Argentina advanced.", venue:"AT&T Stadium", city:"Arlington, TX, USA", videoId:""},
+      {home:"Jordan", away:"Algeria", date:"Jun 22", score:"1–2", note:"Algeria came from behind with two late goals, eliminating World Cup debutants Jordan.", venue:"Levi's Stadium", city:"San Francisco Bay Area, USA", videoId:""},
+      {home:"Jordan", away:"Argentina", date:"Jun 27", score:"—", note:"Final matchday — Argentina have already secured top spot in the group.", venue:"AT&T Stadium", city:"Arlington, TX, USA", videoId:""},
+      {home:"Algeria", away:"Austria", date:"Jun 27", score:"—", note:"Final matchday — this match decides second place in Group J.", venue:"Arrowhead Stadium", city:"Kansas City, USA", videoId:""},
+    ]
+  },
+  {
+    group:"K",
+    teams:["Portugal","DR Congo","Uzbekistan","Colombia"],
+    matches:[
+      {home:"Portugal", away:"DR Congo", date:"Jun 17", score:"1–1", note:"Cristiano Ronaldo started his sixth World Cup, becoming the oldest outfield starter in tournament history.", venue:"Houston Stadium (NRG Stadium)", city:"Houston, USA", videoId:""},
+      {home:"Colombia", away:"Uzbekistan", date:"Jun 17", score:"3–1", note:"Uzbekistan's Fayzullaev scored the nation's first-ever World Cup goal in a losing effort.", venue:"Estadio Akron", city:"Guadalajara/Zapopan, Mexico", videoId:""},
+      {home:"Portugal", away:"Uzbekistan", date:"Jun 23", score:"5–0", note:"Cristiano Ronaldo scored twice, becoming Portugal's all-time leading World Cup-era scorer milestone moment.", venue:"Houston Stadium (NRG Stadium)", city:"Houston, USA", videoId:""},
+      {home:"DR Congo", away:"Colombia", date:"Jun 23", score:"0–1", note:"Colombia's win clinched top spot in Group K heading into the final matchday.", venue:"Estadio Akron", city:"Guadalajara/Zapopan, Mexico", videoId:""},
+      {home:"Colombia", away:"Portugal", date:"Jun 27", score:"—", note:"Final matchday — winner likely takes the group.", venue:"Hard Rock Stadium", city:"Miami Gardens, USA", videoId:""},
+      {home:"DR Congo", away:"Uzbekistan", date:"Jun 27", score:"—", note:"Final matchday — DR Congo needs a win to have any chance of advancing.", venue:"Mercedes-Benz Stadium", city:"Atlanta, USA", videoId:""},
+    ]
+  },
+  {
+    group:"L",
+    teams:["England","Croatia","Ghana","Panama"],
+    matches:[
+      {home:"England", away:"Croatia", date:"Jun 17", score:"4–2", note:"Harry Kane equaled Gary Lineker's England World Cup goal record in this one.", venue:"Boston Stadium (Gillette Stadium)", city:"Foxborough, MA, USA", videoId:""},
+      {home:"Ghana", away:"Panama", date:"Jun 17", score:"1–0", note:"A 95th-minute winner — among the latest goals ever scored by Ghana at a World Cup.", venue:"BMO Field", city:"Toronto, Canada", videoId:""},
+      {home:"England", away:"Ghana", date:"Jun 23", score:"0–0", note:"Ghana held firm under heavy late England pressure to secure a point.", venue:"Boston Stadium (Gillette Stadium)", city:"Foxborough, MA, USA", videoId:""},
+      {home:"Panama", away:"Croatia", date:"Jun 23", score:"0–1", note:"Croatia's win clinched a knockout-stage spot.", venue:"BMO Field", city:"Toronto, Canada", videoId:""},
+      {home:"Panama", away:"England", date:"Jun 27", score:"—", note:"Final matchday — Panama need a win and help to have any chance of advancing.", venue:"New York New Jersey Stadium", city:"East Rutherford, NJ, USA", videoId:""},
+      {home:"Croatia", away:"Ghana", date:"Jun 27", score:"—", note:"Final matchday — Croatia have already secured top spot in the group.", venue:"Lincoln Financial Field", city:"Philadelphia, USA", videoId:""},
+    ]
+  },
+];
+
+function ytSearchUrl(home, away, channel, lengthTag){
+  const q = encodeURIComponent(`${home} vs ${away} highlights ${channel} World Cup 2026`);
+  return `https://www.youtube.com/results?search_query=${q}`;
+}
+
+function buildHighlightOptions(home, away){
+  // Rotate through all five channels so links feel varied across matches.
+  return CHANNELS;
+}
+
+let matchCounter = 0;
+
+function dayNum(dateStr){
+  // "Jun 11" -> 11
+  const parts = dateStr.split(" ");
+  return parseInt(parts[1], 10);
+}
+
+function parseScore(scoreStr){
+  // "2–0" -> {home:2, away:0}; returns null if score unknown
+  if(!scoreStr || scoreStr === "—") return null;
+  const parts = scoreStr.split("–").map(s=>parseInt(s.trim(),10));
+  if(parts.length !== 2 || isNaN(parts[0]) || isNaN(parts[1])) return null;
+  return {home:parts[0], away:parts[1]};
+}
+
+// Build a flat, dated list of every match across all groups (used for both views)
+function getFlatMatches(){
+  const flat = [];
+  DATA.forEach(g=>{
+    g.matches.forEach(m=>{
+      flat.push({...m, group:g.group, day:dayNum(m.date)});
+    });
+  });
+  return flat;
+}
+
+// Compute standings for a given group, counting only matches with day <= throughDay
+// (and, within that day, only matches that appear at or before this one in DATA order)
+function computeStandingsFromMatches(groupLetter, matchesToInclude){
+  const groupObj = DATA.find(g=>g.group===groupLetter);
+  const table = {};
+  groupObj.teams.forEach(t=>{
+    table[t] = {team:t, p:0, w:0, d:0, l:0, gf:0, ga:0, gd:0, pts:0};
+  });
+
+  matchesToInclude.forEach(m=>{
+    const sc = parseScore(m.score);
+    if(!sc) return; // unplayed/unknown — skip
+
+    const home = table[m.home];
+    const away = table[m.away];
+    if(!home || !away) return;
+
+    home.p++; away.p++;
+    home.gf += sc.home; home.ga += sc.away;
+    away.gf += sc.away; away.ga += sc.home;
+
+    if(sc.home > sc.away){ home.w++; home.pts += 3; away.l++; }
+    else if(sc.home < sc.away){ away.w++; away.pts += 3; home.l++; }
+    else { home.d++; away.d++; home.pts += 1; away.pts += 1; }
+  });
+
+  Object.values(table).forEach(r=> r.gd = r.gf - r.ga );
+
+  return Object.values(table).sort((a,b)=>{
+    if(b.pts !== a.pts) return b.pts - a.pts;
+    if(b.gd !== a.gd) return b.gd - a.gd;
+    return b.gf - a.gf;
+  });
+}
+
+function renderStandingsTableFromStandings(groupLetter, standings){
+  const rows = standings.map((r,i)=>`
+    <tr class="${i<2 ? 'qualified' : ''}">
+      <td class="pos">${i+1}</td>
+      <td class="team-name">${r.team}</td>
+      <td>${r.p}</td>
+      <td>${r.w}</td>
+      <td>${r.d}</td>
+      <td>${r.l}</td>
+      <td>${r.gd > 0 ? '+' : ''}${r.gd}</td>
+      <td class="pts">${r.pts}</td>
+    </tr>`).join("");
+
+  return `
+    <div class="standings-block">
+      <div class="standings-label">Group ${groupLetter} standings after this match</div>
+      <table class="standings-table">
+        <thead>
+          <tr><th></th><th>Team</th><th>P</th><th>W</th><th>D</th><th>L</th><th>GD</th><th>Pts</th></tr>
+        </thead>
+        <tbody>${rows}</tbody>
+      </table>
+      <div class="standings-note">Top 2 advance automatically — best 8 third-place teams also qualify</div>
+    </div>`;
+}
+
+function computeStandings(groupLetter, cutoffDay, cutoffMatchIndexWithinDay, matchesOnCutoffDay){
+  const groupObj = DATA.find(g=>g.group===groupLetter);
+  const table = {};
+  groupObj.teams.forEach(t=>{
+    table[t] = {team:t, p:0, w:0, d:0, l:0, gf:0, ga:0, gd:0, pts:0};
+  });
+
+  groupObj.matches.forEach(m=>{
+    const md = dayNum(m.date);
+    if(md > cutoffDay) return; // future day, skip entirely
+    if(md === cutoffDay){
+      // Only include matches on the cutoff day that come at-or-before the current one
+      const idx = matchesOnCutoffDay.indexOf(m);
+      if(idx === -1 || idx > cutoffMatchIndexWithinDay) return;
+    }
+    const sc = parseScore(m.score);
+    if(!sc) return; // unplayed/unknown — skip
+
+    const home = table[m.home];
+    const away = table[m.away];
+    if(!home || !away) return;
+
+    home.p++; away.p++;
+    home.gf += sc.home; home.ga += sc.away;
+    away.gf += sc.away; away.ga += sc.home;
+
+    if(sc.home > sc.away){ home.w++; home.pts += 3; away.l++; }
+    else if(sc.home < sc.away){ away.w++; away.pts += 3; home.l++; }
+    else { home.d++; away.d++; home.pts += 1; away.pts += 1; }
+  });
+
+  Object.values(table).forEach(r=> r.gd = r.gf - r.ga );
+
+  return Object.values(table).sort((a,b)=>{
+    if(b.pts !== a.pts) return b.pts - a.pts;
+    if(b.gd !== a.gd) return b.gd - a.gd;
+    return b.gf - a.gf;
+  });
+}
+
+function renderStandingsTable(groupLetter, cutoffDay, cutoffMatchIndexWithinDay, matchesOnCutoffDay){
+  const standings = computeStandings(groupLetter, cutoffDay, cutoffMatchIndexWithinDay, matchesOnCutoffDay);
+  return renderStandingsTableFromStandings(groupLetter, standings);
+}
+
+function makeMatchKey(groupLetter, m){
+  return `wc26-${groupLetter}-${m.home}-${m.away}-${m.date}`.replace(/\s+/g, '_');
+}
+
+function renderVideoEmbed(videoId, home, away){
+  if(videoId && videoId.trim()){
+    const id = videoId.trim();
+    const watchUrl = `https://youtu.be/${id}`;
+    return `
+    <div class="video-block">
+      <div class="video-label">Fox Soccer extended highlights</div>
+      <div class="video-frame-wrap">
+        <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/${id}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      </div>
+      <a class="video-fallback-link" href="${watchUrl}" target="_blank" rel="noopener">
+        ▶ If the player above is blocked, watch on YouTube
+      </a>
+    </div>`;
+  }
+  return `
+    <div class="video-block video-block-empty">
+      <div class="video-label">Fox Soccer extended highlights</div>
+      <div class="video-placeholder">
+        🎬 No video linked yet — paste a YouTube video ID into this match's <code>videoId</code> field to embed it here.
+      </div>
+    </div>`;
+}
+
+function renderMatchCard(m, g, standingsHtml, groupLetterForKey){
+  matchCounter++;
+  const mid = `m${matchCounter}`;
+  const matchKey = makeMatchKey(groupLetterForKey, m);
+  const channels = buildHighlightOptions(m.home, m.away);
+  const shortChannel = channels[matchCounter % channels.length];
+  const longChannel = channels[(matchCounter + 2) % channels.length];
+
+  const shortUrl = ytSearchUrl(m.home, m.away, shortChannel, "short");
+  const longUrl = ytSearchUrl(m.home, m.away, longChannel, "long");
+
+  const groupTag = g ? `<span class="card-group-tag">GROUP ${g}</span>` : "";
+  const standingsMarkup = standingsHtml || "";
+  const videoMarkup = renderVideoEmbed(m.videoId, m.home, m.away);
+
+  return `
+    <div class="match" data-match-key="${matchKey}">
+      <div class="match-top">
+        <div class="teams">${m.home} <span class="vs">vs</span> ${m.away}</div>
+        <div class="match-meta">${groupTag}<span class="match-date">${m.date}</span></div>
+      </div>
+      <div class="venue-row">
+        <span class="venue-icon">📍</span>
+        <span class="venue-text"><strong>${m.venue}</strong> — ${m.city}</span>
+      </div>
+      <div class="watched-row">
+        <label class="watched-toggle">
+          <input type="checkbox" class="watched-checkbox" data-match-key="${matchKey}">
+          <span class="watched-box"></span>
+          <span class="watched-label-text">I've watched this match</span>
+        </label>
+      </div>
+      <div class="score-zone">
+        <button class="spoiler-btn" data-target="${mid}">
+          <span class="icon">⚽</span> Reveal Final Score
+        </button>
+        <div class="score-reveal" id="${mid}">
+          <div class="final-score">${m.home} ${m.score} ${m.away}</div>
+          <div class="note">${m.note}</div>
+          ${standingsMarkup}
+          ${videoMarkup}
+        </div>
+      </div>
+      <div class="hl-block">
+        <div class="hl-label">Highlights (search opens on YouTube)</div>
+        <div class="hl-options">
+          <a class="hl-link short" href="${shortUrl}" target="_blank" rel="noopener">
+            ⏱ Short recap <span class="hl-tag">${shortChannel} · &lt;6 min</span>
+          </a>
+          <a class="hl-link long" href="${longUrl}" target="_blank" rel="noopener">
+            🎬 Extended highlights <span class="hl-tag">${longChannel} · 10+ min</span>
+          </a>
+        </div>
+      </div>
+    </div>`;
+}
+
+function renderGroup(g){
+  const sectionId = `group-${g.group}`;
+  let html = `<section class="group-section" id="${sectionId}">
+    <div class="group-head">
+      <div class="group-letter">GROUP ${g.group}</div>
+      <div class="group-teams">${g.teams.join(" · ")}</div>
+    </div>`;
+
+  g.matches.forEach((m, idx)=>{
+    const matchesSoFar = g.matches.slice(0, idx + 1);
+    const standings = computeStandingsFromMatches(g.group, matchesSoFar);
+    const standingsHtml = renderStandingsTableFromStandings(g.group, standings);
+    html += renderMatchCard(m, null, standingsHtml, g.group);
+  });
+
+  html += `</section>`;
+  return html;
+}
+
+function renderByGroupView(){
+  return DATA.map(renderGroup).join("");
+}
+
+function renderByDateView(){
+  const flat = getFlatMatches();
+
+  // Group by day number, preserving chronological order
+  const byDay = {};
+  flat.forEach(m=>{
+    if(!byDay[m.day]) byDay[m.day] = [];
+    byDay[m.day].push(m);
+  });
+
+  const sortedDays = Object.keys(byDay).map(Number).sort((a,b)=>a-b);
+
+  let html = "";
+  sortedDays.forEach(day=>{
+    const matches = byDay[day];
+    const sectionId = `date-${day}`;
+    html += `<section class="group-section" id="${sectionId}">
+      <div class="group-head date-head">
+        <div class="group-letter date-letter">JUN ${day}</div>
+        <div class="group-teams">${matches.length} ${matches.length===1?"match":"matches"} played</div>
+      </div>`;
+
+    // Need original (un-spread) match objects from each group for accurate index lookup
+    matches.forEach((m, idxWithinDay)=>{
+      const groupObj = DATA.find(g=>g.group===m.group);
+      const originalMatchesOnThisGroupAndDay = groupObj.matches.filter(gm=>dayNum(gm.date)===day);
+      const cutoffIdx = originalMatchesOnThisGroupAndDay.findIndex(gm=>
+        gm.home===m.home && gm.away===m.away && gm.date===m.date
+      );
+      const standingsHtml = renderStandingsTable(m.group, day, cutoffIdx, originalMatchesOnThisGroupAndDay);
+      html += renderMatchCard(m, m.group, standingsHtml, m.group);
+    });
+    html += `</section>`;
+  });
+  return html;
+}
+
+// ---- BY TEAM (COUNTRY) VIEW ----
+function getAllTeams(){
+  const teams = new Set();
+  DATA.forEach(g=> g.teams.forEach(t=> teams.add(t)) );
+  return [...teams].sort();
+}
+
+let selectedTeam = null;
+
+function renderByCountryView(){
+  const teams = getAllTeams();
+  // Default to first team if none selected
+  const active = selectedTeam || teams[0];
+
+  // Find all matches involving this team, chronologically
+  const flat = getFlatMatches()
+    .filter(m=> m.home === active || m.away === active)
+    .sort((a,b)=> a.day - b.day);
+
+  let html = `<div class="team-chips" id="teamChips">`;
+  teams.forEach(t=>{
+    const cls = t === active ? "team-chip active" : "team-chip";
+    html += `<button class="${cls}" data-team="${t.replace(/"/g,'&quot;')}">${t}</button>`;
+  });
+  html += `</div>`;
+
+  html += `<section class="group-section" id="team-section">
+    <div class="group-head">
+      <div class="group-letter team-letter">${active}</div>
+      <div class="group-teams">${flat.length} ${flat.length===1?"match":"matches"} in the tournament</div>
+    </div>`;
+
+  if(flat.length === 0){
+    html += `<div class="empty-note">No matches found for this team.</div>`;
+  } else {
+    flat.forEach(m=>{
+      // standings as of this match within its group
+      const groupObj = DATA.find(g=>g.group===m.group);
+      const idx = groupObj.matches.findIndex(gm=>
+        gm.home===m.home && gm.away===m.away && gm.date===m.date
+      );
+      const matchesSoFar = groupObj.matches.slice(0, idx + 1);
+      const standings = computeStandingsFromMatches(m.group, matchesSoFar);
+      const standingsHtml = renderStandingsTableFromStandings(m.group, standings);
+      html += renderMatchCard(m, m.group, standingsHtml, m.group);
+    });
+  }
+  html += `</section>`;
+  return html;
+}
+
+// ---- BRACKET VIEW ----
+// Full knockout tree. Round of 32 has confirmed pairings where known;
+// later rounds show the feeding structure (winners advance into them).
+// Teams confirmed into the Round of 32 (as of the latest update)
+const QUALIFIED_TEAMS = [
+  "Mexico","South Africa","Switzerland","Canada","Brazil","Morocco",
+  "United States","Germany","Ivory Coast","Ecuador","Netherlands","Japan",
+  "Sweden","Australia","France","Norway","Argentina","Colombia","Spain"
+];
+
+// Round of 32 ties, ordered so adjacent pairs feed the same R16 match.
+const R32 = [
+  {match:73, date:"Jun 28", home:"South Africa", away:"Canada"},
+  {match:74, date:"Jun 29", home:"Germany", away:"3rd A/B/C/D/F"},
+  {match:75, date:"Jun 30", home:"Netherlands", away:"Morocco"},
+  {match:76, date:"Jun 29", home:"Brazil", away:"Japan"},
+  {match:77, date:"Jun 30", home:"Group I winner", away:"3rd C/D/F/G/H"},
+  {match:78, date:"Jun 30", home:"Ivory Coast", away:"Group I runner-up"},
+  {match:79, date:"Jun 30", home:"Mexico", away:"3rd C/E/F/H/I"},
+  {match:80, date:"Jul 1", home:"Group L winner", away:"3rd E/H/I/J/K"},
+  {match:81, date:"Jul 1", home:"United States", away:"Bosnia & Herz."},
+  {match:82, date:"Jul 1", home:"Group G winner", away:"3rd A/E/H/I/J"},
+  {match:83, date:"Jul 2", home:"Group K runner-up", away:"Group L runner-up"},
+  {match:84, date:"Jul 2", home:"Group H winner", away:"Group J runner-up"},
+  {match:85, date:"Jul 2", home:"Switzerland", away:"3rd E/F/G/I/J"},
+  {match:86, date:"Jul 3", home:"Australia", away:"Group G runner-up"},
+  {match:87, date:"Jul 3", home:"Argentina", away:"Group H runner-up"},
+  {match:88, date:"Jul 3", home:"France", away:"3rd A/B/C/E/F"},
+];
+
+// Later rounds: each tie references which prior matches feed it.
+const R16 = [
+  {match:89, date:"Jul 4", from:[73,74]},
+  {match:90, date:"Jul 4", from:[75,76]},
+  {match:91, date:"Jul 5", from:[77,78]},
+  {match:92, date:"Jul 5", from:[79,80]},
+  {match:93, date:"Jul 6", from:[81,82]},
+  {match:94, date:"Jul 6", from:[83,84]},
+  {match:95, date:"Jul 7", from:[85,86]},
+  {match:96, date:"Jul 7", from:[87,88]},
+];
+
+const QF = [
+  {match:97, date:"Jul 9", from:[89,90]},
+  {match:98, date:"Jul 10", from:[91,92]},
+  {match:99, date:"Jul 11", from:[93,94]},
+  {match:100, date:"Jul 11", from:[95,96]},
+];
+
+const SF = [
+  {match:101, date:"Jul 14", from:[97,98]},
+  {match:102, date:"Jul 15", from:[99,100]},
+];
+
+const FINAL_ROUND = [
+  {match:104, date:"Jul 19", from:[101,102], label:"Final"},
+];
+
+const THIRD_PLACE = [
+  {match:103, date:"Jul 18", from:[101,102], label:"Third-place playoff", losers:true},
+];
+
+const BRACKET_ROUNDS = [
+  {key:"r32", title:"Round of 32", sub:"Jun 28 – Jul 3", ties:R32, type:"r32"},
+  {key:"r16", title:"Round of 16", sub:"Jul 4 – Jul 7", ties:R16, type:"feed"},
+  {key:"qf", title:"Quarter-finals", sub:"Jul 9 – Jul 11", ties:QF, type:"feed"},
+  {key:"sf", title:"Semi-finals", sub:"Jul 14 – Jul 15", ties:SF, type:"feed"},
+  {key:"final", title:"Final", sub:"Jul 19", ties:FINAL_ROUND, type:"feed"},
+];
+
+function bracketTeamCell(name){
+  const confirmed = QUALIFIED_TEAMS.includes(name);
+  const cls = confirmed ? "bk-team confirmed" : "bk-team pending";
+  return `<div class="${cls}">${name}</div>`;
+}
+
+function renderBracketMatch(tie, type){
+  if(type === "r32"){
+    return `
+      <div class="bk-match" data-match="${tie.match}">
+        <div class="bk-match-meta"><span>M${tie.match}</span><span class="bk-match-date">${tie.date}</span></div>
+        ${bracketTeamCell(tie.home)}
+        ${bracketTeamCell(tie.away)}
+      </div>`;
+  }
+  // feed match — two slots fed by prior winners
+  const label = tie.label ? tie.label : `M${tie.match}`;
+  const a = tie.from ? `Winner M${tie.from[0]}` : "TBD";
+  const b = tie.from ? `Winner M${tie.from[1]}` : "TBD";
+  return `
+    <div class="bk-match bk-match-feed" data-match="${tie.match}">
+      <div class="bk-match-meta"><span>${label}</span><span class="bk-match-date">${tie.date}</span></div>
+      <div class="bk-team pending">${a}</div>
+      <div class="bk-team pending">${b}</div>
+    </div>`;
+}
+
+function renderBracketView(){
+  let html = `<section class="group-section" id="bracket-section">
+    <div class="group-head">
+      <div class="group-letter">BRACKET</div>
+      <div class="group-teams">Knockout stage · scroll across to follow the tree</div>
+    </div>
+    <div class="bracket-note">
+      Scroll/swipe horizontally to move from the Round of 32 toward the Final. Confirmed teams show in green; undetermined slots show as placeholders that fill in as results come in.
+    </div>`;
+
+  // Quick-jump round tabs (scroll the tree to that column)
+  html += `<div class="bk-round-tabs" id="bkRoundTabs">`;
+  BRACKET_ROUNDS.forEach((r, i)=>{
+    html += `<button class="bk-round-tab${i===0?' active':''}" data-round-idx="${i}" data-round-key="${r.key}">${r.title}</button>`;
+  });
+  html += `</div>`;
+
+  // The horizontally-scrollable bracket tree
+  html += `<div class="bk-scroll" id="bkScroll"><div class="bk-tree" id="bkTree">`;
+  BRACKET_ROUNDS.forEach((r)=>{
+    html += `<div class="bk-col" data-round="${r.key}">
+      <div class="bk-col-head">
+        <div class="bk-col-title">${r.title}</div>
+        <div class="bk-col-sub">${r.sub}</div>
+      </div>
+      <div class="bk-col-body">`;
+    r.ties.forEach(tie=>{
+      html += `<div class="bk-slot">${renderBracketMatch(tie, r.type)}</div>`;
+    });
+    html += `</div></div>`;
+  });
+  html += `</div></div>`;
+
+  // Position dots (shown only in narrow paging mode)
+  html += `<div class="bk-dots" id="bkDots">`;
+  BRACKET_ROUNDS.forEach((r,i)=>{
+    html += `<span class="bk-dot${i===0?' active':''}" data-round-idx="${i}"></span>`;
+  });
+  html += `</div>`;
+
+  // Third-place playoff shown separately (it sits outside the main tree)
+  THIRD_PLACE.forEach(tie=>{
+    html += `<div class="bk-thirdplace">
+      <div class="bk-thirdplace-label">Third-place playoff · ${tie.date}</div>
+      <div class="bk-match bk-match-feed bk-match-third">
+        <div class="bk-team pending">Loser M${tie.from[0]}</div>
+        <div class="bk-team pending">Loser M${tie.from[1]}</div>
+      </div>
+    </div>`;
+  });
+
+  // Confirmed teams progress strip
+  html += `<div class="bracket-progress">
+      <div class="bracket-progress-label">Teams confirmed into the Round of 32</div>
+      <div class="bracket-progress-chips">`;
+  QUALIFIED_TEAMS.slice().sort().forEach(t=>{
+    html += `<span class="qualified-chip">${t}</span>`;
+  });
+  html += `</div>
+      <div class="bracket-progress-note">More teams join as third-place qualifiers are confirmed.</div>
+    </div>
+  </section>`;
+
+  // Below the bracket: the regular chronological by-date view
+  html += `<div class="bracket-date-divider"><span>All matches by date</span></div>`;
+  html += renderByDateView();
+
+  return html;
+}
+
+// Wire up the bracket: wide screens scroll/jump the tree; narrow screens
+// switch to a swipeable one-round-per-page pager.
+function attachBracketHandlers(){
+  const scroller = document.getElementById('bkScroll');
+  const tree = document.getElementById('bkTree');
+  const dots = document.getElementById('bkDots');
+  if(!scroller || !tree) return;
+
+  const cols = [...tree.querySelectorAll('.bk-col')];
+  const PAGE_BREAKPOINT = 720;
+  let pagedIdx = 0;
+
+  function isPaged(){ return window.innerWidth < PAGE_BREAKPOINT; }
+
+  function setActiveTab(idx){
+    document.querySelectorAll('.bk-round-tab').forEach((t,i)=> t.classList.toggle('active', i===idx));
+    document.querySelectorAll('.bk-dot').forEach((d,i)=> d.classList.toggle('active', i===idx));
+  }
+
+  // --- Paged mode (narrow) ---
+  function goToPage(idx){
+    pagedIdx = Math.max(0, Math.min(cols.length - 1, idx));
+    tree.style.transform = `translateX(-${pagedIdx * 100}%)`;
+    setActiveTab(pagedIdx);
+    const activeTab = document.querySelector('.bk-round-tab.active');
+    if(activeTab && activeTab.scrollIntoView) activeTab.scrollIntoView({inline:'center', block:'nearest', behavior:'smooth'});
+  }
+
+  // --- Wide mode (scroll/jump) ---
+  function scrollToCol(idx){
+    idx = Math.max(0, Math.min(cols.length - 1, idx));
+    const col = cols[idx];
+    if(col) scroller.scrollTo({left: col.offsetLeft - 12, behavior:'smooth'});
+  }
+
+  function applyMode(){
+    const paged = isPaged();
+    scroller.classList.toggle('bk-paged', paged);
+    if(dots) dots.classList.toggle('bk-dots-visible', paged);
+    if(paged){
+      tree.style.transform = `translateX(-${pagedIdx * 100}%)`;
+      setActiveTab(pagedIdx);
+    } else {
+      tree.style.transform = "";
+    }
+  }
+
+  // Tab clicks: page or scroll depending on mode
+  document.querySelectorAll('.bk-round-tab').forEach(tab=>{
+    tab.addEventListener('click', ()=>{
+      const idx = parseInt(tab.dataset.roundIdx,10);
+      if(isPaged()) goToPage(idx);
+      else scrollToCol(idx);
+    });
+  });
+  // Dot clicks (paged only)
+  document.querySelectorAll('.bk-dot').forEach(dot=>{
+    dot.addEventListener('click', ()=> goToPage(parseInt(dot.dataset.roundIdx,10)) );
+  });
+
+  // Scroll position updates active tab (wide mode)
+  let scrollRaf = null;
+  scroller.addEventListener('scroll', ()=>{
+    if(isPaged() || scrollRaf) return;
+    scrollRaf = requestAnimationFrame(()=>{
+      scrollRaf = null;
+      const center = scroller.scrollLeft + scroller.clientWidth / 2;
+      let nearest = 0, nearestDist = Infinity;
+      cols.forEach((col, i)=>{
+        const colCenter = col.offsetLeft + col.offsetWidth / 2;
+        const d = Math.abs(colCenter - center);
+        if(d < nearestDist){ nearestDist = d; nearest = i; }
+      });
+      setActiveTab(nearest);
+    });
+  }, {passive:true});
+
+  // Swipe for paged mode
+  let startX = 0, startY = 0, swiping = false;
+  scroller.addEventListener('touchstart', (e)=>{
+    if(!isPaged()) return;
+    startX = e.touches[0].clientX; startY = e.touches[0].clientY; swiping = true;
+  }, {passive:true});
+  scroller.addEventListener('touchend', (e)=>{
+    if(!swiping || !isPaged()) return;
+    swiping = false;
+    const dx = e.changedTouches[0].clientX - startX;
+    const dy = e.changedTouches[0].clientY - startY;
+    if(Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)){
+      if(dx < 0) goToPage(pagedIdx + 1);
+      else goToPage(pagedIdx - 1);
+    }
+  }, {passive:true});
+
+  // Re-apply mode on resize
+  let resizeRaf = null;
+  window.addEventListener('resize', ()=>{
+    if(resizeRaf) return;
+    resizeRaf = requestAnimationFrame(()=>{ resizeRaf = null; applyMode(); });
+  });
+
+  applyMode();
+}
+
+let currentView = "group";
+
+// ---- Watched-match tracking ----
+// Seeded with a previously-issued restore code, used as a fallback when
+// persistent storage has nothing saved (since storage isn't reliable in this environment).
+const DEFAULT_WATCHED_CODE = "WC26-WyJ3YzI2LUEtTWV4aWNvLVNvdXRoX0FmcmljYS1KdW5fMTEiLCJ3YzI2LUEtU291dGhfS29yZWEtQ3plY2hpYS1KdW5fMTEiLCJ3YzI2LUItQ2FuYWRhLUJvc25pYV9hbmRfSGVyemVnb3ZpbmEtSnVuXzEyIiwid2MyNi1ELVVuaXRlZF9TdGF0ZXMtUGFyYWd1YXktSnVuXzEyIiwid2MyNi1CLVFhdGFyLVN3aXR6ZXJsYW5kLUp1bl8xMyIsIndjMjYtQy1CcmF6aWwtTW9yb2Njby1KdW5fMTMiLCJ3YzI2LUMtU2NvdGxhbmQtSGFpdGktSnVuXzEzIiwid2MyNi1ELUF1c3RyYWxpYS1Uw7xya2l5ZS1KdW5fMTMiLCJ3YzI2LUUtR2VybWFueS1DdXJhw6dhby1KdW5fMTQiLCJ3YzI2LUUtSXZvcnlfQ29hc3QtRWN1YWRvci1KdW5fMTQiLCJ3YzI2LUYtTmV0aGVybGFuZHMtSmFwYW4tSnVuXzE0Iiwid2MyNi1GLVN3ZWRlbi1UdW5pc2lhLUp1bl8xNCIsIndjMjYtRy1CZWxnaXVtLUVneXB0LUp1bl8xNSIsIndjMjYtRy1JcmFuLU5ld19aZWFsYW5kLUp1bl8xNSIsIndjMjYtSC1TcGFpbi1DYXBlX1ZlcmRlLUp1bl8xNSIsIndjMjYtSC1TYXVkaV9BcmFiaWEtVXJ1Z3VheS1KdW5fMTUiLCJ3YzI2LUktRnJhbmNlLVNlbmVnYWwtSnVuXzE2Iiwid2MyNi1JLUlyYXEtTm9yd2F5LUp1bl8xNiIsIndjMjYtSi1BcmdlbnRpbmEtQWxnZXJpYS1KdW5fMTYiLCJ3YzI2LUotQXVzdHJpYS1Kb3JkYW4tSnVuXzE2Iiwid2MyNi1LLVBvcnR1Z2FsLURSX0NvbmdvLUp1bl8xNyIsIndjMjYtSy1Db2xvbWJpYS1VemJla2lzdGFuLUp1bl8xNyIsIndjMjYtTC1FbmdsYW5kLUNyb2F0aWEtSnVuXzE3Iiwid2MyNi1MLUdoYW5hLVBhbmFtYS1KdW5fMTciLCJ3YzI2LUEtQ3plY2hpYS1Tb3V0aF9BZnJpY2EtSnVuXzE4Iiwid2MyNi1BLU1leGljby1Tb3V0aF9Lb3JlYS1KdW5fMTgiLCJ3YzI2LUItQ2FuYWRhLVFhdGFyLUp1bl8xOCIsIndjMjYtQy1TY290bGFuZC1Nb3JvY2NvLUp1bl8xOSIsIndjMjYtQy1CcmF6aWwtSGFpdGktSnVuXzE5Iiwid2MyNi1ELVVuaXRlZF9TdGF0ZXMtQXVzdHJhbGlhLUp1bl8xOSIsIndjMjYtRC1Uw7xya2l5ZS1QYXJhZ3VheS1KdW5fMTkiLCJ3YzI2LUUtR2VybWFueS1Jdm9yeV9Db2FzdC1KdW5fMjAiLCJ3YzI2LUUtRWN1YWRvci1DdXJhw6dhby1KdW5fMjAiLCJ3YzI2LUYtTmV0aGVybGFuZHMtU3dlZGVuLUp1bl8yMCIsIndjMjYtRi1UdW5pc2lhLUphcGFuLUp1bl8yMCIsIndjMjYtRy1CZWxnaXVtLUlyYW4tSnVuXzIxIiwid2MyNi1HLU5ld19aZWFsYW5kLUVneXB0LUp1bl8yMSIsIndjMjYtSC1TcGFpbi1TYXVkaV9BcmFiaWEtSnVuXzIxIiwid2MyNi1ILVVydWd1YXktQ2FwZV9WZXJkZS1KdW5fMjEiLCJ3YzI2LUktRnJhbmNlLUlyYXEtSnVuXzIyIl0=";
+
+let watchedSet = new Set();
+let watchedStorageReady = false;
+const hasStorageApi = typeof window !== 'undefined' && window.storage && typeof window.storage.get === 'function';
+
+async function loadWatchedState(){
+  // Seed from the default code first, so there's always a sensible starting point
+  try{
+    const seeded = decodeWatchedCode(DEFAULT_WATCHED_CODE);
+    watchedSet = new Set(seeded);
+  }catch(e){
+    watchedSet = new Set();
+  }
+
+  if(!hasStorageApi){ watchedStorageReady = true; return; }
+  try{
+    const result = await window.storage.get('watched-matches');
+    if(result && typeof result.value === 'string'){
+      const arr = JSON.parse(result.value);
+      // Only override the seed if storage actually has saved data
+      if(Array.isArray(arr) && arr.length > 0) watchedSet = new Set(arr);
+    }
+  }catch(e){
+    // key doesn't exist yet, or storage isn't ready — keep the seeded default
+  }
+  watchedStorageReady = true;
+}
+
+let saveFailureCount = 0;
+
+async function saveWatchedState(){
+  const statusEl = document.getElementById('saveStatus');
+  if(!hasStorageApi){
+    if(statusEl) statusEl.textContent = "Not saved between visits";
+    return;
+  }
+  const payload = JSON.stringify([...watchedSet]);
+  try{
+    const result = await window.storage.set('watched-matches', payload);
+    if(!result){
+      saveFailureCount++;
+      if(statusEl) statusEl.textContent = "Not saved between visits";
+    } else {
+      saveFailureCount = 0;
+      if(statusEl) statusEl.textContent = "";
+    }
+  }catch(e){
+    saveFailureCount++;
+    if(statusEl) statusEl.textContent = "Not saved between visits";
+    // Log full detail once, then stay quiet to avoid noisy repeats
+    if(saveFailureCount === 1){
+      console.error('Persistent storage unavailable for watched-state; tracking is kept in-memory for this session only.', e && e.message ? e.message : e);
+    }
+  }
+}
+
+function applyWatchedStateToDOM(){
+  document.querySelectorAll('.match[data-match-key]').forEach(card=>{
+    const key = card.dataset.matchKey;
+    const checkbox = card.querySelector('.watched-checkbox');
+    const isWatched = watchedSet.has(key);
+    if(checkbox) checkbox.checked = isWatched;
+    card.classList.toggle('is-watched', isWatched);
+  });
+  updateWatchedCount();
+}
+
+function updateWatchedCount(){
+  const el = document.getElementById('stat-watched');
+  if(el) el.textContent = watchedSet.size;
+}
+
+function attachWatchedHandlers(){
+  document.querySelectorAll('.watched-checkbox').forEach(cb=>{
+    cb.addEventListener('change', ()=>{
+      const key = cb.dataset.matchKey;
+      const card = cb.closest('.match');
+      if(cb.checked){
+        watchedSet.add(key);
+      } else {
+        watchedSet.delete(key);
+      }
+      if(card) card.classList.toggle('is-watched', cb.checked);
+      updateWatchedCount();
+      saveWatchedState();
+    });
+  });
+}
+
+function renderMain(){
+  matchCounter = 0;
+  const main = document.getElementById('main');
+  let viewHtml;
+  if(currentView === "group") viewHtml = renderByGroupView();
+  else if(currentView === "date") viewHtml = renderByDateView();
+  else if(currentView === "country") viewHtml = renderByCountryView();
+  else if(currentView === "bracket") viewHtml = renderBracketView();
+  else viewHtml = renderByGroupView();
+  main.innerHTML = viewHtml;
+  document.body.classList.toggle('bracket-view-active', currentView === "bracket");
+  attachScoreHandlers();
+  attachWatchedHandlers();
+  attachTeamChipHandlers();
+  attachBracketHandlers();
+  applyWatchedStateToDOM();
+}
+
+function attachTeamChipHandlers(){
+  document.querySelectorAll('.team-chip').forEach(chip=>{
+    chip.addEventListener('click', ()=>{
+      selectedTeam = chip.dataset.team;
+      renderMain();
+      renderNav();
+    });
+  });
+}
+
+function renderNav(){
+  const nav = document.getElementById('groupNav');
+  if(currentView === "group"){
+    nav.innerHTML = DATA.map(g=>`<a href="javascript:void(0)" data-scroll="group-${g.group}">GRP ${g.group}</a>`).join("");
+  } else if(currentView === "date"){
+    const days = [...new Set(DATA.flatMap(g=>g.matches.map(m=>dayNum(m.date))))].sort((a,b)=>a-b);
+    nav.innerHTML = days.map(d=>`<a href="javascript:void(0)" data-scroll="date-${d}">JUN ${d}</a>`).join("");
+  } else if(currentView === "bracket"){
+    let chips = `<a href="javascript:void(0)" data-scroll="bracket-section">BRACKET</a>`;
+    const days = [...new Set(DATA.flatMap(g=>g.matches.map(m=>dayNum(m.date))))].sort((a,b)=>a-b);
+    chips += days.map(d=>`<a href="javascript:void(0)" data-scroll="date-${d}">JUN ${d}</a>`).join("");
+    nav.innerHTML = chips;
+  } else {
+    // country view — no jump nav (team chips handle navigation)
+    nav.innerHTML = "";
+  }
+  nav.querySelectorAll('a[data-scroll]').forEach(link=>{
+    link.addEventListener('click', (e)=>{
+      e.preventDefault();
+      const el = document.getElementById(link.dataset.scroll);
+      if(el){ el.scrollIntoView({behavior:'smooth', block:'start'}); }
+    });
+  });
+}
+
+function attachScoreHandlers(){
+  document.querySelectorAll('.spoiler-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const target = document.getElementById(btn.dataset.target);
+      const isShown = target.classList.toggle('shown');
+      btn.innerHTML = isShown
+        ? '<span class="icon">🙈</span> Hide Score'
+        : '<span class="icon">⚽</span> Reveal Final Score';
+    });
+  });
+}
+
+async function render(){
+  await loadWatchedState();
+  renderMain();
+  renderNav();
+
+  const totalGames = DATA.reduce((sum,g)=>sum+g.matches.length,0);
+  document.getElementById('stat-games').textContent = totalGames;
+
+  document.getElementById('revealAllBtn').addEventListener('click', ()=>{
+    const allShown = [...document.querySelectorAll('.score-reveal')].every(el=>el.classList.contains('shown'));
+    document.querySelectorAll('.score-reveal').forEach(el=>{
+      el.classList.toggle('shown', !allShown);
+    });
+    document.querySelectorAll('.spoiler-btn').forEach(btn=>{
+      btn.innerHTML = !allShown
+        ? '<span class="icon">🙈</span> Hide Score'
+        : '<span class="icon">⚽</span> Reveal Final Score';
+    });
+    document.getElementById('revealAllBtn').textContent = !allShown ? "Hide All Scores" : "Reveal All Scores";
+  });
+
+  document.querySelectorAll('.toggle-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      if(btn.classList.contains('active')) return;
+      document.querySelectorAll('.toggle-btn').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      currentView = btn.dataset.view;
+      renderMain();
+      renderNav();
+      // Reset reveal-all button label since DOM was rebuilt
+      document.getElementById('revealAllBtn').textContent = "Reveal All Scores";
+    });
+  });
+
+  setupBackupPanel();
+}
+
+// ---- Watched-list backup code (export/import) ----
+function encodeWatchedCode(){
+  const arr = [...watchedSet];
+  const json = JSON.stringify(arr);
+  // Use base64 so the code is compact and copy/paste-safe
+  let encoded;
+  try{
+    encoded = btoa(unescape(encodeURIComponent(json)));
+  }catch(e){
+    encoded = btoa(json);
+  }
+  return `WC26-${encoded}`;
+}
+
+function decodeWatchedCode(code){
+  const trimmed = (code || "").trim();
+  const withoutPrefix = trimmed.replace(/^WC26-/, "");
+  if(!withoutPrefix) throw new Error("Empty code");
+  let json;
+  try{
+    json = decodeURIComponent(escape(atob(withoutPrefix)));
+  }catch(e){
+    json = atob(withoutPrefix);
+  }
+  const arr = JSON.parse(json);
+  if(!Array.isArray(arr)) throw new Error("Code did not contain a valid list");
+  return arr;
+}
+
+function refreshBackupCodeOutput(){
+  const out = document.getElementById('backupCodeOutput');
+  if(out) out.value = watchedSet.size > 0 ? encodeWatchedCode() : "";
+}
+
+function setupBackupPanel(){
+  const toggleBtn = document.getElementById('backupToggleBtn');
+  const panel = document.getElementById('backupPanel');
+  const copyBtn = document.getElementById('copyCodeBtn');
+  const restoreBtn = document.getElementById('restoreCodeBtn');
+  const input = document.getElementById('backupCodeInput');
+  const feedback = document.getElementById('backupFeedback');
+
+  toggleBtn.addEventListener('click', ()=>{
+    const isOpen = panel.classList.toggle('open');
+    if(isOpen) refreshBackupCodeOutput();
+  });
+
+  copyBtn.addEventListener('click', async ()=>{
+    refreshBackupCodeOutput();
+    const out = document.getElementById('backupCodeOutput');
+    if(!out.value){
+      feedback.textContent = "Nothing watched yet — check a few matches first.";
+      feedback.className = "backup-feedback";
+      return;
+    }
+    try{
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        await navigator.clipboard.writeText(out.value);
+      } else {
+        out.select();
+        document.execCommand('copy');
+      }
+      feedback.textContent = "Copied! Save it somewhere safe.";
+      feedback.className = "backup-feedback success";
+    }catch(e){
+      out.select();
+      feedback.textContent = "Couldn't auto-copy — text is selected, copy it manually.";
+      feedback.className = "backup-feedback";
+    }
+  });
+
+  restoreBtn.addEventListener('click', ()=>{
+    try{
+      const arr = decodeWatchedCode(input.value);
+      watchedSet = new Set(arr);
+      applyWatchedStateToDOM();
+      refreshBackupCodeOutput();
+      saveWatchedState();
+      feedback.textContent = `Restored ${arr.length} watched match${arr.length === 1 ? '' : 'es'}.`;
+      feedback.className = "backup-feedback success";
+    }catch(e){
+      feedback.textContent = "That code didn't look right — double check you copied the whole thing.";
+      feedback.className = "backup-feedback";
+    }
+  });
+}
+
+render();
+</script>
+
+</body>
+</html>
