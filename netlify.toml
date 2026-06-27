@@ -1,5 +1,6 @@
 [build]
   publish = "."
+  ignore = "git diff --quiet HEAD^ HEAD -- index.html netlify/ netlify.toml"
 
 [functions]
   directory = "netlify/functions"
