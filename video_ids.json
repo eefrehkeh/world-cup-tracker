@@ -1,0 +1,11 @@
+{
+  "_note": "FOX Sports YouTube video IDs for World Cup 2026 match highlights. POLICY: FOX uploads only. confidence: 'verified' = FOX-pattern YouTube upload ('X vs Y [Extended/Fast] Highlights 🌎🏆 2026 FIFA World Cup™') corroborated by a foxsports.com/watch page + correct date/score; 'best-guess' = a FOX-pattern upload with something unconfirmed; '' = no FOX YouTube upload surfaced (FIFA-channel-only uploads are intentionally NOT used). IDs come from web search result URLs; videos were not watched. Standard 'Highlights' cut preferred, then Extended, then Fast/Quick.",
+
+  "South Korea|Czechia|Jun 11": {"id": "QWoDfCkh7f8", "confidence": "verified", "src": "FOX 'South Korea vs Czechia Highlights 🌎🏆 2026 FIFA World Cup™'; foxsports.com/watch page exists; Jun 11"},
+  "Mexico|South Korea|Jun 18": {"id": "F1sMvm6D-0Y", "confidence": "verified", "src": "FOX 'Mexico vs South Korea Extended Highlights 🌎🏆 2026 FIFA World Cup™' (Extended cut); Mexico 1-0; Jun 18"},
+  "South Africa|South Korea|Jun 24": {"id": "A7PTebEdius", "confidence": "verified", "src": "FOX 'South Africa vs South Korea Extended Highlights 🌎🏆 2026 FIFA World Cup™' (Extended cut); foxsports.com/watch page exists; Jun 24"},
+
+  "Mexico|South Africa|Jun 11": {"id": "", "confidence": "", "src": "FOX-only policy: only a FIFA-channel upload (PmevGCkUtM8) found; no FOX YouTube upload surfaced; zip's r1Afsds3ZD0 uncorroborated"},
+  "Czechia|Mexico|Jun 24": {"id": "", "confidence": "", "src": "FOX-only policy: only a FIFA-channel upload (h9wH7diGNC0) found; no FOX YouTube upload surfaced"},
+  "Czechia|South Africa|Jun 18": {"id": "", "confidence": "", "src": "No YouTube upload (FOX or FIFA) surfaced; only foxsports.com/watch (fmc- internal IDs) and fifa.com player links exist"}
+}
