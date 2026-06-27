@@ -194,5 +194,45 @@
     "id": "Ihp4QH9YkBc",
     "confidence": "verified",
     "src": "FOX 'New Zealand vs Egypt Extended Highlights 🌎🏆'; Jun 21; 1-3"
+  },
+  "Spain|Cape Verde|Jun 15": {
+    "id": "wzKYVElYRrw",
+    "confidence": "verified",
+    "src": "FOX 'Spain vs Cape Verde Extended Highlights 🌎🏆'; Jun 15; 0-0"
+  },
+  "Saudi Arabia|Uruguay|Jun 15": {
+    "id": "Tz9R1OYdTSs",
+    "confidence": "verified",
+    "src": "FOX 'Saudi Arabia vs Uruguay Extended Highlights 🌎🏆'; Jun 15; 1-1"
+  },
+  "Spain|Saudi Arabia|Jun 21": {
+    "id": "w453UjgtQw4",
+    "confidence": "verified",
+    "src": "FOX 'Spain vs Saudi Arabia Extended Highlights 🌎🏆'; Jun 21; 4-0"
+  },
+  "Uruguay|Cape Verde|Jun 21": {
+    "id": "ZXvFKZM1nL4",
+    "confidence": "verified",
+    "src": "FOX 'Uruguay vs Cape Verde Extended Highlights 🌎🏆'; Jun 21; 2-2"
+  },
+  "France|Senegal|Jun 16": {
+    "id": "SlmYDbzHqjg",
+    "confidence": "verified",
+    "src": "FOX 'France vs Senegal Extended Highlights 🌎🏆'; Jun 16; 3-1"
+  },
+  "Iraq|Norway|Jun 16": {
+    "id": "ku1hsMdKDXQ",
+    "confidence": "verified",
+    "src": "FOX 'Iraq vs Norway Extended Highlights 🌎🏆'; Jun 16"
+  },
+  "France|Iraq|Jun 22": {
+    "id": "Mo7aY61WF9I",
+    "confidence": "verified",
+    "src": "FOX 'France vs Iraq Extended Highlights 🌎🏆'; Jun 22; 3-0"
+  },
+  "Norway|Senegal|Jun 22": {
+    "id": "vcgzGgM4uJg",
+    "confidence": "verified",
+    "src": "FOX 'Norway vs Senegal Extended Highlights 🌎🏆'; Jun 22; 3-2 (confirms pre-existing repo ID)"
   }
 }

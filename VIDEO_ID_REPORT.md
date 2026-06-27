@@ -1,11 +1,11 @@
 # Video ID Report
 
 - Total `videoId` fields in file: **71**
-- Filled this run / total in JSON: **33**
-- Still empty in file: **37**
-- Verified: **33**  |  Best-guess: **0**
+- Filled this run / total in JSON: **41**
+- Still empty in file: **30**
+- Verified: **41**  |  Best-guess: **0**
 
-## Verified (33)
+## Verified (41)
 - South Korea vs Czechia (Jun 11) -> `QWoDfCkh7f8`  (FOX 'South Korea vs Czechia Highlights 🌎🏆 2026 FIFA World Cup™'; foxsports.com/watch page exists; Jun 11)
 - Mexico vs South Korea (Jun 18) -> `F1sMvm6D-0Y`  (FOX 'Mexico vs South Korea Extended Highlights 🌎🏆 2026 FIFA World Cup™' (Extended cut); Mexico 1-0; Jun 18)
 - South Africa vs South Korea (Jun 24) -> `A7PTebEdius`  (FOX 'South Africa vs South Korea Extended Highlights 🌎🏆 2026 FIFA World Cup™' (Extended cut); foxsports.com/watch page exists; Jun 24)
@@ -39,6 +39,14 @@
 - Iran vs New Zealand (Jun 15) -> `UZ_7qFbFYRY`  (FOX 'Iran vs New Zealand Extended Highlights 🌎🏆'; Jun 15; 2-2)
 - Belgium vs Iran (Jun 21) -> `YbiEe9pOV-s`  (FOX 'Belgium vs Iran Extended Highlights 🌎🏆'; Jun 21; 0-0)
 - New Zealand vs Egypt (Jun 21) -> `Ihp4QH9YkBc`  (FOX 'New Zealand vs Egypt Extended Highlights 🌎🏆'; Jun 21; 1-3)
+- Spain vs Cape Verde (Jun 15) -> `wzKYVElYRrw`  (FOX 'Spain vs Cape Verde Extended Highlights 🌎🏆'; Jun 15; 0-0)
+- Saudi Arabia vs Uruguay (Jun 15) -> `Tz9R1OYdTSs`  (FOX 'Saudi Arabia vs Uruguay Extended Highlights 🌎🏆'; Jun 15; 1-1)
+- Spain vs Saudi Arabia (Jun 21) -> `w453UjgtQw4`  (FOX 'Spain vs Saudi Arabia Extended Highlights 🌎🏆'; Jun 21; 4-0)
+- Uruguay vs Cape Verde (Jun 21) -> `ZXvFKZM1nL4`  (FOX 'Uruguay vs Cape Verde Extended Highlights 🌎🏆'; Jun 21; 2-2)
+- France vs Senegal (Jun 16) -> `SlmYDbzHqjg`  (FOX 'France vs Senegal Extended Highlights 🌎🏆'; Jun 16; 3-1)
+- Iraq vs Norway (Jun 16) -> `ku1hsMdKDXQ`  (FOX 'Iraq vs Norway Extended Highlights 🌎🏆'; Jun 16)
+- France vs Iraq (Jun 22) -> `Mo7aY61WF9I`  (FOX 'France vs Iraq Extended Highlights 🌎🏆'; Jun 22; 3-0)
+- Norway vs Senegal (Jun 22) -> `vcgzGgM4uJg`  (FOX 'Norway vs Senegal Extended Highlights 🌎🏆'; Jun 22; 3-2 (confirms pre-existing repo ID))
 
 ## Best-guess - double-check these (0)
 _none_
