@@ -897,7 +897,7 @@
 
   .video-block{
     margin-top:12px;
-    padding-top:12px;
+    padding:12px 16px 0;
     border-top:1px dashed var(--line);
   }
   .video-label{
@@ -936,6 +936,49 @@
     transition:background .15s ease;
   }
   .video-fallback-link:hover{background:var(--paper-2);}
+  /* Click-to-play facade (loads the real iframe only on click) */
+  .video-facade{
+    position:absolute; inset:0;
+    width:100%; height:100%;
+    padding:0; border:0; margin:0;
+    background:#000; cursor:pointer; display:block;
+  }
+  .video-facade .video-thumb{
+    width:100%; height:100%; object-fit:cover; display:block;
+  }
+  .video-facade .video-play{
+    position:absolute; top:50%; left:50%;
+    transform:translate(-50%,-50%);
+    width:54px; height:54px; border-radius:50%;
+    background:rgba(27,42,31,0.82); color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-size:22px; padding-left:3px;
+    transition:background .15s ease, transform .15s ease;
+    pointer-events:none;
+  }
+  .video-facade:hover .video-play{
+    background:var(--rust);
+    transform:translate(-50%,-50%) scale(1.06);
+  }
+  /* Site-wide video size: hero is default; toggle adds .videos-compact */
+  body.videos-compact .video-frame-wrap{ max-width:320px; }
+  .btn-video-size{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11.5px;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    background:var(--card);
+    border:1.5px solid var(--ink);
+    color:var(--ink);
+    padding:9px 16px;
+    border-radius:3px;
+    cursor:pointer;
+    transition:transform .12s ease, background .15s ease;
+  }
+  .btn-video-size:hover{background:var(--gold-soft); transform:translateY(-1px);}
+  .btn-video-size:active{transform:translateY(0);}
+  .btn-video-size[aria-pressed="true"]{background:var(--gold-soft);}
+  .controls-actions{display:flex; gap:8px; flex-wrap:wrap; align-items:center;}
   .video-block-empty .video-placeholder{
     font-family:'Archivo', sans-serif;
     font-size:12.5px;
@@ -1095,7 +1138,10 @@
     <button class="toggle-btn" data-view="country">By Team</button>
     <button class="toggle-btn" data-view="bracket">Bracket</button>
   </div>
-  <button class="btn-reveal-all" id="revealAllBtn">Reveal All Scores</button>
+  <div class="controls-actions">
+    <button class="btn-video-size" id="videoSizeBtn" aria-pressed="false">▭ Compact videos</button>
+    <button class="btn-reveal-all" id="revealAllBtn">Reveal All Scores</button>
+  </div>
 </div>
 
 <div class="backup-row">
@@ -1432,24 +1478,23 @@ function renderVideoEmbed(videoId, home, away){
   if(videoId && videoId.trim()){
     const id = videoId.trim();
     const watchUrl = `https://youtu.be/${id}`;
+    const thumb = `https://i.ytimg.com/vi/${id}/maxresdefault.jpg`;
+    const thumbFallback = `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
     return `
     <div class="video-block">
-      <div class="video-label">Fox Soccer extended highlights</div>
+      <div class="video-label">Fox Soccer highlights</div>
       <div class="video-frame-wrap">
-        <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/${id}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        <button class="video-facade" data-vid="${id}" aria-label="Play highlights: ${home} vs ${away}">
+          <img class="video-thumb" src="${thumb}" onerror="this.onerror=null;this.src='${thumbFallback}';" alt="" loading="lazy">
+          <span class="video-play" aria-hidden="true">▶</span>
+        </button>
       </div>
       <a class="video-fallback-link" href="${watchUrl}" target="_blank" rel="noopener">
-        ▶ If the player above is blocked, watch on YouTube
+        ▶ Watch on YouTube
       </a>
     </div>`;
   }
-  return `
-    <div class="video-block video-block-empty">
-      <div class="video-label">Fox Soccer extended highlights</div>
-      <div class="video-placeholder">
-        🎬 No video linked yet — paste a YouTube video ID into this match's <code>videoId</code> field to embed it here.
-      </div>
-    </div>`;
+  return "";
 }
 
 function renderMatchCard(m, g, standingsHtml, groupLetterForKey){
@@ -1484,6 +1529,7 @@ function renderMatchCard(m, g, standingsHtml, groupLetterForKey){
           <span class="watched-label-text">I've watched this match</span>
         </label>
       </div>
+      ${videoMarkup}
       <div class="score-zone">
         <button class="spoiler-btn" data-target="${mid}">
           <span class="icon">⚽</span> Reveal Final Score
@@ -1492,7 +1538,6 @@ function renderMatchCard(m, g, standingsHtml, groupLetterForKey){
           <div class="final-score">${m.home} ${m.score} ${m.away}</div>
           <div class="note">${m.note}</div>
           ${standingsMarkup}
-          ${videoMarkup}
         </div>
       </div>
       <div class="hl-block">
@@ -2054,10 +2099,46 @@ function attachScoreHandlers(){
   });
 }
 
+function setupVideoFacades(){
+  const main = document.getElementById('main');
+  if(!main) return;
+  main.addEventListener('click', (e)=>{
+    const facade = e.target.closest('.video-facade');
+    if(!facade) return;
+    const id = facade.dataset.vid;
+    const wrap = facade.closest('.video-frame-wrap');
+    if(!id || !wrap) return;
+    wrap.innerHTML = '<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>';
+  });
+}
+
+function getPref(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }
+function setPref(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
+
+function updateVideoSizeBtn(btn, compact){
+  btn.setAttribute('aria-pressed', compact ? 'true' : 'false');
+  btn.textContent = compact ? '⛶ Hero videos' : '▭ Compact videos';
+}
+
+function initVideoSizeToggle(){
+  const btn = document.getElementById('videoSizeBtn');
+  if(!btn) return;
+  const compact = getPref('wc_video_size') === 'compact';
+  document.body.classList.toggle('videos-compact', compact);
+  updateVideoSizeBtn(btn, compact);
+  btn.addEventListener('click', ()=>{
+    const nowCompact = document.body.classList.toggle('videos-compact');
+    setPref('wc_video_size', nowCompact ? 'compact' : 'hero');
+    updateVideoSizeBtn(btn, nowCompact);
+  });
+}
+
 async function render(){
   await loadWatchedState();
   renderMain();
   renderNav();
+  setupVideoFacades();
+  initVideoSizeToggle();
 
   const totalGames = DATA.reduce((sum,g)=>sum+g.matches.length,0);
   document.getElementById('stat-games').textContent = totalGames;
