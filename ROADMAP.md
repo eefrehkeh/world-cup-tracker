@@ -1,6 +1,6 @@
 # World Cup Tracker — Roadmap & Board
 
-_Last updated: June 26, 2026_
+_Last updated: June 27, 2026_
 
 A running list of bugs, fixes, and feature ideas. Add new ideas to **Backlog** as they come up; move things across columns as they progress.
 
@@ -8,11 +8,11 @@ A running list of bugs, fixes, and feature ideas. Add new ideas to **Backlog** a
 
 ## 🔴 Bugs
 
-- [ ] YouTube embeds show "content blocked" in Claude's artifact preview and Error 153 when the downloaded HTML is opened directly — root cause is referrer/sandbox related, not fixable from inside the HTML alone. Should be re-tested now that the site is live on a real domain (this was the actual root cause).
+- _None open._ (The old "content blocked" / Error 153 on embeds was confirmed to be a Claude-sandbox / `file://` artifact — embeds play correctly on the live Netlify domain.)
 
 ## 🟡 In Progress / Next Up
 
-- [ ] **Verify YouTube embeds work now that we're deployed for real** — this was blocked by Claude's sandbox before; confirm on the live Netlify URL.
+- _Nothing in flight — core v1 is complete and live._
 
 ## 🔵 Backlog (ideas, not yet started)
 
@@ -25,6 +25,7 @@ A running list of bugs, fixes, and feature ideas. Add new ideas to **Backlog** a
 
 ## ✅ Done
 
+- [x] **Confirmed highlight embeds play on the live Netlify domain** — the earlier Error 153 was a Claude-sandbox / `file://` artifact, not a real bug
 - [x] **Real Fox Soccer highlight video IDs** filled for every played match (60/71) — verified FOX uploads, sourced through `video_ids.json` + `scripts/apply_video_ids.py`; the remaining 11 are unplayed or have no FOX upload yet
 - [x] **Highlight video moved above the reveal-score button** as a click-to-play embed (thumbnail loads the player on click), plus a **site-wide toggle** to switch all videos between hero and compact size (choice persists across visits)
 - [x] Group stage tracker: all 12 groups, 71 matches, spoiler-protected scores

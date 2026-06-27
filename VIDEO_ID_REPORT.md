@@ -1,15 +1,15 @@
 # Video ID Report
 
 - Total `videoId` fields in file: **71**
-- Filled this run / total in JSON: **60**
-- Still empty in file: **11**
-- Verified: **60**  |  Best-guess: **0**
+- Filled this run / total in JSON: **63**
+- Still empty in file: **8**
+- Verified: **63**  |  Best-guess: **0**
 
-## Verified (60)
-- Mexico vs South Africa (Jun 11) -> `r1Afsds3ZD0`  (User-provided YouTube link; opener — FOX YouTube upload never surfaced)
+## Verified (63)
 - South Korea vs Czechia (Jun 11) -> `QWoDfCkh7f8`  (FOX 'South Korea vs Czechia Highlights 🌎🏆 2026 FIFA World Cup™'; foxsports.com/watch page exists; Jun 11)
 - Mexico vs South Korea (Jun 18) -> `F1sMvm6D-0Y`  (FOX 'Mexico vs South Korea Extended Highlights 🌎🏆 2026 FIFA World Cup™' (Extended cut); Mexico 1-0; Jun 18)
 - South Africa vs South Korea (Jun 24) -> `A7PTebEdius`  (FOX 'South Africa vs South Korea Extended Highlights 🌎🏆 2026 FIFA World Cup™' (Extended cut); foxsports.com/watch page exists; Jun 24)
+- Mexico vs South Africa (Jun 11) -> `r1Afsds3ZD0`  (User-provided YouTube link (https://youtu.be/r1Afsds3ZD0); opener — FOX YouTube upload never surfaced across 5 query variants)
 - Czechia vs Mexico (Jun 24) -> `IR891e2-JBc`  (FOX 'Czechia vs Mexico Extended Highlights 🌎🏆'; Jun 24; 0-3 (found on later retry))
 - Czechia vs South Africa (Jun 18) -> `jijCaWH_IxM`  (FOX 'Czechia vs South Africa Extended Highlights 🌎🏆'; Jun 18; 1-1 (found on later retry))
 - Canada vs Bosnia and Herzegovina (Jun 12) -> `n5qkHOWhFAc`  (FOX 'Canada vs Bosnia and Herzegovina Highlights 🌎🏆' (standard); Jun 12; 1-1)
@@ -66,16 +66,16 @@
 - Panama vs Croatia (Jun 23) -> `EBWpoly7qiE`  (FOX 'Panama vs Croatia Extended Highlights 🌎🏆'; Jun 23; 0-1)
 - Norway vs France (Jun 26) -> `VB1B9bkj2xc`  (FOX 'Norway vs France Extended Highlights 🌎🏆'; Jun 26; 1-4 (was unplayed in handoff; now played))
 - Senegal vs Iraq (Jun 26) -> `oR3o61OvWLI`  (FOX 'Senegal vs Iraq Extended Highlights 🌎🏆'; Jun 26; 5-0 (was unplayed in handoff; now played))
+- Cape Verde vs Saudi Arabia (Jun 26) -> `grj3Ijq7cjQ`  (FOX 'Cape Verde vs Saudi Arabia Extended Highlights 🌎🏆'; Jun 26; 0-0)
+- Egypt vs Iran (Jun 26) -> `vzUdJ51WH48`  (FOX 'Egypt vs Iran Extended Highlights 🌎🏆'; Jun 26)
+- New Zealand vs Belgium (Jun 26) -> `Rouzq1yDV-Q`  (FOX 'New Zealand vs Belgium Extended Highlights 🌎🏆'; Jun 26; 1-5)
 
 ## Best-guess - double-check these (0)
 _none_
 
-## Present in JSON but no ID yet (11)
+## Present in JSON but no ID yet (8)
 - Curaçao|Ivory Coast|Jun 25
 - Uruguay|Spain|Jun 26
-- Cape Verde|Saudi Arabia|Jun 26
-- Egypt|Iran|Jun 26
-- New Zealand|Belgium|Jun 26
 - Jordan|Argentina|Jun 27
 - Algeria|Austria|Jun 27
 - Colombia|Portugal|Jun 27
