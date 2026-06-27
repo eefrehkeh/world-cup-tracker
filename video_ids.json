@@ -1,11 +1,88 @@
 {
   "_note": "FOX Sports YouTube video IDs for World Cup 2026 match highlights. POLICY: FOX uploads only. confidence: 'verified' = FOX-pattern YouTube upload ('X vs Y [Extended/Fast] Highlights 🌎🏆 2026 FIFA World Cup™') corroborated by a foxsports.com/watch page + correct date/score; 'best-guess' = a FOX-pattern upload with something unconfirmed; '' = no FOX YouTube upload surfaced (FIFA-channel-only uploads are intentionally NOT used). IDs come from web search result URLs; videos were not watched. Standard 'Highlights' cut preferred, then Extended, then Fast/Quick.",
-
-  "South Korea|Czechia|Jun 11": {"id": "QWoDfCkh7f8", "confidence": "verified", "src": "FOX 'South Korea vs Czechia Highlights 🌎🏆 2026 FIFA World Cup™'; foxsports.com/watch page exists; Jun 11"},
-  "Mexico|South Korea|Jun 18": {"id": "F1sMvm6D-0Y", "confidence": "verified", "src": "FOX 'Mexico vs South Korea Extended Highlights 🌎🏆 2026 FIFA World Cup™' (Extended cut); Mexico 1-0; Jun 18"},
-  "South Africa|South Korea|Jun 24": {"id": "A7PTebEdius", "confidence": "verified", "src": "FOX 'South Africa vs South Korea Extended Highlights 🌎🏆 2026 FIFA World Cup™' (Extended cut); foxsports.com/watch page exists; Jun 24"},
-
-  "Mexico|South Africa|Jun 11": {"id": "", "confidence": "", "src": "FOX-only policy: only a FIFA-channel upload (PmevGCkUtM8) found; no FOX YouTube upload surfaced; zip's r1Afsds3ZD0 uncorroborated"},
-  "Czechia|Mexico|Jun 24": {"id": "", "confidence": "", "src": "FOX-only policy: only a FIFA-channel upload (h9wH7diGNC0) found; no FOX YouTube upload surfaced"},
-  "Czechia|South Africa|Jun 18": {"id": "", "confidence": "", "src": "No YouTube upload (FOX or FIFA) surfaced; only foxsports.com/watch (fmc- internal IDs) and fifa.com player links exist"}
+  "South Korea|Czechia|Jun 11": {
+    "id": "QWoDfCkh7f8",
+    "confidence": "verified",
+    "src": "FOX 'South Korea vs Czechia Highlights 🌎🏆 2026 FIFA World Cup™'; foxsports.com/watch page exists; Jun 11"
+  },
+  "Mexico|South Korea|Jun 18": {
+    "id": "F1sMvm6D-0Y",
+    "confidence": "verified",
+    "src": "FOX 'Mexico vs South Korea Extended Highlights 🌎🏆 2026 FIFA World Cup™' (Extended cut); Mexico 1-0; Jun 18"
+  },
+  "South Africa|South Korea|Jun 24": {
+    "id": "A7PTebEdius",
+    "confidence": "verified",
+    "src": "FOX 'South Africa vs South Korea Extended Highlights 🌎🏆 2026 FIFA World Cup™' (Extended cut); foxsports.com/watch page exists; Jun 24"
+  },
+  "Mexico|South Africa|Jun 11": {
+    "id": "",
+    "confidence": "",
+    "src": "FOX-only policy: only a FIFA-channel upload (PmevGCkUtM8) found; no FOX YouTube upload surfaced; zip's r1Afsds3ZD0 uncorroborated"
+  },
+  "Czechia|Mexico|Jun 24": {
+    "id": "",
+    "confidence": "",
+    "src": "FOX-only policy: only a FIFA-channel upload (h9wH7diGNC0) found; no FOX YouTube upload surfaced"
+  },
+  "Czechia|South Africa|Jun 18": {
+    "id": "",
+    "confidence": "",
+    "src": "No YouTube upload (FOX or FIFA) surfaced; only foxsports.com/watch (fmc- internal IDs) and fifa.com player links exist"
+  },
+  "Canada|Bosnia and Herzegovina|Jun 12": {
+    "id": "n5qkHOWhFAc",
+    "confidence": "verified",
+    "src": "FOX 'Canada vs Bosnia and Herzegovina Highlights 🌎🏆' (standard); Jun 12; 1-1"
+  },
+  "Qatar|Switzerland|Jun 13": {
+    "id": "CUo5J7CUnCo",
+    "confidence": "verified",
+    "src": "FOX 'Qatar vs Switzerland Highlights 🌎🏆' (standard); Jun 13; 1-1"
+  },
+  "Canada|Qatar|Jun 18": {
+    "id": "vz9OTeU6gTM",
+    "confidence": "verified",
+    "src": "FOX 'Canada vs Qatar Extended Highlights 🌎🏆'; Jun 18; 6-0"
+  },
+  "Switzerland|Canada|Jun 24": {
+    "id": "pObYkmGnk24",
+    "confidence": "verified",
+    "src": "FOX 'Switzerland vs Canada Extended Highlights 🌎🏆'; Jun 24"
+  },
+  "Qatar|Bosnia and Herzegovina|Jun 24": {
+    "id": "mk6m1LJdkrI",
+    "confidence": "verified",
+    "src": "FOX 'Bosnia and Herzegovina vs Qatar Extended Highlights 🌎🏆' (fixture reversed in tracker); Jun 24; 3-1"
+  },
+  "Brazil|Morocco|Jun 13": {
+    "id": "DX5wBEslnQI",
+    "confidence": "verified",
+    "src": "FOX 'Brazil vs Morocco Highlights 🌎🏆' (standard); Jun 13; 1-1"
+  },
+  "Scotland|Haiti|Jun 13": {
+    "id": "J_2Y34vSbBA",
+    "confidence": "verified",
+    "src": "FOX 'Haiti vs Scotland Extended Highlights 🌎🏆' (fixture reversed in tracker); 0-1"
+  },
+  "Scotland|Morocco|Jun 19": {
+    "id": "wff2tvitS-s",
+    "confidence": "verified",
+    "src": "FOX 'Scotland vs Morocco Extended Highlights 🌎🏆'; Jun 19; 0-1"
+  },
+  "Brazil|Haiti|Jun 19": {
+    "id": "BphiVajPsFc",
+    "confidence": "verified",
+    "src": "FOX 'Brazil vs Haiti Extended Highlights 🌎🏆'; Jun 19; 3-0"
+  },
+  "Scotland|Brazil|Jun 24": {
+    "id": "fWN13Oe4kA0",
+    "confidence": "verified",
+    "src": "FOX 'Scotland vs Brazil Extended Highlights 🌎🏆'; Jun 24; 0-3"
+  },
+  "Morocco|Haiti|Jun 24": {
+    "id": "",
+    "confidence": "",
+    "src": "FOX-only: only FIFA-channel upload (ZU2ssk6Bmg8) found; no FOX YouTube upload surfaced"
+  }
 }
