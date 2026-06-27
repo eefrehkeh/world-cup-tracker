@@ -401,29 +401,42 @@
      Below 720px the tree becomes a swipeable pager: one round per screen,
      connector lines hidden, navigation by swipe / tabs / dots. */
   @media (max-width:719px){
+    /* Paged mode: each round sits in a fixed viewport-height window that
+       vertically centers its matches; a dense round scrolls inside the window,
+       so reaching a later round (e.g. the Final) never requires page-scrolling. */
     .bk-scroll.bk-paged{
       overflow:hidden;
-      padding:14px 0;
+      height:72vh;
+      min-height:360px;
+      padding:0;
     }
     .bk-scroll.bk-paged .bk-tree{
       min-width:0;
       width:100%;
+      height:100%;
       transition:transform .35s cubic-bezier(.4,0,.2,1);
     }
     .bk-scroll.bk-paged .bk-col{
       flex:0 0 100%;
       width:100%;
       min-width:100%;
+      height:100%;
       padding:0 14px;
+      --bk-gap:14px;          /* feed stubs span the column padding to the screen edge */
+      overflow-y:auto;        /* a round with many games scrolls within the window */
     }
-    /* hide connector elbows in paged mode (no adjacent column to connect to) */
-    .bk-scroll.bk-paged .bk-slot::after,
-    .bk-scroll.bk-paged .bk-match::before,
-    .bk-scroll.bk-paged .bk-match::after{
-      display:none;
+    .bk-scroll.bk-paged .bk-col-body{
+      justify-content:safe center;
+      gap:6px;
     }
-    /* give matches more room to breathe since there's vertical space to spare */
-    .bk-scroll.bk-paged .bk-slot{min-height:108px; padding:14px 0;}
+    .bk-scroll.bk-paged .bk-slot{
+      flex:0 0 auto;
+      min-height:auto;
+      padding:8px 0;
+    }
+    /* keep the vertical pair-joiners hidden, but let each card show its
+       horizontal feed line running off to the screen edge */
+    .bk-scroll.bk-paged .bk-slot::after{display:none;}
     .bk-scroll.bk-paged .bk-col-title{font-size:26px;}
   }
   /* position dots — only shown in paged mode */
