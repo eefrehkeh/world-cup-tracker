@@ -1490,7 +1490,7 @@ function renderVideoEmbed(videoId, home, away){
         </button>
       </div>
       <a class="video-fallback-link" href="${watchUrl}" target="_blank" rel="noopener">
-        ▶ Watch on YouTube
+        Won't play here (or asks you to sign in)? ▶ Watch on YouTube
       </a>
     </div>`;
   }
@@ -2108,7 +2108,7 @@ function setupVideoFacades(){
     const id = facade.dataset.vid;
     const wrap = facade.closest('.video-frame-wrap');
     if(!id || !wrap) return;
-    wrap.innerHTML = '<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>';
+    wrap.innerHTML = '<iframe width="560" height="315" src="https://www.youtube.com/embed/' + id + '?autoplay=1&rel=0&playsinline=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>';
   });
 }
 
