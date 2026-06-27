@@ -13,7 +13,6 @@ A running list of bugs, fixes, and feature ideas. Add new ideas to **Backlog** a
 ## 🟡 In Progress / Next Up
 
 - [ ] **Verify YouTube embeds work now that we're deployed for real** — this was blocked by Claude's sandbox before; confirm on the live Netlify URL.
-- [ ] Fill in real Fox Soccer video IDs match by match.
 
 ## 🔵 Backlog (ideas, not yet started)
 
@@ -21,12 +20,13 @@ A running list of bugs, fixes, and feature ideas. Add new ideas to **Backlog** a
 - [ ] Visual redesign pass — hero treatment, possibly a photo carousel of real World Cup moments
 - [ ] Stats tracker: top scorers, cards, clean sheets, historical World Cup facts
 - [ ] Ads / monetization — pending traffic realism (see notes below)
-- [ ] Real video IDs for Fox Soccer highlights, filled in match by match
 - [ ] Cross-check the knockout bracket's `from:[...]` feed mapping against FIFA's official Round of 16 draw once announced
 - [ ] Mobile app wrapper? (probably overkill for v1 — revisit if traffic justifies it)
 
 ## ✅ Done
 
+- [x] **Real Fox Soccer highlight video IDs** filled for every played match (60/71) — verified FOX uploads, sourced through `video_ids.json` + `scripts/apply_video_ids.py`; the remaining 11 are unplayed or have no FOX upload yet
+- [x] **Highlight video moved above the reveal-score button** as a click-to-play embed (thumbnail loads the player on click), plus a **site-wide toggle** to switch all videos between hero and compact size (choice persists across visits)
 - [x] Group stage tracker: all 12 groups, 71 matches, spoiler-protected scores
 - [x] By Group / By Date / By Team / Bracket views
 - [x] Progressive standings tables (group & date views)
