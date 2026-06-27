@@ -1,0 +1,358 @@
+{
+  "_note": "FOX Sports YouTube video IDs for World Cup 2026 match highlights. POLICY: FOX uploads only. confidence: 'verified' = FOX-pattern YouTube upload ('X vs Y [Extended/Fast] Highlights 🌎🏆 2026 FIFA World Cup™') corroborated by a foxsports.com/watch page + correct date/score; 'best-guess' = a FOX-pattern upload with something unconfirmed; '' = no FOX YouTube upload surfaced (FIFA-channel-only uploads are intentionally NOT used). IDs come from web search result URLs; videos were not watched. Standard 'Highlights' cut preferred, then Extended, then Fast/Quick.",
+  "South Korea|Czechia|Jun 11": {
+    "id": "QWoDfCkh7f8",
+    "confidence": "verified",
+    "src": "FOX 'South Korea vs Czechia Highlights 🌎🏆 2026 FIFA World Cup™'; foxsports.com/watch page exists; Jun 11"
+  },
+  "Mexico|South Korea|Jun 18": {
+    "id": "F1sMvm6D-0Y",
+    "confidence": "verified",
+    "src": "FOX 'Mexico vs South Korea Extended Highlights 🌎🏆 2026 FIFA World Cup™' (Extended cut); Mexico 1-0; Jun 18"
+  },
+  "South Africa|South Korea|Jun 24": {
+    "id": "A7PTebEdius",
+    "confidence": "verified",
+    "src": "FOX 'South Africa vs South Korea Extended Highlights 🌎🏆 2026 FIFA World Cup™' (Extended cut); foxsports.com/watch page exists; Jun 24"
+  },
+  "Mexico|South Africa|Jun 11": {
+    "id": "",
+    "confidence": "",
+    "src": "FOX-only: opener's FOX YouTube upload never surfaced across 5 query variants; only FIFA-channel (PmevGCkUtM8) + foxsports.com pages exist"
+  },
+  "Czechia|Mexico|Jun 24": {
+    "id": "IR891e2-JBc",
+    "confidence": "verified",
+    "src": "FOX 'Czechia vs Mexico Extended Highlights 🌎🏆'; Jun 24; 0-3 (found on later retry)"
+  },
+  "Czechia|South Africa|Jun 18": {
+    "id": "jijCaWH_IxM",
+    "confidence": "verified",
+    "src": "FOX 'Czechia vs South Africa Extended Highlights 🌎🏆'; Jun 18; 1-1 (found on later retry)"
+  },
+  "Canada|Bosnia and Herzegovina|Jun 12": {
+    "id": "n5qkHOWhFAc",
+    "confidence": "verified",
+    "src": "FOX 'Canada vs Bosnia and Herzegovina Highlights 🌎🏆' (standard); Jun 12; 1-1"
+  },
+  "Qatar|Switzerland|Jun 13": {
+    "id": "CUo5J7CUnCo",
+    "confidence": "verified",
+    "src": "FOX 'Qatar vs Switzerland Highlights 🌎🏆' (standard); Jun 13; 1-1"
+  },
+  "Canada|Qatar|Jun 18": {
+    "id": "vz9OTeU6gTM",
+    "confidence": "verified",
+    "src": "FOX 'Canada vs Qatar Extended Highlights 🌎🏆'; Jun 18; 6-0"
+  },
+  "Switzerland|Canada|Jun 24": {
+    "id": "pObYkmGnk24",
+    "confidence": "verified",
+    "src": "FOX 'Switzerland vs Canada Extended Highlights 🌎🏆'; Jun 24"
+  },
+  "Qatar|Bosnia and Herzegovina|Jun 24": {
+    "id": "mk6m1LJdkrI",
+    "confidence": "verified",
+    "src": "FOX 'Bosnia and Herzegovina vs Qatar Extended Highlights 🌎🏆' (fixture reversed in tracker); Jun 24; 3-1"
+  },
+  "Brazil|Morocco|Jun 13": {
+    "id": "DX5wBEslnQI",
+    "confidence": "verified",
+    "src": "FOX 'Brazil vs Morocco Highlights 🌎🏆' (standard); Jun 13; 1-1"
+  },
+  "Scotland|Haiti|Jun 13": {
+    "id": "J_2Y34vSbBA",
+    "confidence": "verified",
+    "src": "FOX 'Haiti vs Scotland Extended Highlights 🌎🏆' (fixture reversed in tracker); 0-1"
+  },
+  "Scotland|Morocco|Jun 19": {
+    "id": "wff2tvitS-s",
+    "confidence": "verified",
+    "src": "FOX 'Scotland vs Morocco Extended Highlights 🌎🏆'; Jun 19; 0-1"
+  },
+  "Brazil|Haiti|Jun 19": {
+    "id": "BphiVajPsFc",
+    "confidence": "verified",
+    "src": "FOX 'Brazil vs Haiti Extended Highlights 🌎🏆'; Jun 19; 3-0"
+  },
+  "Scotland|Brazil|Jun 24": {
+    "id": "fWN13Oe4kA0",
+    "confidence": "verified",
+    "src": "FOX 'Scotland vs Brazil Extended Highlights 🌎🏆'; Jun 24; 0-3"
+  },
+  "Morocco|Haiti|Jun 24": {
+    "id": "37c0v5fkCLI",
+    "confidence": "verified",
+    "src": "FOX 'Morocco vs Haiti Extended Highlights 🌎🏆'; Jun 24; 4-2 (found on later retry)"
+  },
+  "United States|Paraguay|Jun 12": {
+    "id": "BXD1_mhODBU",
+    "confidence": "verified",
+    "src": "FOX 'United States vs Paraguay Highlights 🌎🏆' (standard); Jun 12; 4-1"
+  },
+  "Australia|Türkiye|Jun 13": {
+    "id": "xyKJHekC7io",
+    "confidence": "verified",
+    "src": "FOX 'Australia vs Türkiye Highlights 🌎🏆' (standard); 2-0 (tracker Jun 13; FOX boxscore Jun 14)"
+  },
+  "United States|Australia|Jun 19": {
+    "id": "1gMiT5r-K7Q",
+    "confidence": "verified",
+    "src": "FOX 'United States vs Australia Extended Highlights 🌎🏆'; Jun 19; 2-0"
+  },
+  "Türkiye|Paraguay|Jun 19": {
+    "id": "HrbIda-C9SE",
+    "confidence": "verified",
+    "src": "FOX 'Türkiye vs Paraguay Extended Highlights 🌎🏆'; Jun 19"
+  },
+  "Türkiye|United States|Jun 26": {
+    "id": "7JJLMyKBG90",
+    "confidence": "verified",
+    "src": "FOX 'Türkiye vs United States Extended Highlights 🌎🏆'; 3-2 (tracker Jun 26; FOX boxscore Jun 25)"
+  },
+  "Paraguay|Australia|Jun 26": {
+    "id": "NdgZtyReLbY",
+    "confidence": "verified",
+    "src": "FOX 'Paraguay vs Australia Extended Highlights 🌎🏆'; 0-0 (Jun 25/26)"
+  },
+  "Germany|Curaçao|Jun 14": {
+    "id": "cGKWqfsRDgo",
+    "confidence": "verified",
+    "src": "FOX 'Germany vs Curaçao Highlights 🌎🏆' (standard); Jun 14; 7-1"
+  },
+  "Ivory Coast|Ecuador|Jun 14": {
+    "id": "pBk8BjA-X4Y",
+    "confidence": "verified",
+    "src": "FOX 'Ivory Coast vs Ecuador Highlights 🌎🏆' (standard); Jun 14; 1-0"
+  },
+  "Germany|Ivory Coast|Jun 20": {
+    "id": "EL9nHScp4bk",
+    "confidence": "verified",
+    "src": "FOX 'Germany vs Ivory Coast Extended Highlights 🌎🏆'; Jun 20; 2-1"
+  },
+  "Ecuador|Curaçao|Jun 20": {
+    "id": "_JQLeADlzXM",
+    "confidence": "verified",
+    "src": "FOX 'Ecuador vs Curaçao Extended Highlights 🌎🏆'; Jun 20; 0-0"
+  },
+  "Ecuador|Germany|Jun 25": {
+    "id": "L4AmC_L4Cdw",
+    "confidence": "verified",
+    "src": "FOX 'Ecuador vs Germany Extended Highlights 🌎🏆'; Jun 25; 2-1"
+  },
+  "Curaçao|Ivory Coast|Jun 25": {
+    "id": "",
+    "confidence": "",
+    "src": "FOX-only: no FOX YouTube upload surfaced across retries (foxsports.com + TSN only); Jun 25; 0-2"
+  },
+  "Netherlands|Japan|Jun 14": {
+    "id": "SaTyQMmOpPM",
+    "confidence": "verified",
+    "src": "FOX 'Netherlands vs Japan Extended Highlights 🌎🏆'; Jun 14; 2-2"
+  },
+  "Sweden|Tunisia|Jun 14": {
+    "id": "F47z0suCV7Y",
+    "confidence": "verified",
+    "src": "FOX 'Sweden vs Tunisia Extended Highlights 🌎🏆'; Jun 14; 5-1"
+  },
+  "Netherlands|Sweden|Jun 20": {
+    "id": "IRllRLrG7Sg",
+    "confidence": "verified",
+    "src": "FOX 'Netherlands vs Sweden Extended Highlights 🌎🏆'; Jun 20; 5-1"
+  },
+  "Tunisia|Japan|Jun 20": {
+    "id": "ATmlGGfCyBA",
+    "confidence": "verified",
+    "src": "FOX 'Tunisia vs Japan Extended Highlights 🌎🏆'; 0-4 (tracker Jun 20; FOX boxscore Jun 21)"
+  },
+  "Tunisia|Netherlands|Jun 26": {
+    "id": "o0AmHN-XnOs",
+    "confidence": "verified",
+    "src": "FOX 'Tunisia vs Netherlands Extended Highlights 🌎🏆'; 1-3 (Jun 25/26)"
+  },
+  "Japan|Sweden|Jun 26": {
+    "id": "CerrE-MoofY",
+    "confidence": "verified",
+    "src": "FOX 'Japan vs Sweden Extended Highlights 🌎🏆'; (Jun 25/26)"
+  },
+  "Belgium|Egypt|Jun 15": {
+    "id": "o_3t0d8x9JY",
+    "confidence": "verified",
+    "src": "FOX 'Belgium vs Egypt Highlights 🌎🏆' (standard); Jun 15; 1-1"
+  },
+  "Iran|New Zealand|Jun 15": {
+    "id": "UZ_7qFbFYRY",
+    "confidence": "verified",
+    "src": "FOX 'Iran vs New Zealand Extended Highlights 🌎🏆'; Jun 15; 2-2"
+  },
+  "Belgium|Iran|Jun 21": {
+    "id": "YbiEe9pOV-s",
+    "confidence": "verified",
+    "src": "FOX 'Belgium vs Iran Extended Highlights 🌎🏆'; Jun 21; 0-0"
+  },
+  "New Zealand|Egypt|Jun 21": {
+    "id": "Ihp4QH9YkBc",
+    "confidence": "verified",
+    "src": "FOX 'New Zealand vs Egypt Extended Highlights 🌎🏆'; Jun 21; 1-3"
+  },
+  "Spain|Cape Verde|Jun 15": {
+    "id": "wzKYVElYRrw",
+    "confidence": "verified",
+    "src": "FOX 'Spain vs Cape Verde Extended Highlights 🌎🏆'; Jun 15; 0-0"
+  },
+  "Saudi Arabia|Uruguay|Jun 15": {
+    "id": "Tz9R1OYdTSs",
+    "confidence": "verified",
+    "src": "FOX 'Saudi Arabia vs Uruguay Extended Highlights 🌎🏆'; Jun 15; 1-1"
+  },
+  "Spain|Saudi Arabia|Jun 21": {
+    "id": "w453UjgtQw4",
+    "confidence": "verified",
+    "src": "FOX 'Spain vs Saudi Arabia Extended Highlights 🌎🏆'; Jun 21; 4-0"
+  },
+  "Uruguay|Cape Verde|Jun 21": {
+    "id": "ZXvFKZM1nL4",
+    "confidence": "verified",
+    "src": "FOX 'Uruguay vs Cape Verde Extended Highlights 🌎🏆'; Jun 21; 2-2"
+  },
+  "France|Senegal|Jun 16": {
+    "id": "SlmYDbzHqjg",
+    "confidence": "verified",
+    "src": "FOX 'France vs Senegal Extended Highlights 🌎🏆'; Jun 16; 3-1"
+  },
+  "Iraq|Norway|Jun 16": {
+    "id": "ku1hsMdKDXQ",
+    "confidence": "verified",
+    "src": "FOX 'Iraq vs Norway Extended Highlights 🌎🏆'; Jun 16"
+  },
+  "France|Iraq|Jun 22": {
+    "id": "Mo7aY61WF9I",
+    "confidence": "verified",
+    "src": "FOX 'France vs Iraq Extended Highlights 🌎🏆'; Jun 22; 3-0"
+  },
+  "Norway|Senegal|Jun 22": {
+    "id": "vcgzGgM4uJg",
+    "confidence": "verified",
+    "src": "FOX 'Norway vs Senegal Extended Highlights 🌎🏆'; Jun 22; 3-2 (confirms pre-existing repo ID)"
+  },
+  "Argentina|Algeria|Jun 16": {
+    "id": "GtyuIf7zykA",
+    "confidence": "verified",
+    "src": "FOX 'Argentina vs Algeria Extended Highlights 🌎🏆'; Jun 16; 3-0"
+  },
+  "Austria|Jordan|Jun 16": {
+    "id": "yOPRItttrPU",
+    "confidence": "verified",
+    "src": "FOX 'Austria vs Jordan Extended Highlights 🌎🏆'; Jun 16; 3-1"
+  },
+  "Argentina|Austria|Jun 22": {
+    "id": "JakdhltyECE",
+    "confidence": "verified",
+    "src": "FOX 'Argentina vs Austria Extended Highlights 🌎🏆'; Jun 22; 2-0"
+  },
+  "Jordan|Algeria|Jun 22": {
+    "id": "qq3eMBEUbzY",
+    "confidence": "verified",
+    "src": "FOX 'Jordan vs Algeria Extended Highlights 🌎🏆'; Jun 22; 1-2"
+  },
+  "Portugal|DR Congo|Jun 17": {
+    "id": "SjumRdNESKg",
+    "confidence": "verified",
+    "src": "FOX 'Portugal vs DR Congo Extended Highlights' (matches FOX page fmc-jpnus6u6oyh33mr9); Jun 17; 1-1"
+  },
+  "Colombia|Uzbekistan|Jun 17": {
+    "id": "Qb3ipZFspnc",
+    "confidence": "verified",
+    "src": "FOX 'Uzbekistan vs Colombia Extended Highlights 🌎🏆' (fixture reversed in tracker); Jun 17; 1-3"
+  },
+  "Portugal|Uzbekistan|Jun 23": {
+    "id": "jqgn-kY0rFA",
+    "confidence": "verified",
+    "src": "FOX 'Portugal vs Uzbekistan Extended Highlights 🌎🏆'; Jun 23; 5-0"
+  },
+  "DR Congo|Colombia|Jun 23": {
+    "id": "C-bTb3K_suE",
+    "confidence": "verified",
+    "src": "FOX 'Colombia vs DR Congo Extended Highlights 🌎🏆' (fixture reversed in tracker); 1-0"
+  },
+  "England|Croatia|Jun 17": {
+    "id": "lGoe9nxRfyU",
+    "confidence": "verified",
+    "src": "FOX 'England vs Croatia Extended Highlights 🌎🏆'; Jun 17; 4-2"
+  },
+  "Ghana|Panama|Jun 17": {
+    "id": "hFO9DhasJ2A",
+    "confidence": "verified",
+    "src": "FOX 'Ghana vs Panama Extended Highlights 🌎🏆'; Jun 17; 1-0"
+  },
+  "England|Ghana|Jun 23": {
+    "id": "ebuYwC7lwCk",
+    "confidence": "verified",
+    "src": "FOX 'England vs Ghana Extended Highlights 🌎🏆'; Jun 23; 0-0"
+  },
+  "Panama|Croatia|Jun 23": {
+    "id": "EBWpoly7qiE",
+    "confidence": "verified",
+    "src": "FOX 'Panama vs Croatia Extended Highlights 🌎🏆'; Jun 23; 0-1"
+  },
+  "Norway|France|Jun 26": {
+    "id": "VB1B9bkj2xc",
+    "confidence": "verified",
+    "src": "FOX 'Norway vs France Extended Highlights 🌎🏆'; Jun 26; 1-4 (was unplayed in handoff; now played)"
+  },
+  "Senegal|Iraq|Jun 26": {
+    "id": "oR3o61OvWLI",
+    "confidence": "verified",
+    "src": "FOX 'Senegal vs Iraq Extended Highlights 🌎🏆'; Jun 26; 5-0 (was unplayed in handoff; now played)"
+  },
+  "Uruguay|Spain|Jun 26": {
+    "id": "",
+    "confidence": "",
+    "src": "Played Jun 26 (Spain 1-0); FOX YouTube highlight not yet available/indexed at run time"
+  },
+  "Cape Verde|Saudi Arabia|Jun 26": {
+    "id": "",
+    "confidence": "",
+    "src": "Played Jun 26 (0-0); FOX YouTube highlight not yet available/indexed at run time"
+  },
+  "Egypt|Iran|Jun 26": {
+    "id": "",
+    "confidence": "",
+    "src": "Not yet kicked off at run time (Jun 26 evening PT)"
+  },
+  "New Zealand|Belgium|Jun 26": {
+    "id": "",
+    "confidence": "",
+    "src": "Not yet kicked off at run time (Jun 26 night)"
+  },
+  "Jordan|Argentina|Jun 27": {
+    "id": "",
+    "confidence": "",
+    "src": "Unplayed (Jun 27)"
+  },
+  "Algeria|Austria|Jun 27": {
+    "id": "",
+    "confidence": "",
+    "src": "Unplayed (Jun 27)"
+  },
+  "Colombia|Portugal|Jun 27": {
+    "id": "",
+    "confidence": "",
+    "src": "Unplayed (Jun 27)"
+  },
+  "DR Congo|Uzbekistan|Jun 27": {
+    "id": "",
+    "confidence": "",
+    "src": "Unplayed (Jun 27)"
+  },
+  "Panama|England|Jun 27": {
+    "id": "",
+    "confidence": "",
+    "src": "Unplayed (Jun 27)"
+  },
+  "Croatia|Ghana|Jun 27": {
+    "id": "",
+    "confidence": "",
+    "src": "Unplayed (Jun 27)"
+  }
+}
