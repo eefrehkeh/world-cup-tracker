@@ -1,4 +1,6 @@
-# World Cup Tracker — Roadmap & Board
+# World Cup Tracker (Highlight Watcher) — Roadmap & Board
+
+NOTE: please check the github repo project for new issues and bug trackers.
 
 _Last updated: June 27, 2026_
 

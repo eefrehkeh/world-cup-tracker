@@ -1,6 +1,6 @@
-# World Cup 2026 Tracker
+# World Cup 2026 Tracker (Highlight Watcher)
 
-A self-contained, spoiler-protected highlight tracker for the 2026 FIFA World Cup.
+A self-contained, spoiler-protected highlight tracker for the 2026 FIFA World Cup. Depending on the success this may expand to future world cups and other sporting events!
 
 ## Features
 - By Group / By Date / By Team / Bracket views
