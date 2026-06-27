@@ -1,11 +1,11 @@
 # Video ID Report
 
 - Total `videoId` fields in file: **71**
-- Filled this run / total in JSON: **13**
-- Still empty in file: **57**
-- Verified: **13**  |  Best-guess: **0**
+- Filled this run / total in JSON: **23**
+- Still empty in file: **47**
+- Verified: **23**  |  Best-guess: **0**
 
-## Verified (13)
+## Verified (23)
 - South Korea vs Czechia (Jun 11) -> `QWoDfCkh7f8`  (FOX 'South Korea vs Czechia Highlights 🌎🏆 2026 FIFA World Cup™'; foxsports.com/watch page exists; Jun 11)
 - Mexico vs South Korea (Jun 18) -> `F1sMvm6D-0Y`  (FOX 'Mexico vs South Korea Extended Highlights 🌎🏆 2026 FIFA World Cup™' (Extended cut); Mexico 1-0; Jun 18)
 - South Africa vs South Korea (Jun 24) -> `A7PTebEdius`  (FOX 'South Africa vs South Korea Extended Highlights 🌎🏆 2026 FIFA World Cup™' (Extended cut); foxsports.com/watch page exists; Jun 24)
@@ -19,12 +19,24 @@
 - Scotland vs Morocco (Jun 19) -> `wff2tvitS-s`  (FOX 'Scotland vs Morocco Extended Highlights 🌎🏆'; Jun 19; 0-1)
 - Brazil vs Haiti (Jun 19) -> `BphiVajPsFc`  (FOX 'Brazil vs Haiti Extended Highlights 🌎🏆'; Jun 19; 3-0)
 - Scotland vs Brazil (Jun 24) -> `fWN13Oe4kA0`  (FOX 'Scotland vs Brazil Extended Highlights 🌎🏆'; Jun 24; 0-3)
+- United States vs Paraguay (Jun 12) -> `BXD1_mhODBU`  (FOX 'United States vs Paraguay Highlights 🌎🏆' (standard); Jun 12; 4-1)
+- United States vs Australia (Jun 19) -> `1gMiT5r-K7Q`  (FOX 'United States vs Australia Extended Highlights 🌎🏆'; Jun 19; 2-0)
+- Türkiye vs Paraguay (Jun 19) -> `HrbIda-C9SE`  (FOX 'Türkiye vs Paraguay Extended Highlights 🌎🏆'; Jun 19)
+- Türkiye vs United States (Jun 26) -> `7JJLMyKBG90`  (FOX 'Türkiye vs United States Extended Highlights 🌎🏆'; 3-2 (tracker Jun 26; FOX boxscore Jun 25))
+- Paraguay vs Australia (Jun 26) -> `NdgZtyReLbY`  (FOX 'Paraguay vs Australia Extended Highlights 🌎🏆'; 0-0 (Jun 25/26))
+- Germany vs Curaçao (Jun 14) -> `cGKWqfsRDgo`  (FOX 'Germany vs Curaçao Highlights 🌎🏆' (standard); Jun 14; 7-1)
+- Ivory Coast vs Ecuador (Jun 14) -> `pBk8BjA-X4Y`  (FOX 'Ivory Coast vs Ecuador Highlights 🌎🏆' (standard); Jun 14; 1-0)
+- Germany vs Ivory Coast (Jun 20) -> `EL9nHScp4bk`  (FOX 'Germany vs Ivory Coast Extended Highlights 🌎🏆'; Jun 20; 2-1)
+- Ecuador vs Curaçao (Jun 20) -> `_JQLeADlzXM`  (FOX 'Ecuador vs Curaçao Extended Highlights 🌎🏆'; Jun 20; 0-0)
+- Ecuador vs Germany (Jun 25) -> `L4AmC_L4Cdw`  (FOX 'Ecuador vs Germany Extended Highlights 🌎🏆'; Jun 25; 2-1)
 
 ## Best-guess - double-check these (0)
 _none_
 
-## Present in JSON but no ID yet (4)
+## Present in JSON but no ID yet (6)
 - Mexico|South Africa|Jun 11
 - Czechia|Mexico|Jun 24
 - Czechia|South Africa|Jun 18
 - Morocco|Haiti|Jun 24
+- Australia|Türkiye|Jun 13
+- Curaçao|Ivory Coast|Jun 25
