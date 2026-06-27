@@ -5,7 +5,7 @@ matches are played — no laptop required.
 
 ## How it works
 
-`.github/workflows/backfill-video-ids.yml` runs every 30 minutes and:
+`.github/workflows/backfill-video-ids.yml` runs every 30 minutes during match hours (14:00–06:59 UTC; paused the rest of the day, when no Americas matches are being uploaded) and:
 
 1. `scripts/backfill_from_youtube.mjs` — reads `video_ids.json`, finds empty matches, and
    pulls the FOX Soccer (`@Foxsoccer`) **uploads playlist** via the YouTube Data API. It
