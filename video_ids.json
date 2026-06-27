@@ -84,5 +84,65 @@
     "id": "",
     "confidence": "",
     "src": "FOX-only: only FIFA-channel upload (ZU2ssk6Bmg8) found; no FOX YouTube upload surfaced"
+  },
+  "United States|Paraguay|Jun 12": {
+    "id": "BXD1_mhODBU",
+    "confidence": "verified",
+    "src": "FOX 'United States vs Paraguay Highlights 🌎🏆' (standard); Jun 12; 4-1"
+  },
+  "Australia|Türkiye|Jun 13": {
+    "id": "",
+    "confidence": "",
+    "src": "FOX-only: no FOX YouTube upload surfaced (foxsports.com pages + FIFA only); 0-2 (tracker Jun 13; FOX boxscore Jun 14)"
+  },
+  "United States|Australia|Jun 19": {
+    "id": "1gMiT5r-K7Q",
+    "confidence": "verified",
+    "src": "FOX 'United States vs Australia Extended Highlights 🌎🏆'; Jun 19; 2-0"
+  },
+  "Türkiye|Paraguay|Jun 19": {
+    "id": "HrbIda-C9SE",
+    "confidence": "verified",
+    "src": "FOX 'Türkiye vs Paraguay Extended Highlights 🌎🏆'; Jun 19"
+  },
+  "Türkiye|United States|Jun 26": {
+    "id": "7JJLMyKBG90",
+    "confidence": "verified",
+    "src": "FOX 'Türkiye vs United States Extended Highlights 🌎🏆'; 3-2 (tracker Jun 26; FOX boxscore Jun 25)"
+  },
+  "Paraguay|Australia|Jun 26": {
+    "id": "NdgZtyReLbY",
+    "confidence": "verified",
+    "src": "FOX 'Paraguay vs Australia Extended Highlights 🌎🏆'; 0-0 (Jun 25/26)"
+  },
+  "Germany|Curaçao|Jun 14": {
+    "id": "cGKWqfsRDgo",
+    "confidence": "verified",
+    "src": "FOX 'Germany vs Curaçao Highlights 🌎🏆' (standard); Jun 14; 7-1"
+  },
+  "Ivory Coast|Ecuador|Jun 14": {
+    "id": "pBk8BjA-X4Y",
+    "confidence": "verified",
+    "src": "FOX 'Ivory Coast vs Ecuador Highlights 🌎🏆' (standard); Jun 14; 1-0"
+  },
+  "Germany|Ivory Coast|Jun 20": {
+    "id": "EL9nHScp4bk",
+    "confidence": "verified",
+    "src": "FOX 'Germany vs Ivory Coast Extended Highlights 🌎🏆'; Jun 20; 2-1"
+  },
+  "Ecuador|Curaçao|Jun 20": {
+    "id": "_JQLeADlzXM",
+    "confidence": "verified",
+    "src": "FOX 'Ecuador vs Curaçao Extended Highlights 🌎🏆'; Jun 20; 0-0"
+  },
+  "Ecuador|Germany|Jun 25": {
+    "id": "L4AmC_L4Cdw",
+    "confidence": "verified",
+    "src": "FOX 'Ecuador vs Germany Extended Highlights 🌎🏆'; Jun 25; 2-1"
+  },
+  "Curaçao|Ivory Coast|Jun 25": {
+    "id": "",
+    "confidence": "",
+    "src": "FOX-only: no FOX YouTube upload surfaced (foxsports.com + TSN only); Jun 25; 0-2"
   }
 }
