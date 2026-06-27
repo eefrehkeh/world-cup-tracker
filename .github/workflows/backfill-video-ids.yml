@@ -1,0 +1,50 @@
+name: Backfill FOX highlight video IDs
+
+on:
+  schedule:
+    - cron: "*/30 * * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: backfill-video-ids
+  cancel-in-progress: false
+
+jobs:
+  backfill:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Test the matcher
+        run: node scripts/backfill_from_youtube.test.mjs
+
+      - name: Find new FOX highlight IDs
+        env:
+          YT_API_KEY: ${{ secrets.YT_API_KEY }}
+        run: node scripts/backfill_from_youtube.mjs
+
+      - name: Apply IDs into index.html
+        run: python3 scripts/apply_video_ids.py
+
+      - name: Commit and push if changed
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add video_ids.json index.html VIDEO_ID_REPORT.md
+            git commit -m "Auto-backfill FOX highlight video IDs"
+            git push
+          else
+            echo "No changes to commit."
+          fi
