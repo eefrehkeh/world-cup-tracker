@@ -1,11 +1,11 @@
 # Video ID Report
 
 - Total `videoId` fields in file: **71**
-- Filled this run / total in JSON: **23**
-- Still empty in file: **47**
-- Verified: **23**  |  Best-guess: **0**
+- Filled this run / total in JSON: **33**
+- Still empty in file: **37**
+- Verified: **33**  |  Best-guess: **0**
 
-## Verified (23)
+## Verified (33)
 - South Korea vs Czechia (Jun 11) -> `QWoDfCkh7f8`  (FOX 'South Korea vs Czechia Highlights 🌎🏆 2026 FIFA World Cup™'; foxsports.com/watch page exists; Jun 11)
 - Mexico vs South Korea (Jun 18) -> `F1sMvm6D-0Y`  (FOX 'Mexico vs South Korea Extended Highlights 🌎🏆 2026 FIFA World Cup™' (Extended cut); Mexico 1-0; Jun 18)
 - South Africa vs South Korea (Jun 24) -> `A7PTebEdius`  (FOX 'South Africa vs South Korea Extended Highlights 🌎🏆 2026 FIFA World Cup™' (Extended cut); foxsports.com/watch page exists; Jun 24)
@@ -29,6 +29,16 @@
 - Germany vs Ivory Coast (Jun 20) -> `EL9nHScp4bk`  (FOX 'Germany vs Ivory Coast Extended Highlights 🌎🏆'; Jun 20; 2-1)
 - Ecuador vs Curaçao (Jun 20) -> `_JQLeADlzXM`  (FOX 'Ecuador vs Curaçao Extended Highlights 🌎🏆'; Jun 20; 0-0)
 - Ecuador vs Germany (Jun 25) -> `L4AmC_L4Cdw`  (FOX 'Ecuador vs Germany Extended Highlights 🌎🏆'; Jun 25; 2-1)
+- Netherlands vs Japan (Jun 14) -> `SaTyQMmOpPM`  (FOX 'Netherlands vs Japan Extended Highlights 🌎🏆'; Jun 14; 2-2)
+- Sweden vs Tunisia (Jun 14) -> `F47z0suCV7Y`  (FOX 'Sweden vs Tunisia Extended Highlights 🌎🏆'; Jun 14; 5-1)
+- Netherlands vs Sweden (Jun 20) -> `IRllRLrG7Sg`  (FOX 'Netherlands vs Sweden Extended Highlights 🌎🏆'; Jun 20; 5-1)
+- Tunisia vs Japan (Jun 20) -> `ATmlGGfCyBA`  (FOX 'Tunisia vs Japan Extended Highlights 🌎🏆'; 0-4 (tracker Jun 20; FOX boxscore Jun 21))
+- Tunisia vs Netherlands (Jun 26) -> `o0AmHN-XnOs`  (FOX 'Tunisia vs Netherlands Extended Highlights 🌎🏆'; 1-3 (Jun 25/26))
+- Japan vs Sweden (Jun 26) -> `CerrE-MoofY`  (FOX 'Japan vs Sweden Extended Highlights 🌎🏆'; (Jun 25/26))
+- Belgium vs Egypt (Jun 15) -> `o_3t0d8x9JY`  (FOX 'Belgium vs Egypt Highlights 🌎🏆' (standard); Jun 15; 1-1)
+- Iran vs New Zealand (Jun 15) -> `UZ_7qFbFYRY`  (FOX 'Iran vs New Zealand Extended Highlights 🌎🏆'; Jun 15; 2-2)
+- Belgium vs Iran (Jun 21) -> `YbiEe9pOV-s`  (FOX 'Belgium vs Iran Extended Highlights 🌎🏆'; Jun 21; 0-0)
+- New Zealand vs Egypt (Jun 21) -> `Ihp4QH9YkBc`  (FOX 'New Zealand vs Egypt Extended Highlights 🌎🏆'; Jun 21; 1-3)
 
 ## Best-guess - double-check these (0)
 _none_

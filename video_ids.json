@@ -144,5 +144,55 @@
     "id": "",
     "confidence": "",
     "src": "FOX-only: no FOX YouTube upload surfaced (foxsports.com + TSN only); Jun 25; 0-2"
+  },
+  "Netherlands|Japan|Jun 14": {
+    "id": "SaTyQMmOpPM",
+    "confidence": "verified",
+    "src": "FOX 'Netherlands vs Japan Extended Highlights 🌎🏆'; Jun 14; 2-2"
+  },
+  "Sweden|Tunisia|Jun 14": {
+    "id": "F47z0suCV7Y",
+    "confidence": "verified",
+    "src": "FOX 'Sweden vs Tunisia Extended Highlights 🌎🏆'; Jun 14; 5-1"
+  },
+  "Netherlands|Sweden|Jun 20": {
+    "id": "IRllRLrG7Sg",
+    "confidence": "verified",
+    "src": "FOX 'Netherlands vs Sweden Extended Highlights 🌎🏆'; Jun 20; 5-1"
+  },
+  "Tunisia|Japan|Jun 20": {
+    "id": "ATmlGGfCyBA",
+    "confidence": "verified",
+    "src": "FOX 'Tunisia vs Japan Extended Highlights 🌎🏆'; 0-4 (tracker Jun 20; FOX boxscore Jun 21)"
+  },
+  "Tunisia|Netherlands|Jun 26": {
+    "id": "o0AmHN-XnOs",
+    "confidence": "verified",
+    "src": "FOX 'Tunisia vs Netherlands Extended Highlights 🌎🏆'; 1-3 (Jun 25/26)"
+  },
+  "Japan|Sweden|Jun 26": {
+    "id": "CerrE-MoofY",
+    "confidence": "verified",
+    "src": "FOX 'Japan vs Sweden Extended Highlights 🌎🏆'; (Jun 25/26)"
+  },
+  "Belgium|Egypt|Jun 15": {
+    "id": "o_3t0d8x9JY",
+    "confidence": "verified",
+    "src": "FOX 'Belgium vs Egypt Highlights 🌎🏆' (standard); Jun 15; 1-1"
+  },
+  "Iran|New Zealand|Jun 15": {
+    "id": "UZ_7qFbFYRY",
+    "confidence": "verified",
+    "src": "FOX 'Iran vs New Zealand Extended Highlights 🌎🏆'; Jun 15; 2-2"
+  },
+  "Belgium|Iran|Jun 21": {
+    "id": "YbiEe9pOV-s",
+    "confidence": "verified",
+    "src": "FOX 'Belgium vs Iran Extended Highlights 🌎🏆'; Jun 21; 0-0"
+  },
+  "New Zealand|Egypt|Jun 21": {
+    "id": "Ihp4QH9YkBc",
+    "confidence": "verified",
+    "src": "FOX 'New Zealand vs Egypt Extended Highlights 🌎🏆'; Jun 21; 1-3"
   }
 }
