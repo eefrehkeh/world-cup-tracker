@@ -1,11 +1,11 @@
 # Video ID Report
 
 - Total `videoId` fields in file: **71**
-- Filled this run / total in JSON: **41**
-- Still empty in file: **30**
-- Verified: **41**  |  Best-guess: **0**
+- Filled this run / total in JSON: **53**
+- Still empty in file: **18**
+- Verified: **53**  |  Best-guess: **0**
 
-## Verified (41)
+## Verified (53)
 - South Korea vs Czechia (Jun 11) -> `QWoDfCkh7f8`  (FOX 'South Korea vs Czechia Highlights 🌎🏆 2026 FIFA World Cup™'; foxsports.com/watch page exists; Jun 11)
 - Mexico vs South Korea (Jun 18) -> `F1sMvm6D-0Y`  (FOX 'Mexico vs South Korea Extended Highlights 🌎🏆 2026 FIFA World Cup™' (Extended cut); Mexico 1-0; Jun 18)
 - South Africa vs South Korea (Jun 24) -> `A7PTebEdius`  (FOX 'South Africa vs South Korea Extended Highlights 🌎🏆 2026 FIFA World Cup™' (Extended cut); foxsports.com/watch page exists; Jun 24)
@@ -47,6 +47,18 @@
 - Iraq vs Norway (Jun 16) -> `ku1hsMdKDXQ`  (FOX 'Iraq vs Norway Extended Highlights 🌎🏆'; Jun 16)
 - France vs Iraq (Jun 22) -> `Mo7aY61WF9I`  (FOX 'France vs Iraq Extended Highlights 🌎🏆'; Jun 22; 3-0)
 - Norway vs Senegal (Jun 22) -> `vcgzGgM4uJg`  (FOX 'Norway vs Senegal Extended Highlights 🌎🏆'; Jun 22; 3-2 (confirms pre-existing repo ID))
+- Argentina vs Algeria (Jun 16) -> `GtyuIf7zykA`  (FOX 'Argentina vs Algeria Extended Highlights 🌎🏆'; Jun 16; 3-0)
+- Austria vs Jordan (Jun 16) -> `yOPRItttrPU`  (FOX 'Austria vs Jordan Extended Highlights 🌎🏆'; Jun 16; 3-1)
+- Argentina vs Austria (Jun 22) -> `JakdhltyECE`  (FOX 'Argentina vs Austria Extended Highlights 🌎🏆'; Jun 22; 2-0)
+- Jordan vs Algeria (Jun 22) -> `qq3eMBEUbzY`  (FOX 'Jordan vs Algeria Extended Highlights 🌎🏆'; Jun 22; 1-2)
+- Portugal vs DR Congo (Jun 17) -> `SjumRdNESKg`  (FOX 'Portugal vs DR Congo Extended Highlights' (matches FOX page fmc-jpnus6u6oyh33mr9); Jun 17; 1-1)
+- Colombia vs Uzbekistan (Jun 17) -> `Qb3ipZFspnc`  (FOX 'Uzbekistan vs Colombia Extended Highlights 🌎🏆' (fixture reversed in tracker); Jun 17; 1-3)
+- Portugal vs Uzbekistan (Jun 23) -> `jqgn-kY0rFA`  (FOX 'Portugal vs Uzbekistan Extended Highlights 🌎🏆'; Jun 23; 5-0)
+- DR Congo vs Colombia (Jun 23) -> `C-bTb3K_suE`  (FOX 'Colombia vs DR Congo Extended Highlights 🌎🏆' (fixture reversed in tracker); 1-0)
+- England vs Croatia (Jun 17) -> `lGoe9nxRfyU`  (FOX 'England vs Croatia Extended Highlights 🌎🏆'; Jun 17; 4-2)
+- Ghana vs Panama (Jun 17) -> `hFO9DhasJ2A`  (FOX 'Ghana vs Panama Extended Highlights 🌎🏆'; Jun 17; 1-0)
+- England vs Ghana (Jun 23) -> `ebuYwC7lwCk`  (FOX 'England vs Ghana Extended Highlights 🌎🏆'; Jun 23; 0-0)
+- Panama vs Croatia (Jun 23) -> `EBWpoly7qiE`  (FOX 'Panama vs Croatia Extended Highlights 🌎🏆'; Jun 23; 0-1)
 
 ## Best-guess - double-check these (0)
 _none_

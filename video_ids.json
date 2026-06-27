@@ -234,5 +234,65 @@
     "id": "vcgzGgM4uJg",
     "confidence": "verified",
     "src": "FOX 'Norway vs Senegal Extended Highlights 🌎🏆'; Jun 22; 3-2 (confirms pre-existing repo ID)"
+  },
+  "Argentina|Algeria|Jun 16": {
+    "id": "GtyuIf7zykA",
+    "confidence": "verified",
+    "src": "FOX 'Argentina vs Algeria Extended Highlights 🌎🏆'; Jun 16; 3-0"
+  },
+  "Austria|Jordan|Jun 16": {
+    "id": "yOPRItttrPU",
+    "confidence": "verified",
+    "src": "FOX 'Austria vs Jordan Extended Highlights 🌎🏆'; Jun 16; 3-1"
+  },
+  "Argentina|Austria|Jun 22": {
+    "id": "JakdhltyECE",
+    "confidence": "verified",
+    "src": "FOX 'Argentina vs Austria Extended Highlights 🌎🏆'; Jun 22; 2-0"
+  },
+  "Jordan|Algeria|Jun 22": {
+    "id": "qq3eMBEUbzY",
+    "confidence": "verified",
+    "src": "FOX 'Jordan vs Algeria Extended Highlights 🌎🏆'; Jun 22; 1-2"
+  },
+  "Portugal|DR Congo|Jun 17": {
+    "id": "SjumRdNESKg",
+    "confidence": "verified",
+    "src": "FOX 'Portugal vs DR Congo Extended Highlights' (matches FOX page fmc-jpnus6u6oyh33mr9); Jun 17; 1-1"
+  },
+  "Colombia|Uzbekistan|Jun 17": {
+    "id": "Qb3ipZFspnc",
+    "confidence": "verified",
+    "src": "FOX 'Uzbekistan vs Colombia Extended Highlights 🌎🏆' (fixture reversed in tracker); Jun 17; 1-3"
+  },
+  "Portugal|Uzbekistan|Jun 23": {
+    "id": "jqgn-kY0rFA",
+    "confidence": "verified",
+    "src": "FOX 'Portugal vs Uzbekistan Extended Highlights 🌎🏆'; Jun 23; 5-0"
+  },
+  "DR Congo|Colombia|Jun 23": {
+    "id": "C-bTb3K_suE",
+    "confidence": "verified",
+    "src": "FOX 'Colombia vs DR Congo Extended Highlights 🌎🏆' (fixture reversed in tracker); 1-0"
+  },
+  "England|Croatia|Jun 17": {
+    "id": "lGoe9nxRfyU",
+    "confidence": "verified",
+    "src": "FOX 'England vs Croatia Extended Highlights 🌎🏆'; Jun 17; 4-2"
+  },
+  "Ghana|Panama|Jun 17": {
+    "id": "hFO9DhasJ2A",
+    "confidence": "verified",
+    "src": "FOX 'Ghana vs Panama Extended Highlights 🌎🏆'; Jun 17; 1-0"
+  },
+  "England|Ghana|Jun 23": {
+    "id": "ebuYwC7lwCk",
+    "confidence": "verified",
+    "src": "FOX 'England vs Ghana Extended Highlights 🌎🏆'; Jun 23; 0-0"
+  },
+  "Panama|Croatia|Jun 23": {
+    "id": "EBWpoly7qiE",
+    "confidence": "verified",
+    "src": "FOX 'Panama vs Croatia Extended Highlights 🌎🏆'; Jun 23; 0-1"
   }
 }
