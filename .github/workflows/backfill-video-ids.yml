@@ -2,7 +2,10 @@ name: Backfill FOX highlight video IDs
 
 on:
   schedule:
-    - cron: "*/30 14-23,0-6 * * *"
+    # Every 30 min, 15:00–05:59 UTC — the window matches finish and FOX posts highlights.
+    # ~30 runs/day. Switch the "*/30" to "0" for hourly, or trim the hour ranges, to use
+    # fewer Actions minutes. After the group stage you can disable this entirely.
+    - cron: "*/30 15-23,0-5 * * *"
   workflow_dispatch: {}
 
 permissions:
@@ -26,6 +29,16 @@ jobs:
         with:
           python-version: "3.12"
 
+      # Fail RED if the secret is missing, instead of silently going green and doing nothing.
+      - name: Verify YT_API_KEY is set
+        env:
+          YT_API_KEY: ${{ secrets.YT_API_KEY }}
+        run: |
+          if [ -z "${YT_API_KEY:-}" ]; then
+            echo "::error::YT_API_KEY secret is not set — the search step cannot work."
+            exit 1
+          fi
+
       - name: Test the matcher
         run: node scripts/backfill_from_youtube.test.mjs
 
@@ -37,13 +50,52 @@ jobs:
       - name: Apply IDs into index.html
         run: python3 scripts/apply_video_ids.py
 
+      # Record exactly what changed so the run page tells you at a glance.
+      - name: Summarize what this run found
+        id: result
+        run: |
+          set -euo pipefail
+          ADDED_IDS="$(git diff -- index.html \
+            | grep -E '^\+.*videoId:"[A-Za-z0-9_-]{8,}"' \
+            | grep -oE 'videoId:"[A-Za-z0-9_-]{8,}"' || true)"
+          ADDED_COUNT="$(printf '%s\n' "$ADDED_IDS" | grep -c . || true)"
+          EMPTY_LEFT="$(grep -c 'videoId:""' index.html || true)"
+          FILLED_TOTAL="$(grep -oE 'videoId:"[A-Za-z0-9_-]+"' index.html | grep -c . || true)"
+          echo "added_count=$ADDED_COUNT" >> "$GITHUB_OUTPUT"
+
+          if [ "$ADDED_COUNT" -gt 0 ]; then
+            {
+              echo "### ✅ Found $ADDED_COUNT new video ID(s)"
+              echo ""
+              echo "Filled so far: $FILLED_TOTAL  ·  Still empty: $EMPTY_LEFT"
+              echo ""
+              echo "New this run:"
+              echo '```'
+              printf '%s\n' "$ADDED_IDS"
+              echo '```'
+            } >> "$GITHUB_STEP_SUMMARY"
+            echo "::notice::Backfill added $ADDED_COUNT new video ID(s)."
+          else
+            {
+              echo "### ℹ️ No new IDs this run"
+              echo ""
+              echo "Filled so far: $FILLED_TOTAL  ·  Still empty: $EMPTY_LEFT"
+              echo ""
+              echo "Everything findable is already in the repo, or no new highlights are posted yet."
+            } >> "$GITHUB_STEP_SUMMARY"
+            echo "::notice::Backfill ran fine; nothing new to add ($EMPTY_LEFT still empty)."
+            # exit 1   # <-- uncomment ONLY if you want "nothing new" to show as a RED run.
+                       #     Not recommended: idle runs are normal and would spam failure emails.
+          fi
+
       - name: Commit and push if changed
         run: |
+          set -euo pipefail
           if [ -n "$(git status --porcelain)" ]; then
             git config user.name "github-actions[bot]"
             git config user.email "github-actions[bot]@users.noreply.github.com"
             git add video_ids.json index.html VIDEO_ID_REPORT.md
-            git commit -m "Auto-backfill FOX highlight video IDs"
+            git commit -m "Auto-backfill FOX highlight video IDs (${{ steps.result.outputs.added_count }} new)"
             git push
           else
             echo "No changes to commit."
