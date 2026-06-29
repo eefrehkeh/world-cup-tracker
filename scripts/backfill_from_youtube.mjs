@@ -30,6 +30,17 @@ export function matchDate(dateStr) {
   return new Date(Date.UTC(YEAR, MONTHS[m[1]] ?? 0, parseInt(m[2], 10)));
 }
 
+// Date the uploads scan must page back to: the earliest still-empty match,
+// minus the match window. null when no key carries a parseable date.
+export function backfillSinceDate(emptyKeys, windowDays = DATE_WINDOW_DAYS) {
+  const times = emptyKeys
+    .map((k) => matchDate(String(k).split("|")[2] || ""))
+    .filter(Boolean)
+    .map((d) => d.getTime());
+  if (!times.length) return null;
+  return new Date(Math.min(...times) - windowDays * 86400000);
+}
+
 export function norm(s) {
   return s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
     .replace(/&/g, " and ").replace(/[^a-z0-9 ]/g, " ").replace(/\s+/g, " ").trim();
@@ -94,17 +105,25 @@ async function uploadsPlaylistId(key, handle) {
   return j.items[0].contentDetails.relatedPlaylists.uploads;
 }
 
-async function recentUploads(playlistId, key, maxPages = 6) {
+// Pages the uploads playlist newest-first. Stops once a page's oldest upload is
+// older than stopBefore (older pages can't hold a still-needed highlight), or at
+// maxPages as a quota safety cap. stopBefore=null scans up to maxPages.
+async function recentUploads(playlistId, key, { stopBefore = null, maxPages = 40 } = {}) {
   const items = [];
   let pageToken = "";
   for (let i = 0; i < maxPages; i++) {
     const j = await api("playlistItems", {
       part: "snippet,contentDetails", playlistId, maxResults: "50", ...(pageToken ? { pageToken } : {}),
     }, key);
+    let oldestOnPage = null;
     for (const it of j.items || []) {
-      items.push({ title: it.snippet.title, id: it.contentDetails.videoId, published: it.contentDetails.videoPublishedAt });
+      const published = it.contentDetails.videoPublishedAt;
+      items.push({ title: it.snippet.title, id: it.contentDetails.videoId, published });
+      const t = published ? new Date(published).getTime() : null;
+      if (t !== null && (oldestOnPage === null || t < oldestOnPage)) oldestOnPage = t;
     }
     if (!j.nextPageToken) break;
+    if (stopBefore && oldestOnPage !== null && oldestOnPage < stopBefore.getTime()) break;
     pageToken = j.nextPageToken;
   }
   return items;
@@ -121,8 +140,9 @@ export async function main() {
   const empties = Object.entries(data).filter(([k, v]) => !k.startsWith("_") && !v.id);
   if (!empties.length) { console.log("No empty matches; nothing to do."); return; }
 
-  const uploads = await recentUploads(await uploadsPlaylistId(key, handle), key);
-  console.log(`Fetched ${uploads.length} recent uploads; ${empties.length} empty matches to fill.`);
+  const sinceDate = backfillSinceDate(empties.map(([k]) => k));
+  const uploads = await recentUploads(await uploadsPlaylistId(key, handle), key, { stopBefore: sinceDate });
+  console.log(`Fetched ${uploads.length} uploads${sinceDate ? ` (back to ${sinceDate.toISOString().slice(0, 10)})` : ""}; ${empties.length} empty matches to fill.`);
 
   let added = 0;
   for (const [k] of empties) {

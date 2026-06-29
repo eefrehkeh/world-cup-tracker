@@ -1,7 +1,7 @@
 // Offline test for the FOX-upload matcher. No network/API key needed.
 // Run: node scripts/backfill_from_youtube.test.mjs
 
-import { pickForMatch, isMatchHighlight, titleHasTeam, norm, cutRank } from "./backfill_from_youtube.mjs";
+import { pickForMatch, isMatchHighlight, titleHasTeam, norm, cutRank, backfillSinceDate } from "./backfill_from_youtube.mjs";
 
 let failures = 0;
 function check(name, cond) {
@@ -52,6 +52,11 @@ check("returns null when nothing matches", pickForMatch("Curaçao|Ivory Coast|Ju
 check("isMatchHighlight rejects 'Best Moments'", !isMatchHighlight("Matchday 14 Best Moments 🌎🏆 2026 FIFA World Cup™"));
 check("titleHasTeam DR Congo alias", titleHasTeam(norm("Colombia vs Congo DR Extended Highlights 2026 FIFA World Cup"), "DR Congo"));
 check("cutRank orders std<ext<fast", cutRank("X vs Y Highlights") < cutRank("X vs Y Extended Highlights") && cutRank("X vs Y Extended Highlights") < cutRank("X vs Y Fast Highlights"));
+
+// backfillSinceDate: earliest empty match minus the 3-day window sets the scan depth.
+check("backfillSinceDate uses earliest empty minus window",
+  backfillSinceDate(["A|B|Jun 27", "C|D|Jun 25", "E|F|Jul 02"]).toISOString().slice(0, 10) === "2026-06-22");
+check("backfillSinceDate null with no datable keys", backfillSinceDate([]) === null && backfillSinceDate(["X|Y|tbd"]) === null);
 
 console.log(failures ? `\n${failures} FAILED` : "\nAll tests passed");
 process.exit(failures ? 1 : 0);
