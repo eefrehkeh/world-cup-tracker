@@ -8,6 +8,7 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta name="theme-color" content="#1e5631">
+<script type="text/javascript" src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Archivo:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&family=JetBrains+Mono:wght@400;500;700&display=swap');
 
@@ -135,6 +136,47 @@
   .toggle-btn + .toggle-btn{border-left:1.5px solid var(--ink);}
   .toggle-btn.active{background:var(--pitch); color:var(--paper);}
   .toggle-btn:hover:not(.active){background:var(--gold-soft);}
+
+  .hero-auth{
+    position:absolute;
+    top:20px;
+    right:max(16px, calc((100% - 900px) / 2 + 16px));
+    z-index:2;
+    display:flex; flex-direction:column; align-items:flex-end; gap:6px;
+    text-align:right;
+  }
+  .hero-auth .auth-status{
+    font-family:'JetBrains Mono', monospace;
+    font-size:10.5px;
+    letter-spacing:.04em;
+    color:rgba(246,241,228,0.82);
+    max-width:210px;
+  }
+  .btn-auth{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    letter-spacing:.05em;
+    text-transform:uppercase;
+    font-weight:700;
+    background:var(--rust);
+    color:#fff;
+    border:none;
+    padding:11px 20px;
+    border-radius:5px;
+    cursor:pointer;
+    box-shadow:0 3px 12px rgba(0,0,0,0.28);
+    transition:transform .12s ease, background .15s ease, box-shadow .15s ease;
+  }
+  .btn-auth:hover{ background:#a5421f; transform:translateY(-1px); box-shadow:0 5px 16px rgba(0,0,0,0.32); }
+  .btn-auth:active{ transform:translateY(0); }
+  @media (max-width:719px){
+    .hero-auth{
+      position:static;
+      align-items:flex-start;
+      text-align:left;
+      margin:0 0 18px;
+    }
+  }
 
   .backup-row{
     max-width:900px;margin:10px auto 0;
@@ -1169,6 +1211,10 @@
 <body>
 
 <header class="hero">
+  <div class="hero-auth" id="authRow" hidden>
+    <button class="btn-auth" id="authBtn">Sign in to sync</button>
+    <span class="auth-status" id="authStatus">Sync your watched list across devices</span>
+  </div>
   <div class="hero-inner">
     <p class="eyebrow"><span class="dot"></span>Canada · Mexico · USA — June 11 to July 19</p>
     <h1>WORLD CUP 2026<br><span>HIGHLIGHT TRACKER</span></h1>
@@ -2010,13 +2056,93 @@ let watchedSet = new Set();
 let watchedStorageReady = false;
 let apiAvailable = false; // becomes true once we get a successful response from the API
 
+// ---- Auth (Netlify Identity): syncs the watched list + settings across devices ----
+let authUser = null;
+function authReady(){ return typeof window !== 'undefined' && !!window.netlifyIdentity; }
+
+async function authHeaders(){
+  if(!authUser || !authReady()) return {};
+  try{
+    const u = window.netlifyIdentity.currentUser();
+    const token = u ? await u.jwt() : null; // jwt() refreshes the token if it has expired
+    return token ? { Authorization: `Bearer ${token}` } : {};
+  }catch(e){ return {}; }
+}
+
+function currentSettings(){
+  return {
+    videoSize: getPref('wc_video_size') || 'hero',
+    watchedFilter: getPref('wc_watched_filter') || 'off',
+  };
+}
+
+function applySyncedSettings(settings){
+  if(!settings) return;
+  if(settings.videoSize) setPref('wc_video_size', settings.videoSize);
+  if(settings.watchedFilter) setPref('wc_watched_filter', settings.watchedFilter);
+  applyVideoSizePref();
+  applyWatchedFilterPref();
+}
+
+function updateAuthUI(){
+  const row = document.getElementById('authRow');
+  const btn = document.getElementById('authBtn');
+  const status = document.getElementById('authStatus');
+  if(!row || !btn || !status) return;
+  row.hidden = !authReady();
+  if(authUser){
+    status.textContent = `Synced · ${authUser.email || 'your account'}`;
+    btn.textContent = 'Sign out';
+  } else {
+    status.textContent = 'Sync your watched list across devices';
+    btn.textContent = 'Sign in to sync';
+  }
+}
+
+// Fresh sign-in: union this device's current list into the account so nothing is lost.
+async function onAuthLogin(user){
+  authUser = user || null;
+  if(authReady()) window.netlifyIdentity.close();
+  const localBefore = new Set(watchedSet);
+  await loadWatchedState();           // now authed: pulls the account's list + settings
+  let changed = false;
+  localBefore.forEach(k=>{ if(!watchedSet.has(k)){ watchedSet.add(k); changed = true; } });
+  updateAuthUI();
+  renderMain();
+  if(changed) saveWatchedState();     // persist the merged union to the account
+}
+
+async function onAuthLogout(){
+  authUser = null;
+  await loadWatchedState();           // back to this browser's anonymous list
+  updateAuthUI();
+  renderMain();
+}
+
+function initAuth(){
+  if(!authReady()){ const row = document.getElementById('authRow'); if(row) row.hidden = true; return; }
+  const ni = window.netlifyIdentity;
+  ni.on('init', async (user)=>{
+    authUser = user || null;
+    if(user){ await loadWatchedState(); renderMain(); } // restore an existing session's account state
+    updateAuthUI();
+  });
+  ni.on('login', (user)=>{ onAuthLogin(user); });
+  ni.on('logout', ()=>{ onAuthLogout(); });
+  const btn = document.getElementById('authBtn');
+  if(btn) btn.addEventListener('click', ()=>{ authUser ? ni.logout() : ni.open(); });
+  try{ ni.init(); }catch(e){ const row = document.getElementById('authRow'); if(row) row.hidden = true; }
+  updateAuthUI();
+}
+
 async function loadWatchedState(){
   try{
-    const res = await fetch(WATCHED_API, { method: 'GET', credentials: 'same-origin' });
+    const res = await fetch(WATCHED_API, { method: 'GET', credentials: 'same-origin', headers: await authHeaders() });
     if(res.ok){
       const data = await res.json();
       apiAvailable = true;
       watchedSet = (Array.isArray(data.watched)) ? new Set(data.watched) : new Set();
+      if(authUser && data.settings) applySyncedSettings(data.settings);
     } else {
       throw new Error(`API responded ${res.status}`);
     }
@@ -2040,12 +2166,12 @@ function scheduleSaveWatchedState(){
 
 async function saveWatchedState(){
   const statusEl = document.getElementById('saveStatus');
-  const payload = JSON.stringify({ watched: [...watchedSet] });
+  const payload = JSON.stringify({ watched: [...watchedSet], settings: currentSettings() });
   try{
     const res = await fetch(WATCHED_API, {
       method: 'POST',
       credentials: 'same-origin',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', ...(await authHeaders()) },
       body: payload
     });
     if(!res.ok) throw new Error(`API responded ${res.status}`);
@@ -2089,18 +2215,24 @@ function updateWatchedFilterEmptyState(){
   empty.style.display = (filtering && !anyVisible) ? 'block' : 'none';
 }
 
+function applyWatchedFilterPref(){
+  const btn = document.getElementById('watchedFilterBtn');
+  const on = getPref('wc_watched_filter') === 'on';
+  document.body.classList.toggle('filter-watched', on);
+  if(btn) btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+  updateWatchedFilterEmptyState();
+}
+
 function initWatchedFilter(){
   const btn = document.getElementById('watchedFilterBtn');
   if(!btn) return;
-  const on = getPref('wc_watched_filter') === 'on';
-  document.body.classList.toggle('filter-watched', on);
-  btn.setAttribute('aria-pressed', on ? 'true' : 'false');
-  updateWatchedFilterEmptyState();
+  applyWatchedFilterPref();
   btn.addEventListener('click', ()=>{
     const nowOn = document.body.classList.toggle('filter-watched');
     setPref('wc_watched_filter', nowOn ? 'on' : 'off');
     btn.setAttribute('aria-pressed', nowOn ? 'true' : 'false');
     updateWatchedFilterEmptyState();
+    if(authUser) scheduleSaveWatchedState();
   });
 }
 
@@ -2208,16 +2340,23 @@ function updateVideoSizeBtn(btn, compact){
   btn.textContent = compact ? '⛶ Hero videos' : '▭ Compact videos';
 }
 
+function applyVideoSizePref(){
+  const btn = document.getElementById('videoSizeBtn');
+  const compact = getPref('wc_video_size') === 'compact';
+  document.body.classList.toggle('videos-compact', compact);
+  if(btn) updateVideoSizeBtn(btn, compact);
+}
+
 function initVideoSizeToggle(){
   const btn = document.getElementById('videoSizeBtn');
   if(!btn) return;
-  const compact = getPref('wc_video_size') === 'compact';
-  document.body.classList.toggle('videos-compact', compact);
-  updateVideoSizeBtn(btn, compact);
+  applyVideoSizePref();
   btn.addEventListener('click', ()=>{
-    const nowCompact = document.body.classList.toggle('videos-compact');
+    const nowCompact = !document.body.classList.contains('videos-compact');
+    document.body.classList.toggle('videos-compact', nowCompact);
     setPref('wc_video_size', nowCompact ? 'compact' : 'hero');
     updateVideoSizeBtn(btn, nowCompact);
+    if(authUser) scheduleSaveWatchedState();
   });
 }
 
@@ -2228,6 +2367,7 @@ async function render(){
   setupVideoFacades();
   initVideoSizeToggle();
   initWatchedFilter();
+  initAuth();
 
   const totalGames = DATA.reduce((sum,g)=>sum+g.matches.length,0);
   document.getElementById('stat-games').textContent = totalGames;

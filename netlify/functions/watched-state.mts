@@ -1,3 +1,12 @@
+/**
+ * Watched-state persistence (GET/POST `/api/watched-state`).
+ *
+ * Stores `{ watched: string[], settings, updatedAt }` per visitor in Netlify Blobs.
+ * The storage key is the Netlify Identity user (`user:<sub>`) when a verified Identity
+ * bearer token is present — Netlify populates `context.clientContext.user` — otherwise the
+ * anonymous `wc26_vid` cookie. A signed-in user's data follows them across devices; a
+ * logged-out visitor keeps a per-browser list. See AUTH.md for the full architecture.
+ */
 import type { Context, Config } from "@netlify/functions";
 import { getStore } from "@netlify/blobs";
 
@@ -32,25 +41,49 @@ function isValidMatchKeyArray(value: unknown): value is string[] {
   );
 }
 
+const ALLOWED_SETTING_KEYS = ["videoSize", "watchedFilter"] as const;
+function sanitizeSettings(value: unknown): Record<string, string> {
+  if (!value || typeof value !== "object") return {};
+  const src = value as Record<string, unknown>;
+  const out: Record<string, string> = {};
+  for (const k of ALLOWED_SETTING_KEYS) {
+    const v = src[k];
+    if (typeof v === "string" && v.length <= 20) out[k] = v;
+  }
+  return out;
+}
+
+// When a valid Netlify Identity bearer token is sent, Netlify verifies it and
+// populates clientContext.user. Key storage by that user so it follows them
+// across devices; otherwise fall back to the anonymous per-browser cookie.
+function getStorageKey(context: Context, fallback: string): string {
+  const user = (context as unknown as { clientContext?: { user?: { sub?: string } } })
+    .clientContext?.user;
+  return user?.sub ? `user:${user.sub}` : fallback;
+}
+
 export default async (req: Request, context: Context) => {
   const store = getStore(STORE_NAME);
   const { visitorId, isNew } = getOrCreateVisitorId(req);
+  const storageKey = getStorageKey(context, visitorId);
 
   if (req.method === "GET") {
     let watched: string[] = [];
+    let settings: Record<string, string> = {};
     try {
-      const stored = await store.get(visitorId, { type: "json" });
+      const stored = await store.get(storageKey, { type: "json" });
       if (stored && isValidMatchKeyArray(stored.watched)) {
         watched = stored.watched;
       }
+      if (stored) settings = sanitizeSettings(stored.settings);
     } catch {
-      // no saved data yet for this visitor — that's fine, return empty
+      // no saved data yet for this key — that's fine, return empty
     }
 
     const headers: Record<string, string> = { "Content-Type": "application/json" };
     if (isNew) headers["Set-Cookie"] = setCookieHeader(visitorId);
 
-    return new Response(JSON.stringify({ watched }), { status: 200, headers });
+    return new Response(JSON.stringify({ watched, settings }), { status: 200, headers });
   }
 
   if (req.method === "POST") {
@@ -68,8 +101,9 @@ export default async (req: Request, context: Context) => {
         { status: 400 }
       );
     }
+    const settings = sanitizeSettings((body as { settings?: unknown })?.settings);
 
-    await store.setJSON(visitorId, { watched, updatedAt: new Date().toISOString() });
+    await store.setJSON(storageKey, { watched, settings, updatedAt: new Date().toISOString() });
 
     const headers: Record<string, string> = { "Content-Type": "application/json" };
     if (isNew) headers["Set-Cookie"] = setCookieHeader(visitorId);
