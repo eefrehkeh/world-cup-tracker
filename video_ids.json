@@ -141,9 +141,9 @@
     "src": "FOX 'Ecuador vs Germany Extended Highlights 🌎🏆'; Jun 25; 2-1"
   },
   "Curaçao|Ivory Coast|Jun 25": {
-    "id": "",
-    "confidence": "",
-    "src": "FOX-only: no FOX YouTube upload surfaced across retries (foxsports.com + TSN only); Jun 25; 0-2"
+    "id": "Vl8LESKw8_Y",
+    "confidence": "verified",
+    "src": "FOX 'Curaçao vs Ivory Coast Extended Highlights 🌎🏆'; Jun 25; 0-2 (Pépé brace)"
   },
   "Netherlands|Japan|Jun 14": {
     "id": "SaTyQMmOpPM",
@@ -306,9 +306,9 @@
     "src": "FOX 'Senegal vs Iraq Extended Highlights 🌎🏆'; Jun 26; 5-0 (was unplayed in handoff; now played)"
   },
   "Uruguay|Spain|Jun 26": {
-    "id": "",
-    "confidence": "",
-    "src": "Played (Spain 1-0); as of Jun 27 only FIFA-channel/fan uploads found, no FOX YouTube upload yet"
+    "id": "3OVZj9WqyDc",
+    "confidence": "verified",
+    "src": "FOX 'Uruguay vs Spain Extended Highlights 🌎🏆'; Jun 26; 0-1 (Baena)"
   },
   "Cape Verde|Saudi Arabia|Jun 26": {
     "id": "grj3Ijq7cjQ",
@@ -326,33 +326,33 @@
     "src": "FOX 'New Zealand vs Belgium Extended Highlights 🌎🏆'; Jun 26; 1-5"
   },
   "Jordan|Argentina|Jun 27": {
-    "id": "",
-    "confidence": "",
-    "src": "As of Jun 27 only a FC26 video-game simulation + fan re-upload found; no FOX YouTube upload"
+    "id": "sPJIf3GfNo0",
+    "confidence": "verified",
+    "src": "FOX 'Jordan vs Argentina Extended Highlights 🌎🏆'; Jun 27"
   },
   "Algeria|Austria|Jun 27": {
-    "id": "",
-    "confidence": "",
-    "src": "Unplayed (Jun 27)"
+    "id": "fjPH_DXx12M",
+    "confidence": "verified",
+    "src": "FOX 'Algeria vs Austria Extended Highlights 🌎🏆'; Jun 27; 3-3 (Kalajdžić late equalizer)"
   },
   "Colombia|Portugal|Jun 27": {
-    "id": "",
-    "confidence": "",
-    "src": "Unplayed (Jun 27)"
+    "id": "cRb6GQEAsU8",
+    "confidence": "verified",
+    "src": "FOX 'Colombia vs Portugal Extended Highlights 🌎🏆'; Jun 27"
   },
   "DR Congo|Uzbekistan|Jun 27": {
-    "id": "",
-    "confidence": "",
-    "src": "Unplayed (Jun 27)"
+    "id": "iCaUl2GQ3sQ",
+    "confidence": "verified",
+    "src": "FOX 'DR Congo vs Uzbekistan Extended Highlights 🌎🏆'; Jun 27"
   },
   "Panama|England|Jun 27": {
-    "id": "",
-    "confidence": "",
-    "src": "Played; as of Jun 27 only fan uploads found, no FOX YouTube upload yet"
+    "id": "JOPTAAFb3_s",
+    "confidence": "verified",
+    "src": "FOX 'Panama vs England Extended Highlights 🌎🏆'; Jun 27 (Bellingham, Kane)"
   },
   "Croatia|Ghana|Jun 27": {
-    "id": "",
-    "confidence": "",
-    "src": "Unplayed (Jun 27)"
+    "id": "j4wJ3nGXuas",
+    "confidence": "verified",
+    "src": "FOX 'Croatia vs Ghana Extended Highlights 🌎🏆'; Jun 27 (Luckassen equalizer)"
   }
 }
