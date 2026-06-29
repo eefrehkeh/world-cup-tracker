@@ -1,11 +1,11 @@
 # Video ID Report
 
 - Total `videoId` fields in file: **71**
-- Filled this run / total in JSON: **63**
-- Still empty in file: **8**
-- Verified: **63**  |  Best-guess: **0**
+- Filled this run / total in JSON: **71**
+- Still empty in file: **0**
+- Verified: **71**  |  Best-guess: **0**
 
-## Verified (63)
+## Verified (71)
 - South Korea vs Czechia (Jun 11) -> `QWoDfCkh7f8`  (FOX 'South Korea vs Czechia Highlights 🌎🏆 2026 FIFA World Cup™'; foxsports.com/watch page exists; Jun 11)
 - Mexico vs South Korea (Jun 18) -> `F1sMvm6D-0Y`  (FOX 'Mexico vs South Korea Extended Highlights 🌎🏆 2026 FIFA World Cup™' (Extended cut); Mexico 1-0; Jun 18)
 - South Africa vs South Korea (Jun 24) -> `A7PTebEdius`  (FOX 'South Africa vs South Korea Extended Highlights 🌎🏆 2026 FIFA World Cup™' (Extended cut); foxsports.com/watch page exists; Jun 24)
@@ -34,6 +34,7 @@
 - Germany vs Ivory Coast (Jun 20) -> `EL9nHScp4bk`  (FOX 'Germany vs Ivory Coast Extended Highlights 🌎🏆'; Jun 20; 2-1)
 - Ecuador vs Curaçao (Jun 20) -> `_JQLeADlzXM`  (FOX 'Ecuador vs Curaçao Extended Highlights 🌎🏆'; Jun 20; 0-0)
 - Ecuador vs Germany (Jun 25) -> `L4AmC_L4Cdw`  (FOX 'Ecuador vs Germany Extended Highlights 🌎🏆'; Jun 25; 2-1)
+- Curaçao vs Ivory Coast (Jun 25) -> `Vl8LESKw8_Y`  (FOX 'Curaçao vs Ivory Coast Extended Highlights 🌎🏆'; Jun 25; 0-2 (Pépé brace))
 - Netherlands vs Japan (Jun 14) -> `SaTyQMmOpPM`  (FOX 'Netherlands vs Japan Extended Highlights 🌎🏆'; Jun 14; 2-2)
 - Sweden vs Tunisia (Jun 14) -> `F47z0suCV7Y`  (FOX 'Sweden vs Tunisia Extended Highlights 🌎🏆'; Jun 14; 5-1)
 - Netherlands vs Sweden (Jun 20) -> `IRllRLrG7Sg`  (FOX 'Netherlands vs Sweden Extended Highlights 🌎🏆'; Jun 20; 5-1)
@@ -66,19 +67,16 @@
 - Panama vs Croatia (Jun 23) -> `EBWpoly7qiE`  (FOX 'Panama vs Croatia Extended Highlights 🌎🏆'; Jun 23; 0-1)
 - Norway vs France (Jun 26) -> `VB1B9bkj2xc`  (FOX 'Norway vs France Extended Highlights 🌎🏆'; Jun 26; 1-4 (was unplayed in handoff; now played))
 - Senegal vs Iraq (Jun 26) -> `oR3o61OvWLI`  (FOX 'Senegal vs Iraq Extended Highlights 🌎🏆'; Jun 26; 5-0 (was unplayed in handoff; now played))
+- Uruguay vs Spain (Jun 26) -> `3OVZj9WqyDc`  (FOX 'Uruguay vs Spain Extended Highlights 🌎🏆'; Jun 26; 0-1 (Baena))
 - Cape Verde vs Saudi Arabia (Jun 26) -> `grj3Ijq7cjQ`  (FOX 'Cape Verde vs Saudi Arabia Extended Highlights 🌎🏆'; Jun 26; 0-0)
 - Egypt vs Iran (Jun 26) -> `vzUdJ51WH48`  (FOX 'Egypt vs Iran Extended Highlights 🌎🏆'; Jun 26)
 - New Zealand vs Belgium (Jun 26) -> `Rouzq1yDV-Q`  (FOX 'New Zealand vs Belgium Extended Highlights 🌎🏆'; Jun 26; 1-5)
+- Jordan vs Argentina (Jun 27) -> `sPJIf3GfNo0`  (FOX 'Jordan vs Argentina Extended Highlights 🌎🏆'; Jun 27)
+- Algeria vs Austria (Jun 27) -> `fjPH_DXx12M`  (FOX 'Algeria vs Austria Extended Highlights 🌎🏆'; Jun 27; 3-3 (Kalajdžić late equalizer))
+- Colombia vs Portugal (Jun 27) -> `cRb6GQEAsU8`  (FOX 'Colombia vs Portugal Extended Highlights 🌎🏆'; Jun 27)
+- DR Congo vs Uzbekistan (Jun 27) -> `iCaUl2GQ3sQ`  (FOX 'DR Congo vs Uzbekistan Extended Highlights 🌎🏆'; Jun 27)
+- Panama vs England (Jun 27) -> `JOPTAAFb3_s`  (FOX 'Panama vs England Extended Highlights 🌎🏆'; Jun 27 (Bellingham, Kane))
+- Croatia vs Ghana (Jun 27) -> `j4wJ3nGXuas`  (FOX 'Croatia vs Ghana Extended Highlights 🌎🏆'; Jun 27 (Luckassen equalizer))
 
 ## Best-guess - double-check these (0)
 _none_
-
-## Present in JSON but no ID yet (8)
-- Curaçao|Ivory Coast|Jun 25
-- Uruguay|Spain|Jun 26
-- Jordan|Argentina|Jun 27
-- Algeria|Austria|Jun 27
-- Colombia|Portugal|Jun 27
-- DR Congo|Uzbekistan|Jun 27
-- Panama|England|Jun 27
-- Croatia|Ghana|Jun 27
