@@ -1,3 +1,12 @@
+/**
+ * Watched-state persistence (GET/POST `/api/watched-state`).
+ *
+ * Stores `{ watched: string[], settings, updatedAt }` per visitor in Netlify Blobs.
+ * The storage key is the Netlify Identity user (`user:<sub>`) when a verified Identity
+ * bearer token is present — Netlify populates `context.clientContext.user` — otherwise the
+ * anonymous `wc26_vid` cookie. A signed-in user's data follows them across devices; a
+ * logged-out visitor keeps a per-browser list. See AUTH.md for the full architecture.
+ */
 import type { Context, Config } from "@netlify/functions";
 import { getStore } from "@netlify/blobs";
 
