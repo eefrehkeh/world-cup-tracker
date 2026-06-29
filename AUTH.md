@@ -32,7 +32,7 @@ Sections:
   - Loads the Netlify Identity widget (`<script src="https://identity.netlify.com/v1/netlify-identity-widget.js">` in `<head>`).
   - **`#authRow`** — the "Sign in to sync" control; hidden unless the widget is available.
   - Auth JS: `initAuth`, `authReady`, `authHeaders`, `currentSettings`, `applySyncedSettings`, `updateAuthUI`, `onAuthLogin`, `onAuthLogout`.
-  - Settings apply-helpers split out so they can be re-applied after login without rebinding click handlers: `applyVideoSizePref`, `applyWatchedFilterPref`.
+  - Settings apply-helper split out so it can be re-applied after login without rebinding the click handler: `applyWatchedFilterPref`.
   - `loadWatchedState` / `saveWatchedState` send the Identity bearer token when signed in.
 - **`netlify/functions/watched-state.mts`** (server) — GET/POST at `/api/watched-state`; reads/writes Netlify Blobs; keys by user or cookie.
 
@@ -40,7 +40,7 @@ Sections:
 
 - **Store**: Netlify Blobs store `watched-state`.
 - **Key**: `user:<identity-sub>` when a verified Identity bearer token is present, else the anonymous `wc26_vid` cookie UUID.
-- **Value**: `{ watched: string[], settings: { videoSize?, watchedFilter? }, updatedAt: string }`.
+- **Value**: `{ watched: string[], settings: { watchedFilter? }, updatedAt: string }`.
 - **Caps** (server-enforced): ≤ 200 match-keys, each ≤ 120 chars; settings limited to known keys with values ≤ 20 chars.
 
 ### Request flow
@@ -56,7 +56,7 @@ Sections:
   - `login` → **`onAuthLogin`**: union this device's current watched set into the account (so a guest's progress isn't lost), then save the union.
   - `logout` → **`onAuthLogout`**: reload the anonymous (cookie) state.
   - Button → `netlifyIdentity.open()` when logged out, `logout()` when logged in.
-- **Settings sync** is two-way: signed-in loads apply the account's settings via `applySyncedSettings`; toggling video-size or the watched-only filter while signed in schedules a save so the change propagates.
+- **Settings sync** is two-way: signed-in loads apply the account's settings via `applySyncedSettings`; toggling the watched-only filter while signed in schedules a save so the change propagates.
 
 ### Graceful degradation
 

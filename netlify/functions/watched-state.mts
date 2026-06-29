@@ -41,7 +41,7 @@ function isValidMatchKeyArray(value: unknown): value is string[] {
   );
 }
 
-const ALLOWED_SETTING_KEYS = ["videoSize", "watchedFilter"] as const;
+const ALLOWED_SETTING_KEYS = ["watchedFilter"] as const;
 function sanitizeSettings(value: unknown): Record<string, string> {
   if (!value || typeof value !== "object") return {};
   const src = value as Record<string, unknown>;
