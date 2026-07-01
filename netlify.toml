@@ -13,7 +13,7 @@
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "geolocation=(), microphone=(), camera=()"
     Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
-    # CSP starts in Report-Only so it can't break the Identity widget, fonts, or YouTube
-    # embeds. Validate on a deploy preview (DevTools console shows any violations), then
-    # rename this key to Content-Security-Policy to enforce. See SECURITY.md (P1).
-    Content-Security-Policy-Report-Only = "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'self'; script-src 'self' 'unsafe-inline' https://identity.netlify.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' https://i.ytimg.com data:; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://identity.netlify.com; connect-src 'self' https://identity.netlify.com https://api.netlify.com; form-action 'self'"
+    # Enforcing CSP, scoped to what the site actually loads. Validated in Report-Only on a
+    # deploy preview (no violations) before enforcing. If you add a new external source
+    # (script, font, frame, image, or API endpoint), allow it here. See SECURITY.md (P1).
+    Content-Security-Policy = "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'self'; script-src 'self' 'unsafe-inline' https://identity.netlify.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' https://i.ytimg.com data:; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://identity.netlify.com; connect-src 'self' https://identity.netlify.com https://api.netlify.com; form-action 'self'"
