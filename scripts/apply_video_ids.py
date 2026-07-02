@@ -37,7 +37,7 @@ for key, v in data.items():
         skipped_empty.append(key)
         continue
     pat = re.compile(
-        r'(\{home:"%s",\s*away:"%s",\s*date:"%s",[^}]*?videoId:")[^"]*(")'
+        r'(\{[^}]*?home:"%s",\s*away:"%s",\s*date:"%s",[^}]*?videoId:")[^"]*(")'
         % (re.escape(home), re.escape(away), re.escape(date))
     )
     new_html, n = pat.subn(lambda m: m.group(1) + vid + m.group(2), html)

@@ -20,6 +20,18 @@ matches are played — no laptop required.
 It's idempotent: runs with nothing new do nothing. It polls for *"has FOX posted the
 highlight yet,"* so it needs no game schedule and lands within ~30 min of the upload.
 
+## Group stage and knockouts
+
+Both the group-stage cards (the `DATA` array) and the **Knockouts** cards (the `KNOCKOUTS`
+array) share this pipeline: every match is keyed `Home|Away|Date` in `video_ids.json`, and
+`apply_video_ids.py` writes the id into whichever array holds that match.
+
+To add a new knockout round: add each match to the `KNOCKOUTS` array in `index.html` (teams,
+date, and — once played — score + note) with `videoId:""`, and add the same `Home|Away|Date`
+key to `video_ids.json` with an empty id. The Action then fills the **video id** automatically
+within ~30 min of FOX posting the highlight. **Scores and notes are not automated** — update
+those by hand when the game is played.
+
 ## One-time setup
 
 1. **Create a YouTube Data API key** — in Google Cloud Console: create a project, enable

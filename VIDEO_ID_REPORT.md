@@ -1,11 +1,11 @@
 # Video ID Report
 
-- Total `videoId` fields in file: **71**
-- Filled this run / total in JSON: **71**
-- Still empty in file: **0**
-- Verified: **71**  |  Best-guess: **0**
+- Total `videoId` fields in file: **87**
+- Filled this run / total in JSON: **80**
+- Still empty in file: **7**
+- Verified: **80**  |  Best-guess: **0**
 
-## Verified (71)
+## Verified (80)
 - South Korea vs Czechia (Jun 11) -> `QWoDfCkh7f8`  (FOX 'South Korea vs Czechia Highlights 🌎🏆 2026 FIFA World Cup™'; foxsports.com/watch page exists; Jun 11)
 - Mexico vs South Korea (Jun 18) -> `F1sMvm6D-0Y`  (FOX 'Mexico vs South Korea Extended Highlights 🌎🏆 2026 FIFA World Cup™' (Extended cut); Mexico 1-0; Jun 18)
 - South Africa vs South Korea (Jun 24) -> `A7PTebEdius`  (FOX 'South Africa vs South Korea Extended Highlights 🌎🏆 2026 FIFA World Cup™' (Extended cut); foxsports.com/watch page exists; Jun 24)
@@ -77,6 +77,24 @@
 - DR Congo vs Uzbekistan (Jun 27) -> `iCaUl2GQ3sQ`  (FOX 'DR Congo vs Uzbekistan Extended Highlights 🌎🏆'; Jun 27)
 - Panama vs England (Jun 27) -> `JOPTAAFb3_s`  (FOX 'Panama vs England Extended Highlights 🌎🏆'; Jun 27 (Bellingham, Kane))
 - Croatia vs Ghana (Jun 27) -> `j4wJ3nGXuas`  (FOX 'Croatia vs Ghana Extended Highlights 🌎🏆'; Jun 27 (Luckassen equalizer))
+- South Africa vs Canada (Jun 28) -> `VoCkhiVWDdY`  (FOX 'South Africa vs Canada Highlights 🌎🏆'; Round of 32; Jun 28)
+- Germany vs Paraguay (Jun 29) -> `-gtI96YhJek`  (FOX 'Germany vs Paraguay Highlights 🌎🏆'; Round of 32; Jun 29)
+- Netherlands vs Morocco (Jun 29) -> `DkZtwwbN1YI`  (FOX 'Netherlands vs Morocco Highlights 🌎🏆'; Round of 32; Jun 29)
+- Brazil vs Japan (Jun 29) -> `QgUSOlN0Tt0`  (FOX 'Brazil vs Japan Highlights 🌎🏆'; Round of 32; Jun 29)
+- Ivory Coast vs Norway (Jun 30) -> `rPebJKCPjK0`  (FOX 'Ivory Coast vs Norway Highlights 🌎🏆'; Round of 32; Jun 30)
+- France vs Sweden (Jun 30) -> `II84TKpzJY4`  (FOX 'France vs Sweden Highlights 🌎🏆'; Round of 32; Jun 30)
+- Mexico vs Ecuador (Jun 30) -> `UDH9nQPl67k`  (FOX 'Mexico vs Ecuador Highlights 🌎🏆'; Round of 32; Jun 30)
+- England vs DR Congo (Jul 1) -> `x24Ir5Ua4RQ`  (FOX 'England vs DR Congo Highlights 🌎🏆'; Round of 32; Jul 1)
+- Belgium vs Senegal (Jul 1) -> `OJ84ZgReAsE`  (FOX 'Belgium vs Senegal Highlights 🌎🏆'; Round of 32; Jul 1)
 
 ## Best-guess - double-check these (0)
 _none_
+
+## Present in JSON but no ID yet (7)
+- United States|Bosnia & Herz.|Jul 1
+- Spain|Austria|Jul 2
+- Portugal|Croatia|Jul 2
+- Switzerland|Algeria|Jul 2
+- Australia|Egypt|Jul 3
+- Argentina|Cape Verde|Jul 3
+- Colombia|Ghana|Jul 3

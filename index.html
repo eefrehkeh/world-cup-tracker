@@ -1200,7 +1200,7 @@
   <div class="hero-inner">
     <p class="eyebrow"><span class="dot"></span>Canada · Mexico · USA — June 11 to July 19</p>
     <h1>WORLD CUP 2026<br><span>HIGHLIGHT TRACKER</span></h1>
-    <p class="hero-sub">Every match so far, sorted by group. Scores stay hidden until you tap the reveal button — browse the highlight links spoiler-free if you want to watch first.</p>
+    <p class="hero-sub">Every match so far — group stage and knockouts. Scores stay hidden until you tap the reveal button — browse the highlight links spoiler-free if you want to watch first.</p>
     <div class="stat-row">
       <div class="stat-chip"><b id="stat-games">—</b><span>Games Played</span></div>
       <div class="stat-chip watched-chip">
@@ -1219,6 +1219,7 @@
     <button class="toggle-btn active" data-view="group">By Group</button>
     <button class="toggle-btn" data-view="date">By Date</button>
     <button class="toggle-btn" data-view="country">By Team</button>
+    <button class="toggle-btn" data-view="knockouts">Knockouts</button>
     <button class="toggle-btn" data-view="bracket">Bracket</button>
   </div>
   <div class="controls-actions">
@@ -1262,7 +1263,7 @@
 
 <footer>
   Highlight sources: Supersport · FIFA · ESPN FC · Fox Sports · Fox Soccer — links open a YouTube search for that match on the selected channel.<br>
-  Built for personal tracking. Scores and dates reflect results as of June 21, 2026 and will need manual updates as the group stage continues.
+  Built for personal tracking. Scores and dates reflect results through the group stage and Round of 32 (as of July 1, 2026).
 </footer>
 
 <script>
@@ -1349,8 +1350,8 @@ const DATA = [
       {home:"Iran", away:"New Zealand", date:"Jun 15", score:"2–2", note:"Iran came back from behind twice; Elijah Just scored a brace for New Zealand.", venue:"SoFi Stadium", city:"Inglewood, CA, USA", videoId:"UZ_7qFbFYRY"},
       {home:"Belgium", away:"Iran", date:"Jun 21", score:"0–0", note:"A cagey, goalless draw left Group G still wide open with one round to play.", venue:"SoFi Stadium", city:"Inglewood, CA, USA", videoId:"YbiEe9pOV-s"},
       {home:"New Zealand", away:"Egypt", date:"Jun 21", score:"1–3", note:"Egypt's win put them in control of the group heading into the final matchday.", venue:"BC Place", city:"Vancouver, Canada", videoId:"Ihp4QH9YkBc"},
-      {home:"Egypt", away:"Iran", date:"Jun 26", score:"—", note:"Final matchday — Egypt need just a draw to reach the knockout rounds.", venue:"Lumen Field", city:"Seattle, USA", videoId:"vzUdJ51WH48"},
-      {home:"New Zealand", away:"Belgium", date:"Jun 26", score:"—", note:"Final matchday — New Zealand are already eliminated; Belgium need a win.", venue:"BC Place", city:"Vancouver, Canada", videoId:"Rouzq1yDV-Q"},
+      {home:"Egypt", away:"Iran", date:"Jun 26", score:"1–1", note:"Egypt and Iran played out a 1-1 draw.", venue:"Lumen Field", city:"Seattle, USA", videoId:"vzUdJ51WH48"},
+      {home:"New Zealand", away:"Belgium", date:"Jun 26", score:"1–5", note:"Belgium overwhelmed New Zealand 5-1.", venue:"BC Place", city:"Vancouver, Canada", videoId:"Rouzq1yDV-Q"},
     ]
   },
   {
@@ -1361,8 +1362,8 @@ const DATA = [
       {home:"Saudi Arabia", away:"Uruguay", date:"Jun 15", score:"1–1", note:"Saudi Arabia held Uruguay to a draw in their opener.", venue:"Hard Rock Stadium", city:"Miami Gardens, USA", videoId:"Tz9R1OYdTSs"},
       {home:"Spain", away:"Saudi Arabia", date:"Jun 21", score:"4–0", note:"Spain bounced back from their scoreless opener in dominant fashion.", venue:"Mercedes-Benz Stadium", city:"Atlanta, USA", videoId:"w453UjgtQw4"},
       {home:"Uruguay", away:"Cape Verde", date:"Jun 21", score:"2–2", note:"Cape Verde's giant-killing run continued with a draw against Uruguay.", venue:"Hard Rock Stadium", city:"Miami Gardens, USA", videoId:"ZXvFKZM1nL4"},
-      {home:"Cape Verde", away:"Saudi Arabia", date:"Jun 26", score:"—", note:"Final matchday — Cape Verde need a win to reach the knockout rounds in their World Cup debut.", venue:"Houston Stadium (NRG Stadium)", city:"Houston, USA", videoId:"grj3Ijq7cjQ"},
-      {home:"Uruguay", away:"Spain", date:"Jun 26", score:"—", note:"Final matchday — both sides still have something to play for in Group H.", venue:"Estadio Akron", city:"Guadalajara/Zapopan, Mexico", videoId:"3OVZj9WqyDc"},
+      {home:"Cape Verde", away:"Saudi Arabia", date:"Jun 26", score:"0–0", note:"A goalless draw between Cape Verde and Saudi Arabia.", venue:"Houston Stadium (NRG Stadium)", city:"Houston, USA", videoId:"grj3Ijq7cjQ"},
+      {home:"Uruguay", away:"Spain", date:"Jun 26", score:"0–1", note:"Álex Baena's goal gave Spain a 1-0 win and top spot in Group H.", venue:"Estadio Akron", city:"Guadalajara/Zapopan, Mexico", videoId:"3OVZj9WqyDc"},
     ]
   },
   {
@@ -1373,8 +1374,8 @@ const DATA = [
       {home:"Iraq", away:"Norway", date:"Jun 16", score:"1–4", note:"Haaland scored twice (one a forced own-goal) in Norway's opening win.", venue:"Gillette Stadium", city:"Foxborough, MA, USA", videoId:"ku1hsMdKDXQ"},
       {home:"France", away:"Iraq", date:"Jun 22", score:"3–0", note:"Mbappé scored twice through a weather-delayed match to send France into the knockouts.", venue:"Lincoln Financial Field", city:"Philadelphia, USA", videoId:"Mo7aY61WF9I"},
       {home:"Norway", away:"Senegal", date:"Jun 22", score:"3–2", note:"Haaland scored twice as Norway held on to also clinch a knockout-stage spot.", venue:"New York New Jersey Stadium", city:"East Rutherford, NJ, USA", videoId:"vcgzGgM4uJg"},
-      {home:"Norway", away:"France", date:"Jun 26", score:"—", note:"Final matchday — both sides have already qualified; this decides top spot in the group.", venue:"Boston Stadium (Gillette Stadium)", city:"Foxborough, MA, USA", videoId:"VB1B9bkj2xc"},
-      {home:"Senegal", away:"Iraq", date:"Jun 26", score:"—", note:"Final matchday — a dead-rubber finale with both teams already eliminated.", venue:"BMO Field", city:"Toronto, Canada", videoId:"oR3o61OvWLI"},
+      {home:"Norway", away:"France", date:"Jun 26", score:"4–1", note:"Norway stunned France 4-1 to top Group I.", venue:"Boston Stadium (Gillette Stadium)", city:"Foxborough, MA, USA", videoId:"VB1B9bkj2xc"},
+      {home:"Senegal", away:"Iraq", date:"Jun 26", score:"5–0", note:"Senegal signed off with a 5-0 rout of Iraq.", venue:"BMO Field", city:"Toronto, Canada", videoId:"oR3o61OvWLI"},
     ]
   },
   {
@@ -1385,8 +1386,8 @@ const DATA = [
       {home:"Austria", away:"Jordan", date:"Jun 16", score:"3–1", note:"Austria controlled the game against World Cup debutants Jordan.", venue:"Levi's Stadium", city:"San Francisco Bay Area, USA", videoId:"yOPRItttrPU"},
       {home:"Argentina", away:"Austria", date:"Jun 22", score:"2–0", note:"Messi's brace made him the World Cup's all-time leading scorer as Argentina advanced.", venue:"AT&T Stadium", city:"Arlington, TX, USA", videoId:"JakdhltyECE"},
       {home:"Jordan", away:"Algeria", date:"Jun 22", score:"1–2", note:"Algeria came from behind with two late goals, eliminating World Cup debutants Jordan.", venue:"Levi's Stadium", city:"San Francisco Bay Area, USA", videoId:"qq3eMBEUbzY"},
-      {home:"Jordan", away:"Argentina", date:"Jun 27", score:"—", note:"Final matchday — Argentina have already secured top spot in the group.", venue:"AT&T Stadium", city:"Arlington, TX, USA", videoId:"sPJIf3GfNo0"},
-      {home:"Algeria", away:"Austria", date:"Jun 27", score:"—", note:"Final matchday — this match decides second place in Group J.", venue:"Arrowhead Stadium", city:"Kansas City, USA", videoId:"fjPH_DXx12M"},
+      {home:"Jordan", away:"Argentina", date:"Jun 27", score:"1–3", note:"Argentina won 3-1; Messi came off the bench to score in a 7th straight World Cup.", venue:"AT&T Stadium", city:"Arlington, TX, USA", videoId:"sPJIf3GfNo0"},
+      {home:"Algeria", away:"Austria", date:"Jun 27", score:"3–3", note:"A wild 3-3 draw; Austria advanced from Group J.", venue:"Arrowhead Stadium", city:"Kansas City, USA", videoId:"fjPH_DXx12M"},
     ]
   },
   {
@@ -1397,8 +1398,8 @@ const DATA = [
       {home:"Colombia", away:"Uzbekistan", date:"Jun 17", score:"3–1", note:"Uzbekistan's Fayzullaev scored the nation's first-ever World Cup goal in a losing effort.", venue:"Estadio Akron", city:"Guadalajara/Zapopan, Mexico", videoId:"Qb3ipZFspnc"},
       {home:"Portugal", away:"Uzbekistan", date:"Jun 23", score:"5–0", note:"Cristiano Ronaldo scored twice, becoming Portugal's all-time leading World Cup-era scorer milestone moment.", venue:"Houston Stadium (NRG Stadium)", city:"Houston, USA", videoId:"jqgn-kY0rFA"},
       {home:"DR Congo", away:"Colombia", date:"Jun 23", score:"0–1", note:"Colombia's win clinched top spot in Group K heading into the final matchday.", venue:"Estadio Akron", city:"Guadalajara/Zapopan, Mexico", videoId:"C-bTb3K_suE"},
-      {home:"Colombia", away:"Portugal", date:"Jun 27", score:"—", note:"Final matchday — winner likely takes the group.", venue:"Hard Rock Stadium", city:"Miami Gardens, USA", videoId:"cRb6GQEAsU8"},
-      {home:"DR Congo", away:"Uzbekistan", date:"Jun 27", score:"—", note:"Final matchday — DR Congo needs a win to have any chance of advancing.", venue:"Mercedes-Benz Stadium", city:"Atlanta, USA", videoId:"iCaUl2GQ3sQ"},
+      {home:"Colombia", away:"Portugal", date:"Jun 27", score:"0–0", note:"A 0-0 draw; Colombia finished top of Group K.", venue:"Hard Rock Stadium", city:"Miami Gardens, USA", videoId:"cRb6GQEAsU8"},
+      {home:"DR Congo", away:"Uzbekistan", date:"Jun 27", score:"3–1", note:"DR Congo beat Uzbekistan 3-1.", venue:"Mercedes-Benz Stadium", city:"Atlanta, USA", videoId:"iCaUl2GQ3sQ"},
     ]
   },
   {
@@ -1409,8 +1410,8 @@ const DATA = [
       {home:"Ghana", away:"Panama", date:"Jun 17", score:"1–0", note:"A 95th-minute winner — among the latest goals ever scored by Ghana at a World Cup.", venue:"BMO Field", city:"Toronto, Canada", videoId:"hFO9DhasJ2A"},
       {home:"England", away:"Ghana", date:"Jun 23", score:"0–0", note:"Ghana held firm under heavy late England pressure to secure a point.", venue:"Boston Stadium (Gillette Stadium)", city:"Foxborough, MA, USA", videoId:"ebuYwC7lwCk"},
       {home:"Panama", away:"Croatia", date:"Jun 23", score:"0–1", note:"Croatia's win clinched a knockout-stage spot.", venue:"BMO Field", city:"Toronto, Canada", videoId:"EBWpoly7qiE"},
-      {home:"Panama", away:"England", date:"Jun 27", score:"—", note:"Final matchday — Panama need a win and help to have any chance of advancing.", venue:"New York New Jersey Stadium", city:"East Rutherford, NJ, USA", videoId:"JOPTAAFb3_s"},
-      {home:"Croatia", away:"Ghana", date:"Jun 27", score:"—", note:"Final matchday — Croatia have already secured top spot in the group.", venue:"Lincoln Financial Field", city:"Philadelphia, USA", videoId:"j4wJ3nGXuas"},
+      {home:"Panama", away:"England", date:"Jun 27", score:"0–2", note:"Harry Kane's brace sent England through with a 2-0 win.", venue:"New York New Jersey Stadium", city:"East Rutherford, NJ, USA", videoId:"JOPTAAFb3_s"},
+      {home:"Croatia", away:"Ghana", date:"Jun 27", score:"2–1", note:"Croatia edged Ghana 2-1 to top Group L.", venue:"Lincoln Financial Field", city:"Philadelphia, USA", videoId:"j4wJ3nGXuas"},
     ]
   },
 ];
@@ -1606,10 +1607,10 @@ function renderMatchCard(m, g, standingsHtml, groupLetterForKey){
         <div class="teams">${m.home} <span class="vs">vs</span> ${m.away}</div>
         <div class="match-meta">${groupTag}<span class="match-date">${m.date}</span></div>
       </div>
-      <div class="venue-row">
+      ${m.venue ? `<div class="venue-row">
         <span class="venue-icon">📍</span>
-        <span class="venue-text"><strong>${m.venue}</strong> — ${m.city}</span>
-      </div>
+        <span class="venue-text"><strong>${m.venue}</strong>${m.city ? ` — ${m.city}` : ""}</span>
+      </div>` : ""}
       <div class="watched-row">
         <label class="watched-toggle">
           <input type="checkbox" class="watched-checkbox" data-match-key="${matchKey}">
@@ -1758,29 +1759,30 @@ function renderByCountryView(){
 // later rounds show the feeding structure (winners advance into them).
 // Teams confirmed into the Round of 32 (as of the latest update)
 const QUALIFIED_TEAMS = [
-  "Mexico","South Africa","Switzerland","Canada","Brazil","Morocco",
-  "United States","Germany","Ivory Coast","Ecuador","Netherlands","Japan",
-  "Sweden","Australia","France","Norway","Argentina","Colombia","Spain"
+  "South Africa","Canada","Netherlands","Morocco","Germany","Paraguay","France","Sweden",
+  "Brazil","Japan","Ivory Coast","Norway","Mexico","Ecuador","England","DR Congo",
+  "Spain","Austria","Portugal","Croatia","Belgium","Senegal","United States","Bosnia & Herz.",
+  "Argentina","Cape Verde","Australia","Egypt","Switzerland","Algeria","Colombia","Ghana"
 ];
 
 // Round of 32 ties, ordered so adjacent pairs feed the same R16 match.
 const R32 = [
-  {match:73, date:"Jun 28", home:"South Africa", away:"Canada"},
-  {match:74, date:"Jun 29", home:"Germany", away:"3rd A/B/C/D/F"},
-  {match:75, date:"Jun 30", home:"Netherlands", away:"Morocco"},
-  {match:76, date:"Jun 29", home:"Brazil", away:"Japan"},
-  {match:77, date:"Jun 30", home:"Group I winner", away:"3rd C/D/F/G/H"},
-  {match:78, date:"Jun 30", home:"Ivory Coast", away:"Group I runner-up"},
-  {match:79, date:"Jun 30", home:"Mexico", away:"3rd C/E/F/H/I"},
-  {match:80, date:"Jul 1", home:"Group L winner", away:"3rd E/H/I/J/K"},
-  {match:81, date:"Jul 1", home:"United States", away:"Bosnia & Herz."},
-  {match:82, date:"Jul 1", home:"Group G winner", away:"3rd A/E/H/I/J"},
-  {match:83, date:"Jul 2", home:"Group K runner-up", away:"Group L runner-up"},
-  {match:84, date:"Jul 2", home:"Group H winner", away:"Group J runner-up"},
-  {match:85, date:"Jul 2", home:"Switzerland", away:"3rd E/F/G/I/J"},
-  {match:86, date:"Jul 3", home:"Australia", away:"Group G runner-up"},
-  {match:87, date:"Jul 3", home:"Argentina", away:"Group H runner-up"},
-  {match:88, date:"Jul 3", home:"France", away:"3rd A/B/C/E/F"},
+  {match:73, date:"Jun 28", home:"South Africa", away:"Canada", score:"0–1", winner:"Canada"},
+  {match:74, date:"Jun 29", home:"Netherlands", away:"Morocco", score:"1–1", winner:"Morocco"},
+  {match:75, date:"Jun 29", home:"Germany", away:"Paraguay", score:"1–1", winner:"Paraguay"},
+  {match:76, date:"Jun 30", home:"France", away:"Sweden", score:"3–0", winner:"France"},
+  {match:77, date:"Jun 29", home:"Brazil", away:"Japan", score:"2–1", winner:"Brazil"},
+  {match:78, date:"Jun 30", home:"Ivory Coast", away:"Norway", score:"1–2", winner:"Norway"},
+  {match:79, date:"Jun 30", home:"Mexico", away:"Ecuador", score:"2–0", winner:"Mexico"},
+  {match:80, date:"Jul 1", home:"England", away:"DR Congo", score:"2–1", winner:"England"},
+  {match:81, date:"Jul 2", home:"Spain", away:"Austria"},
+  {match:82, date:"Jul 2", home:"Portugal", away:"Croatia"},
+  {match:83, date:"Jul 1", home:"Belgium", away:"Senegal", score:"3–2", winner:"Belgium"},
+  {match:84, date:"Jul 1", home:"United States", away:"Bosnia & Herz."},
+  {match:85, date:"Jul 3", home:"Argentina", away:"Cape Verde"},
+  {match:86, date:"Jul 3", home:"Australia", away:"Egypt"},
+  {match:87, date:"Jul 2", home:"Switzerland", away:"Algeria"},
+  {match:88, date:"Jul 3", home:"Colombia", away:"Ghana"},
 ];
 
 // Later rounds: each tie references which prior matches feed it.
@@ -1823,19 +1825,63 @@ const BRACKET_ROUNDS = [
   {key:"final", title:"Final", sub:"Jul 19", ties:FINAL_ROUND, type:"feed"},
 ];
 
-function bracketTeamCell(name){
+function bracketTeamCell(name, won){
   const confirmed = QUALIFIED_TEAMS.includes(name);
   const cls = confirmed ? "bk-team confirmed" : "bk-team pending";
-  return `<div class="${cls}">${name}</div>`;
+  return `<div class="${cls}"${won ? ' style="font-weight:800"' : ''}>${name}${won ? ' ✓' : ''}</div>`;
+}
+
+// Knockout matches shown as full cards (video + watched + reveal), separate from the bracket tree.
+const KNOCKOUTS = [
+  {round:"Round of 32", home:"South Africa", away:"Canada", date:"Jun 28", score:"0–1", note:"Stephen Eustáquio scored in stoppage time; Canada advance to the Round of 16.", venue:"", city:"", videoId:"VoCkhiVWDdY"},
+  {round:"Round of 32", home:"Germany", away:"Paraguay", date:"Jun 29", score:"1–1", note:"1-1 after extra time; Paraguay win 4-3 on penalties to knock Germany out.", venue:"Boston Stadium", city:"Foxborough, MA, USA", videoId:"-gtI96YhJek"},
+  {round:"Round of 32", home:"Netherlands", away:"Morocco", date:"Jun 29", score:"1–1", note:"1-1 after extra time; Morocco advance 3-2 on penalties.", venue:"Monterrey Stadium", city:"Monterrey, Mexico", videoId:"DkZtwwbN1YI"},
+  {round:"Round of 32", home:"Brazil", away:"Japan", date:"Jun 29", score:"2–1", note:"Casemiro and Martinelli struck; Brazil held on after Sano's screamer.", venue:"", city:"", videoId:"QgUSOlN0Tt0"},
+  {round:"Round of 32", home:"Ivory Coast", away:"Norway", date:"Jun 30", score:"1–2", note:"Erling Haaland's winner sent Norway through.", venue:"Dallas Stadium", city:"Arlington, TX, USA", videoId:"rPebJKCPjK0"},
+  {round:"Round of 32", home:"France", away:"Sweden", date:"Jun 30", score:"3–0", note:"France cruised past Sweden into the Round of 16.", venue:"", city:"", videoId:"II84TKpzJY4"},
+  {round:"Round of 32", home:"Mexico", away:"Ecuador", date:"Jun 30", score:"2–0", note:"Mexico dominated to reach the Round of 16.", venue:"", city:"", videoId:"UDH9nQPl67k"},
+  {round:"Round of 32", home:"England", away:"DR Congo", date:"Jul 1", score:"2–1", note:"Harry Kane's brace sent England into the Round of 16.", venue:"Atlanta Stadium", city:"Atlanta, USA", videoId:"x24Ir5Ua4RQ"},
+  {round:"Round of 32", home:"Belgium", away:"Senegal", date:"Jul 1", score:"3–2", note:"Senegal raced 2-0 up through Habib Diarra and Ismaïla Sarr, but Lukaku and Tielemans hauled Belgium level, and Tielemans' extra-time penalty sealed a dramatic 3-2 comeback (a.e.t.).", venue:"Seattle Stadium", city:"Seattle, USA", videoId:"OJ84ZgReAsE"},
+  {round:"Round of 32", home:"United States", away:"Bosnia & Herz.", date:"Jul 1", score:"—", note:"Kicks off Jul 1 — the FOX highlight fills in automatically once it's posted.", venue:"", city:"", videoId:""},
+  {round:"Round of 32", home:"Spain", away:"Austria", date:"Jul 2", score:"—", note:"Kicks off Jul 2 — the FOX highlight fills in automatically once it's posted.", venue:"", city:"", videoId:""},
+  {round:"Round of 32", home:"Portugal", away:"Croatia", date:"Jul 2", score:"—", note:"Kicks off Jul 2 — the FOX highlight fills in automatically once it's posted.", venue:"", city:"", videoId:""},
+  {round:"Round of 32", home:"Switzerland", away:"Algeria", date:"Jul 2", score:"—", note:"Kicks off Jul 2 — the FOX highlight fills in automatically once it's posted.", venue:"", city:"", videoId:""},
+  {round:"Round of 32", home:"Australia", away:"Egypt", date:"Jul 3", score:"—", note:"Kicks off Jul 3 — the FOX highlight fills in automatically once it's posted.", venue:"", city:"", videoId:""},
+  {round:"Round of 32", home:"Argentina", away:"Cape Verde", date:"Jul 3", score:"—", note:"Kicks off Jul 3 — the FOX highlight fills in automatically once it's posted.", venue:"", city:"", videoId:""},
+  {round:"Round of 32", home:"Colombia", away:"Ghana", date:"Jul 3", score:"—", note:"Kicks off Jul 3 — the FOX highlight fills in automatically once it's posted.", venue:"", city:"", videoId:""},
+];
+
+function renderKnockoutsView(){
+  if(!KNOCKOUTS.length){
+    return `<section class="group-section"><div class="group-head"><div class="group-letter">KNOCKOUTS</div><div class="group-teams">No knockout matches yet.</div></div></section>`;
+  }
+  const rounds = [];
+  KNOCKOUTS.forEach(m=>{
+    let r = rounds.find(x=>x.round===m.round);
+    if(!r){ r = {round:m.round, matches:[]}; rounds.push(r); }
+    r.matches.push(m);
+  });
+  let html = "";
+  rounds.forEach((r,i)=>{
+    html += `<section class="group-section" id="ko-${i}">
+      <div class="group-head">
+        <div class="group-letter">${r.round}</div>
+        <div class="group-teams">${r.matches.length} ${r.matches.length===1?"match":"matches"} · highlights added as FOX posts them</div>
+      </div>`;
+    r.matches.forEach(m=>{ html += renderMatchCard(m, null, "", "KO"); });
+    html += `</section>`;
+  });
+  return html;
 }
 
 function renderBracketMatch(tie, type){
   if(type === "r32"){
+    const meta = tie.score ? `${tie.date} · ${tie.score}` : tie.date;
     return `
       <div class="bk-match" data-match="${tie.match}">
-        <div class="bk-match-meta"><span>M${tie.match}</span><span class="bk-match-date">${tie.date}</span></div>
-        ${bracketTeamCell(tie.home)}
-        ${bracketTeamCell(tie.away)}
+        <div class="bk-match-meta"><span>M${tie.match}</span><span class="bk-match-date">${meta}</span></div>
+        ${bracketTeamCell(tie.home, tie.winner===tie.home)}
+        ${bracketTeamCell(tie.away, tie.winner===tie.away)}
       </div>`;
   }
   // feed match — two slots fed by prior winners
@@ -2239,6 +2285,7 @@ function renderMain(){
   if(currentView === "group") viewHtml = renderByGroupView();
   else if(currentView === "date") viewHtml = renderByDateView();
   else if(currentView === "country") viewHtml = renderByCountryView();
+  else if(currentView === "knockouts") viewHtml = renderKnockoutsView();
   else if(currentView === "bracket") viewHtml = renderBracketView();
   else viewHtml = renderByGroupView();
   main.innerHTML = viewHtml;
@@ -2267,6 +2314,9 @@ function renderNav(){
   } else if(currentView === "date"){
     const days = [...new Set(DATA.flatMap(g=>g.matches.map(m=>dayNum(m.date))))].sort((a,b)=>a-b);
     nav.innerHTML = days.map(d=>`<a href="javascript:void(0)" data-scroll="date-${d}">JUN ${d}</a>`).join("");
+  } else if(currentView === "knockouts"){
+    const rounds = [...new Set(KNOCKOUTS.map(m=>m.round))];
+    nav.innerHTML = rounds.map((r,i)=>`<a href="javascript:void(0)" data-scroll="ko-${i}">${r.replace('Round of ','R')}</a>`).join("");
   } else if(currentView === "bracket"){
     let chips = `<a href="javascript:void(0)" data-scroll="bracket-section">BRACKET</a>`;
     const days = [...new Set(DATA.flatMap(g=>g.matches.map(m=>dayNum(m.date))))].sort((a,b)=>a-b);
@@ -2321,8 +2371,9 @@ async function render(){
   initWatchedFilter();
   initAuth();
 
-  const totalGames = DATA.reduce((sum,g)=>sum+g.matches.length,0);
-  document.getElementById('stat-games').textContent = totalGames;
+  const groupGames = DATA.reduce((sum,g)=>sum+g.matches.length,0);
+  const knockoutsPlayed = KNOCKOUTS.filter(m => m.score && m.score !== "—").length;
+  document.getElementById('stat-games').textContent = groupGames + knockoutsPlayed;
 
   document.getElementById('revealAllBtn').addEventListener('click', ()=>{
     const allShown = [...document.querySelectorAll('.score-reveal')].every(el=>el.classList.contains('shown'));
