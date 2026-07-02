@@ -53,6 +53,11 @@ check("isMatchHighlight rejects 'Best Moments'", !isMatchHighlight("Matchday 14 
 check("titleHasTeam DR Congo alias", titleHasTeam(norm("Colombia vs Congo DR Extended Highlights 2026 FIFA World Cup"), "DR Congo"));
 check("cutRank orders std<ext<fast", cutRank("X vs Y Highlights") < cutRank("X vs Y Extended Highlights") && cutRank("X vs Y Extended Highlights") < cutRank("X vs Y Fast Highlights"));
 
+// Knockout-round title format matches (incl. Bosnia alias + "Round of 32" not excluded).
+check("matches a Round of 32 knockout title", pickForMatch("United States|Bosnia & Herz.|Jul 1", [
+  { title: "United States vs Bosnia & Herzegovina Highlights 🌎🏆 2026 FIFA World Cup™ | Round of 32", id: "KO", published: "2026-07-01T23:30:00Z" },
+]).id === "KO");
+
 // backfillSinceDate: earliest empty match minus the 3-day window sets the scan depth.
 check("backfillSinceDate uses earliest empty minus window",
   backfillSinceDate(["A|B|Jun 27", "C|D|Jun 25", "E|F|Jul 02"]).toISOString().slice(0, 10) === "2026-06-22");

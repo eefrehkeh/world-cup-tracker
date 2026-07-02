@@ -53,6 +53,7 @@ const ALIASES = {
   "cape verde": ["cape verde", "cabo verde"],
   "united states": ["united states", "usa"],
   "south korea": ["south korea", "korea republic"],
+  "bosnia and herz": ["bosnia and herz", "bosnia", "bosnia and herzegovina"],
 };
 export function variants(team) { const n = norm(team); return ALIASES[n] || [n]; }
 export function titleHasTeam(normTitle, team) {
