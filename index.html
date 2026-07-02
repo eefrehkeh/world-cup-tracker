@@ -2371,8 +2371,9 @@ async function render(){
   initWatchedFilter();
   initAuth();
 
-  const totalGames = DATA.reduce((sum,g)=>sum+g.matches.length,0);
-  document.getElementById('stat-games').textContent = totalGames;
+  const groupGames = DATA.reduce((sum,g)=>sum+g.matches.length,0);
+  const knockoutsPlayed = KNOCKOUTS.filter(m => m.score && m.score !== "—").length;
+  document.getElementById('stat-games').textContent = groupGames + knockoutsPlayed;
 
   document.getElementById('revealAllBtn').addEventListener('click', ()=>{
     const allShown = [...document.querySelectorAll('.score-reveal')].every(el=>el.classList.contains('shown'));
