@@ -1,8 +1,8 @@
 # Video ID Report
 
-- Total `videoId` fields in file: **87**
+- Total `videoId` fields in file: **88**
 - Filled this run / total in JSON: **80**
-- Still empty in file: **7**
+- Still empty in file: **8**
 - Verified: **80**  |  Best-guess: **0**
 
 ## Verified (80)
@@ -90,7 +90,7 @@
 ## Best-guess - double-check these (0)
 _none_
 
-## Present in JSON but no ID yet (7)
+## Present in JSON but no ID yet (8)
 - United States|Bosnia & Herz.|Jul 1
 - Spain|Austria|Jul 2
 - Portugal|Croatia|Jul 2
@@ -98,3 +98,4 @@ _none_
 - Australia|Egypt|Jul 3
 - Argentina|Cape Verde|Jul 3
 - Colombia|Ghana|Jul 3
+- Switzerland|Bosnia and Herzegovina|Jun 18
