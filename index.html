@@ -597,6 +597,12 @@
     font-weight:600;
     font-size:11px;
   }
+  .bk-team.won{
+    color:var(--ink);
+    background:rgba(185,78,44,0.16);
+    border-left:3px solid var(--rust);
+    font-weight:800;
+  }
 
   /* ---- Connector lines (classic bracket elbows) ----
      Each column has horizontal padding (the gap between columns is 2× that
@@ -1828,8 +1834,9 @@ const BRACKET_ROUNDS = [
 
 function bracketTeamCell(name, won){
   const confirmed = QUALIFIED_TEAMS.includes(name);
-  const cls = confirmed ? "bk-team confirmed" : "bk-team pending";
-  return `<div class="${cls}"${won ? ' style="font-weight:800"' : ''}>${name}${won ? ' ✓' : ''}</div>`;
+  const base = confirmed ? "bk-team confirmed" : "bk-team pending";
+  const cls = won ? base + " won" : base;
+  return `<div class="${cls}">${name}${won ? ' ✓' : ''}</div>`;
 }
 
 // Knockout matches shown as full cards (video + watched + reveal), separate from the bracket tree.
