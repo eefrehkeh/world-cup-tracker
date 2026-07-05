@@ -597,6 +597,12 @@
     font-weight:600;
     font-size:11px;
   }
+  .bk-team.won{
+    color:var(--ink);
+    background:rgba(185,78,44,0.16);
+    border-left:3px solid var(--rust);
+    font-weight:800;
+  }
 
   /* ---- Connector lines (classic bracket elbows) ----
      Each column has horizontal padding (the gap between columns is 2× that
@@ -1776,30 +1782,30 @@ const R32 = [
   {match:78, date:"Jun 30", home:"Ivory Coast", away:"Norway", score:"1–2", winner:"Norway"},
   {match:79, date:"Jun 30", home:"Mexico", away:"Ecuador", score:"2–0", winner:"Mexico"},
   {match:80, date:"Jul 1", home:"England", away:"DR Congo", score:"2–1", winner:"England"},
-  {match:81, date:"Jul 2", home:"Spain", away:"Austria"},
-  {match:82, date:"Jul 2", home:"Portugal", away:"Croatia"},
+  {match:81, date:"Jul 2", home:"Spain", away:"Austria", score:"3–0", winner:"Spain"},
+  {match:82, date:"Jul 2", home:"Portugal", away:"Croatia", score:"2–1", winner:"Portugal"},
   {match:83, date:"Jul 1", home:"Belgium", away:"Senegal", score:"3–2", winner:"Belgium"},
   {match:84, date:"Jul 1", home:"United States", away:"Bosnia & Herz.", score:"2–0", winner:"United States"},
-  {match:85, date:"Jul 3", home:"Argentina", away:"Cape Verde"},
-  {match:86, date:"Jul 3", home:"Australia", away:"Egypt"},
-  {match:87, date:"Jul 2", home:"Switzerland", away:"Algeria"},
-  {match:88, date:"Jul 3", home:"Colombia", away:"Ghana"},
+  {match:85, date:"Jul 3", home:"Argentina", away:"Cape Verde", score:"3–2", winner:"Argentina"},
+  {match:86, date:"Jul 3", home:"Australia", away:"Egypt", score:"1–1", winner:"Egypt"},
+  {match:87, date:"Jul 2", home:"Switzerland", away:"Algeria", score:"2–0", winner:"Switzerland"},
+  {match:88, date:"Jul 3", home:"Colombia", away:"Ghana", score:"1–0", winner:"Colombia"},
 ];
 
 // Later rounds: each tie references which prior matches feed it.
 const R16 = [
-  {match:89, date:"Jul 4", from:[73,74]},
-  {match:90, date:"Jul 4", from:[75,76]},
-  {match:91, date:"Jul 5", from:[77,78]},
-  {match:92, date:"Jul 5", from:[79,80]},
-  {match:93, date:"Jul 6", from:[81,82]},
-  {match:94, date:"Jul 6", from:[83,84]},
-  {match:95, date:"Jul 7", from:[85,86]},
-  {match:96, date:"Jul 7", from:[87,88]},
+  {match:89, date:"Jul 4", from:[73,74], home:"Canada", away:"Morocco", score:"0–3", winner:"Morocco"},
+  {match:90, date:"Jul 4", from:[75,76], home:"Paraguay", away:"France", score:"0–1", winner:"France"},
+  {match:91, date:"Jul 5", from:[77,78], home:"Brazil", away:"Norway"},
+  {match:92, date:"Jul 5", from:[79,80], home:"Mexico", away:"England"},
+  {match:93, date:"Jul 6", from:[81,82], home:"Portugal", away:"Spain"},
+  {match:94, date:"Jul 6", from:[83,84], home:"United States", away:"Belgium"},
+  {match:95, date:"Jul 7", from:[85,86], home:"Argentina", away:"Egypt"},
+  {match:96, date:"Jul 7", from:[87,88], home:"Switzerland", away:"Colombia"},
 ];
 
 const QF = [
-  {match:97, date:"Jul 9", from:[89,90]},
+  {match:97, date:"Jul 9", from:[89,90], home:"France", away:"Morocco"},
   {match:98, date:"Jul 10", from:[91,92]},
   {match:99, date:"Jul 11", from:[93,94]},
   {match:100, date:"Jul 11", from:[95,96]},
@@ -1828,8 +1834,9 @@ const BRACKET_ROUNDS = [
 
 function bracketTeamCell(name, won){
   const confirmed = QUALIFIED_TEAMS.includes(name);
-  const cls = confirmed ? "bk-team confirmed" : "bk-team pending";
-  return `<div class="${cls}"${won ? ' style="font-weight:800"' : ''}>${name}${won ? ' ✓' : ''}</div>`;
+  const base = confirmed ? "bk-team confirmed" : "bk-team pending";
+  const cls = won ? base + " won" : base;
+  return `<div class="${cls}">${name}${won ? ' ✓' : ''}</div>`;
 }
 
 // Knockout matches shown as full cards (video + watched + reveal), separate from the bracket tree.
@@ -1844,12 +1851,20 @@ const KNOCKOUTS = [
   {round:"Round of 32", home:"England", away:"DR Congo", date:"Jul 1", score:"2–1", note:"England beat DR Congo 2-1 to reach the Round of 16.", venue:"Atlanta Stadium", city:"Atlanta, USA", videoId:"x24Ir5Ua4RQ"},
   {round:"Round of 32", home:"Belgium", away:"Senegal", date:"Jul 1", score:"3–2", note:"Belgium beat Senegal 3-2 to reach the Round of 16.", venue:"Seattle Stadium", city:"Seattle, USA", videoId:"OJ84ZgReAsE"},
   {round:"Round of 32", home:"United States", away:"Bosnia & Herz.", date:"Jul 1", score:"2–0", note:"The United States beat Bosnia & Herzegovina 2-0 to reach the Round of 16.", venue:"", city:"", videoId:""},
-  {round:"Round of 32", home:"Spain", away:"Austria", date:"Jul 2", score:"—", note:"Kicks off Jul 2 — the FOX highlight fills in automatically once it's posted.", venue:"", city:"", videoId:""},
-  {round:"Round of 32", home:"Portugal", away:"Croatia", date:"Jul 2", score:"—", note:"Kicks off Jul 2 — the FOX highlight fills in automatically once it's posted.", venue:"", city:"", videoId:""},
-  {round:"Round of 32", home:"Switzerland", away:"Algeria", date:"Jul 2", score:"—", note:"Kicks off Jul 2 — the FOX highlight fills in automatically once it's posted.", venue:"", city:"", videoId:""},
-  {round:"Round of 32", home:"Australia", away:"Egypt", date:"Jul 3", score:"—", note:"Kicks off Jul 3 — the FOX highlight fills in automatically once it's posted.", venue:"", city:"", videoId:""},
-  {round:"Round of 32", home:"Argentina", away:"Cape Verde", date:"Jul 3", score:"—", note:"Kicks off Jul 3 — the FOX highlight fills in automatically once it's posted.", venue:"", city:"", videoId:""},
-  {round:"Round of 32", home:"Colombia", away:"Ghana", date:"Jul 3", score:"—", note:"Kicks off Jul 3 — the FOX highlight fills in automatically once it's posted.", venue:"", city:"", videoId:""},
+  {round:"Round of 32", home:"Spain", away:"Austria", date:"Jul 2", score:"3–0", note:"Spain beat Austria 3-0 to reach the Round of 16.", venue:"", city:"", videoId:"J9SxUH5VCSU"},
+  {round:"Round of 32", home:"Portugal", away:"Croatia", date:"Jul 2", score:"2–1", note:"Portugal beat Croatia 2-1 to reach the Round of 16.", venue:"", city:"", videoId:"J9yS7PsoEck"},
+  {round:"Round of 32", home:"Switzerland", away:"Algeria", date:"Jul 2", score:"2–0", note:"Switzerland beat Algeria 2-0 to reach the Round of 16.", venue:"", city:"", videoId:"bSZEbYXssBI"},
+  {round:"Round of 32", home:"Australia", away:"Egypt", date:"Jul 3", score:"1–1", note:"1-1 after extra time; Egypt won 4-2 on penalties to reach the Round of 16.", venue:"", city:"", videoId:"ACWOG7t8Plk"},
+  {round:"Round of 32", home:"Argentina", away:"Cape Verde", date:"Jul 3", score:"3–2", note:"Argentina edged Cape Verde 3-2 to reach the Round of 16.", venue:"", city:"", videoId:"EC2jOKluGRI"},
+  {round:"Round of 32", home:"Colombia", away:"Ghana", date:"Jul 3", score:"1–0", note:"Colombia beat Ghana 1-0 to reach the Round of 16.", venue:"", city:"", videoId:"9TJRhuQOJuE"},
+  {round:"Round of 16", home:"Canada", away:"Morocco", date:"Jul 4", score:"0–3", note:"Morocco beat Canada 3-0 to reach the quarter-finals.", venue:"Houston Stadium", city:"Houston, USA", videoId:"QLFucR6SGr4"},
+  {round:"Round of 16", home:"Paraguay", away:"France", date:"Jul 4", score:"0–1", note:"France beat Paraguay 1-0 to reach the quarter-finals.", venue:"Philadelphia Stadium", city:"Philadelphia, USA", videoId:"2ANrnnZEE6c"},
+  {round:"Round of 16", home:"Brazil", away:"Norway", date:"Jul 5", score:"—", note:"Kicks off Jul 5 — the FOX highlight fills in automatically once it's posted.", venue:"", city:"", videoId:""},
+  {round:"Round of 16", home:"Mexico", away:"England", date:"Jul 5", score:"—", note:"Kicks off Jul 5 — the FOX highlight fills in automatically once it's posted.", venue:"", city:"", videoId:""},
+  {round:"Round of 16", home:"Portugal", away:"Spain", date:"Jul 6", score:"—", note:"Kicks off Jul 6 — the FOX highlight fills in automatically once it's posted.", venue:"", city:"", videoId:""},
+  {round:"Round of 16", home:"United States", away:"Belgium", date:"Jul 6", score:"—", note:"Kicks off Jul 6 — the FOX highlight fills in automatically once it's posted.", venue:"", city:"", videoId:""},
+  {round:"Round of 16", home:"Argentina", away:"Egypt", date:"Jul 7", score:"—", note:"Kicks off Jul 7 — the FOX highlight fills in automatically once it's posted.", venue:"", city:"", videoId:""},
+  {round:"Round of 16", home:"Switzerland", away:"Colombia", date:"Jul 7", score:"—", note:"Kicks off Jul 7 — the FOX highlight fills in automatically once it's posted.", venue:"", city:"", videoId:""},
 ];
 
 function renderKnockoutsView(){
@@ -1876,7 +1891,7 @@ function renderKnockoutsView(){
 }
 
 function renderBracketMatch(tie, type){
-  if(type === "r32"){
+  if(type === "r32" || tie.home){
     const meta = tie.score ? `${tie.date} · ${tie.score}` : tie.date;
     return `
       <div class="bk-match" data-match="${tie.match}">

@@ -406,38 +406,66 @@
     "src": "Round of 32 — upcoming; auto-fills when FOX posts the highlight"
   },
   "Spain|Austria|Jul 2": {
-    "id": "",
-    "confidence": "",
-    "src": "Round of 32 — upcoming; auto-fills when FOX posts the highlight"
+    "id": "J9SxUH5VCSU",
+    "confidence": "verified",
+    "src": "FOX Soccer YouTube — Round of 32 highlight (Jul 5 FIFA schedule)"
   },
   "Portugal|Croatia|Jul 2": {
-    "id": "",
-    "confidence": "",
-    "src": "Round of 32 — upcoming; auto-fills when FOX posts the highlight"
+    "id": "J9yS7PsoEck",
+    "confidence": "verified",
+    "src": "FOX Soccer YouTube — Round of 32 highlight (Jul 5 FIFA schedule)"
   },
   "Switzerland|Algeria|Jul 2": {
-    "id": "",
-    "confidence": "",
-    "src": "Round of 32 — upcoming; auto-fills when FOX posts the highlight"
+    "id": "bSZEbYXssBI",
+    "confidence": "verified",
+    "src": "FOX Soccer YouTube — Round of 32 highlight (Jul 5 FIFA schedule)"
   },
   "Australia|Egypt|Jul 3": {
-    "id": "",
-    "confidence": "",
-    "src": "Round of 32 — upcoming; auto-fills when FOX posts the highlight"
+    "id": "ACWOG7t8Plk",
+    "confidence": "verified",
+    "src": "FOX Soccer YouTube — Round of 32 highlight (Jul 5 FIFA schedule)"
   },
   "Argentina|Cape Verde|Jul 3": {
-    "id": "",
-    "confidence": "",
-    "src": "Round of 32 — upcoming; auto-fills when FOX posts the highlight"
+    "id": "EC2jOKluGRI",
+    "confidence": "verified",
+    "src": "FOX Soccer YouTube — Round of 32 highlight (Jul 5 FIFA schedule)"
   },
   "Colombia|Ghana|Jul 3": {
-    "id": "",
-    "confidence": "",
-    "src": "Round of 32 — upcoming; auto-fills when FOX posts the highlight"
+    "id": "9TJRhuQOJuE",
+    "confidence": "verified",
+    "src": "FOX Soccer YouTube — Round of 32 highlight (Jul 5 FIFA schedule)"
   },
   "Switzerland|Bosnia and Herzegovina|Jun 18": {
     "id": "",
     "confidence": "",
     "src": "Group B; SUI 4-1 BIH; Jun 18; auto-fills when FOX posts"
+  },
+  "Canada|Morocco|Jul 4": {
+    "id": "QLFucR6SGr4",
+    "confidence": "verified",
+    "src": "FOX Soccer YouTube — Round of 16 highlight (Jul 5 FIFA schedule)"
+  },
+  "Paraguay|France|Jul 4": {
+    "id": "2ANrnnZEE6c",
+    "confidence": "verified",
+    "src": "FOX Soccer YouTube — Round of 16 highlight"
+  },
+  "Brazil|Norway|Jul 5": {
+    "id": ""
+  },
+  "Mexico|England|Jul 5": {
+    "id": ""
+  },
+  "Portugal|Spain|Jul 6": {
+    "id": ""
+  },
+  "United States|Belgium|Jul 6": {
+    "id": ""
+  },
+  "Argentina|Egypt|Jul 7": {
+    "id": ""
+  },
+  "Switzerland|Colombia|Jul 7": {
+    "id": ""
   }
 }
