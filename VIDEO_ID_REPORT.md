@@ -1,11 +1,11 @@
 # Video ID Report
 
-- Total `videoId` fields in file: **87**
-- Filled this run / total in JSON: **80**
-- Still empty in file: **7**
-- Verified: **80**  |  Best-guess: **0**
+- Total `videoId` fields in file: **96**
+- Filled this run / total in JSON: **87**
+- Still empty in file: **9**
+- Verified: **87**  |  Best-guess: **0**
 
-## Verified (80)
+## Verified (87)
 - South Korea vs Czechia (Jun 11) -> `QWoDfCkh7f8`  (FOX 'South Korea vs Czechia Highlights 🌎🏆 2026 FIFA World Cup™'; foxsports.com/watch page exists; Jun 11)
 - Mexico vs South Korea (Jun 18) -> `F1sMvm6D-0Y`  (FOX 'Mexico vs South Korea Extended Highlights 🌎🏆 2026 FIFA World Cup™' (Extended cut); Mexico 1-0; Jun 18)
 - South Africa vs South Korea (Jun 24) -> `A7PTebEdius`  (FOX 'South Africa vs South Korea Extended Highlights 🌎🏆 2026 FIFA World Cup™' (Extended cut); foxsports.com/watch page exists; Jun 24)
@@ -86,15 +86,24 @@
 - Mexico vs Ecuador (Jun 30) -> `UDH9nQPl67k`  (FOX 'Mexico vs Ecuador Highlights 🌎🏆'; Round of 32; Jun 30)
 - England vs DR Congo (Jul 1) -> `x24Ir5Ua4RQ`  (FOX 'England vs DR Congo Highlights 🌎🏆'; Round of 32; Jul 1)
 - Belgium vs Senegal (Jul 1) -> `OJ84ZgReAsE`  (FOX 'Belgium vs Senegal Highlights 🌎🏆'; Round of 32; Jul 1)
+- Spain vs Austria (Jul 2) -> `J9SxUH5VCSU`  (FOX Soccer YouTube — Round of 32 highlight (Jul 5 FIFA schedule))
+- Portugal vs Croatia (Jul 2) -> `J9yS7PsoEck`  (FOX Soccer YouTube — Round of 32 highlight (Jul 5 FIFA schedule))
+- Switzerland vs Algeria (Jul 2) -> `bSZEbYXssBI`  (FOX Soccer YouTube — Round of 32 highlight (Jul 5 FIFA schedule))
+- Australia vs Egypt (Jul 3) -> `ACWOG7t8Plk`  (FOX Soccer YouTube — Round of 32 highlight (Jul 5 FIFA schedule))
+- Argentina vs Cape Verde (Jul 3) -> `EC2jOKluGRI`  (FOX Soccer YouTube — Round of 32 highlight (Jul 5 FIFA schedule))
+- Colombia vs Ghana (Jul 3) -> `9TJRhuQOJuE`  (FOX Soccer YouTube — Round of 32 highlight (Jul 5 FIFA schedule))
+- Canada vs Morocco (Jul 4) -> `QLFucR6SGr4`  (FOX Soccer YouTube — Round of 16 highlight (Jul 5 FIFA schedule))
 
 ## Best-guess - double-check these (0)
 _none_
 
-## Present in JSON but no ID yet (7)
+## Present in JSON but no ID yet (9)
 - United States|Bosnia & Herz.|Jul 1
-- Spain|Austria|Jul 2
-- Portugal|Croatia|Jul 2
-- Switzerland|Algeria|Jul 2
-- Australia|Egypt|Jul 3
-- Argentina|Cape Verde|Jul 3
-- Colombia|Ghana|Jul 3
+- Switzerland|Bosnia and Herzegovina|Jun 18
+- Paraguay|France|Jul 4
+- Brazil|Norway|Jul 5
+- Mexico|England|Jul 5
+- Portugal|Spain|Jul 6
+- United States|Belgium|Jul 6
+- Argentina|Egypt|Jul 7
+- Switzerland|Colombia|Jul 7
