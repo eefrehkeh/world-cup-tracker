@@ -1,11 +1,11 @@
 # Video ID Report
 
 - Total `videoId` fields in file: **96**
-- Filled this run / total in JSON: **87**
-- Still empty in file: **9**
-- Verified: **87**  |  Best-guess: **0**
+- Filled this run / total in JSON: **88**
+- Still empty in file: **8**
+- Verified: **88**  |  Best-guess: **0**
 
-## Verified (87)
+## Verified (88)
 - South Korea vs Czechia (Jun 11) -> `QWoDfCkh7f8`  (FOX 'South Korea vs Czechia Highlights 🌎🏆 2026 FIFA World Cup™'; foxsports.com/watch page exists; Jun 11)
 - Mexico vs South Korea (Jun 18) -> `F1sMvm6D-0Y`  (FOX 'Mexico vs South Korea Extended Highlights 🌎🏆 2026 FIFA World Cup™' (Extended cut); Mexico 1-0; Jun 18)
 - South Africa vs South Korea (Jun 24) -> `A7PTebEdius`  (FOX 'South Africa vs South Korea Extended Highlights 🌎🏆 2026 FIFA World Cup™' (Extended cut); foxsports.com/watch page exists; Jun 24)
@@ -93,14 +93,14 @@
 - Argentina vs Cape Verde (Jul 3) -> `EC2jOKluGRI`  (FOX Soccer YouTube — Round of 32 highlight (Jul 5 FIFA schedule))
 - Colombia vs Ghana (Jul 3) -> `9TJRhuQOJuE`  (FOX Soccer YouTube — Round of 32 highlight (Jul 5 FIFA schedule))
 - Canada vs Morocco (Jul 4) -> `QLFucR6SGr4`  (FOX Soccer YouTube — Round of 16 highlight (Jul 5 FIFA schedule))
+- Paraguay vs France (Jul 4) -> `2ANrnnZEE6c`  (FOX Soccer YouTube — Round of 16 highlight)
 
 ## Best-guess - double-check these (0)
 _none_
 
-## Present in JSON but no ID yet (9)
+## Present in JSON but no ID yet (8)
 - United States|Bosnia & Herz.|Jul 1
 - Switzerland|Bosnia and Herzegovina|Jun 18
-- Paraguay|France|Jul 4
 - Brazil|Norway|Jul 5
 - Mexico|England|Jul 5
 - Portugal|Spain|Jul 6
