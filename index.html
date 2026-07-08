@@ -1441,6 +1441,24 @@ function dayNum(dateStr){
   return parseInt(parts[1], 10);
 }
 
+const MONTH_NUM = { jan:1, feb:2, mar:3, apr:4, may:5, jun:6, jul:7, aug:8, sep:9, oct:10, nov:11, dec:12 };
+function dateOrdinal(dateStr){
+  // "Jun 11" -> 611 ; "Jul 5" -> 705 (month-aware, so dates sort across months)
+  const [mon, d] = dateStr.split(" ");
+  return (MONTH_NUM[mon.toLowerCase().slice(0,3)] || 0) * 100 + parseInt(d, 10);
+}
+function dateLabel(dateStr){
+  const [mon, d] = dateStr.split(" ");
+  return `${mon.toUpperCase()} ${d}`;
+}
+// Every distinct match date across group stage AND knockouts, in chronological order.
+function getAllMatchDates(){
+  const dates = [];
+  DATA.forEach(g=> g.matches.forEach(m=> dates.push(m.date)) );
+  KNOCKOUTS.forEach(m=> dates.push(m.date) );
+  return [...new Set(dates)].sort((a,b)=>dateOrdinal(a)-dateOrdinal(b));
+}
+
 function parseScore(scoreStr){
   // "2–0" -> {home:2, away:0}; returns null if score unknown
   if(!scoreStr || scoreStr === "—") return null;
@@ -1674,29 +1692,34 @@ function renderByGroupView(){
 }
 
 function renderByDateView(){
-  const flat = getFlatMatches();
+  // Every match — group stage AND knockouts — bucketed by its calendar date.
+  const byDate = {};
+  const push = (m, extra) => {
+    if(!byDate[m.date]) byDate[m.date] = [];
+    byDate[m.date].push({...m, ...extra});
+  };
+  DATA.forEach(g=> g.matches.forEach(m=> push(m, {kind:"group", group:g.group})) );
+  KNOCKOUTS.forEach(m=> push(m, {kind:"ko"}) );
 
-  // Group by day number, preserving chronological order
-  const byDay = {};
-  flat.forEach(m=>{
-    if(!byDay[m.day]) byDay[m.day] = [];
-    byDay[m.day].push(m);
-  });
-
-  const sortedDays = Object.keys(byDay).map(Number).sort((a,b)=>a-b);
+  const sortedDates = Object.keys(byDate).sort((a,b)=>dateOrdinal(a)-dateOrdinal(b));
 
   let html = "";
-  sortedDays.forEach(day=>{
-    const matches = byDay[day];
-    const sectionId = `date-${day}`;
+  sortedDates.forEach(dateStr=>{
+    const matches = byDate[dateStr];
+    const sectionId = `date-${dateOrdinal(dateStr)}`;
     html += `<section class="group-section" id="${sectionId}">
       <div class="group-head date-head">
-        <div class="group-letter date-letter">JUN ${day}</div>
-        <div class="group-teams">${matches.length} ${matches.length===1?"match":"matches"} played</div>
+        <div class="group-letter date-letter">${dateLabel(dateStr)}</div>
+        <div class="group-teams">${matches.length} ${matches.length===1?"match":"matches"}</div>
       </div>`;
 
-    // Need original (un-spread) match objects from each group for accurate index lookup
-    matches.forEach((m, idxWithinDay)=>{
+    matches.forEach(m=>{
+      if(m.kind === "ko"){
+        html += renderMatchCard(m, null, "", "KO");
+        return;
+      }
+      // Group match: recompute the standings snapshot as of this match.
+      const day = dayNum(m.date);
       const groupObj = DATA.find(g=>g.group===m.group);
       const originalMatchesOnThisGroupAndDay = groupObj.matches.filter(gm=>dayNum(gm.date)===day);
       const cutoffIdx = originalMatchesOnThisGroupAndDay.findIndex(gm=>
@@ -2328,15 +2351,13 @@ function renderNav(){
   if(currentView === "group"){
     nav.innerHTML = DATA.map(g=>`<a href="javascript:void(0)" data-scroll="group-${g.group}">GRP ${g.group}</a>`).join("");
   } else if(currentView === "date"){
-    const days = [...new Set(DATA.flatMap(g=>g.matches.map(m=>dayNum(m.date))))].sort((a,b)=>a-b);
-    nav.innerHTML = days.map(d=>`<a href="javascript:void(0)" data-scroll="date-${d}">JUN ${d}</a>`).join("");
+    nav.innerHTML = getAllMatchDates().map(ds=>`<a href="javascript:void(0)" data-scroll="date-${dateOrdinal(ds)}">${dateLabel(ds)}</a>`).join("");
   } else if(currentView === "knockouts"){
     const rounds = [...new Set(KNOCKOUTS.map(m=>m.round))];
     nav.innerHTML = rounds.map((r,i)=>`<a href="javascript:void(0)" data-scroll="ko-${i}">${r.replace('Round of ','R')}</a>`).join("");
   } else if(currentView === "bracket"){
     let chips = `<a href="javascript:void(0)" data-scroll="bracket-section">BRACKET</a>`;
-    const days = [...new Set(DATA.flatMap(g=>g.matches.map(m=>dayNum(m.date))))].sort((a,b)=>a-b);
-    chips += days.map(d=>`<a href="javascript:void(0)" data-scroll="date-${d}">JUN ${d}</a>`).join("");
+    chips += getAllMatchDates().map(ds=>`<a href="javascript:void(0)" data-scroll="date-${dateOrdinal(ds)}">${dateLabel(ds)}</a>`).join("");
     nav.innerHTML = chips;
   } else {
     // country view — no jump nav (team chips handle navigation)
