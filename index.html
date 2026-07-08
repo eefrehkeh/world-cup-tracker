@@ -1796,19 +1796,19 @@ const R32 = [
 const R16 = [
   {match:89, date:"Jul 4", from:[73,74], home:"Canada", away:"Morocco", score:"0–3", winner:"Morocco"},
   {match:90, date:"Jul 4", from:[75,76], home:"Paraguay", away:"France", score:"0–1", winner:"France"},
-  {match:91, date:"Jul 5", from:[77,78], home:"Brazil", away:"Norway"},
-  {match:92, date:"Jul 5", from:[79,80], home:"Mexico", away:"England"},
-  {match:93, date:"Jul 6", from:[81,82], home:"Portugal", away:"Spain"},
-  {match:94, date:"Jul 6", from:[83,84], home:"United States", away:"Belgium"},
-  {match:95, date:"Jul 7", from:[85,86], home:"Argentina", away:"Egypt"},
-  {match:96, date:"Jul 7", from:[87,88], home:"Switzerland", away:"Colombia"},
+  {match:91, date:"Jul 5", from:[77,78], home:"Brazil", away:"Norway", score:"1–2", winner:"Norway"},
+  {match:92, date:"Jul 5", from:[79,80], home:"Mexico", away:"England", score:"2–3", winner:"England"},
+  {match:93, date:"Jul 6", from:[81,82], home:"Portugal", away:"Spain", score:"0–1", winner:"Spain"},
+  {match:94, date:"Jul 6", from:[83,84], home:"United States", away:"Belgium", score:"1–4", winner:"Belgium"},
+  {match:95, date:"Jul 7", from:[85,86], home:"Argentina", away:"Egypt", score:"3–2", winner:"Argentina"},
+  {match:96, date:"Jul 7", from:[87,88], home:"Switzerland", away:"Colombia", score:"0–0", winner:"Switzerland"},
 ];
 
 const QF = [
   {match:97, date:"Jul 9", from:[89,90], home:"France", away:"Morocco"},
-  {match:98, date:"Jul 10", from:[91,92]},
-  {match:99, date:"Jul 11", from:[93,94]},
-  {match:100, date:"Jul 11", from:[95,96]},
+  {match:98, date:"Jul 10", from:[91,92], home:"Norway", away:"England"},
+  {match:99, date:"Jul 11", from:[93,94], home:"Spain", away:"Belgium"},
+  {match:100, date:"Jul 11", from:[95,96], home:"Argentina", away:"Switzerland"},
 ];
 
 const SF = [
@@ -1859,12 +1859,12 @@ const KNOCKOUTS = [
   {round:"Round of 32", home:"Colombia", away:"Ghana", date:"Jul 3", score:"1–0", note:"Colombia beat Ghana 1-0 to reach the Round of 16.", venue:"", city:"", videoId:"9TJRhuQOJuE"},
   {round:"Round of 16", home:"Canada", away:"Morocco", date:"Jul 4", score:"0–3", note:"Morocco beat Canada 3-0 to reach the quarter-finals.", venue:"Houston Stadium", city:"Houston, USA", videoId:"QLFucR6SGr4"},
   {round:"Round of 16", home:"Paraguay", away:"France", date:"Jul 4", score:"0–1", note:"France beat Paraguay 1-0 to reach the quarter-finals.", venue:"Philadelphia Stadium", city:"Philadelphia, USA", videoId:"2ANrnnZEE6c"},
-  {round:"Round of 16", home:"Brazil", away:"Norway", date:"Jul 5", score:"—", note:"Kicks off Jul 5 — the FOX highlight fills in automatically once it's posted.", venue:"", city:"", videoId:""},
-  {round:"Round of 16", home:"Mexico", away:"England", date:"Jul 5", score:"—", note:"Kicks off Jul 5 — the FOX highlight fills in automatically once it's posted.", venue:"", city:"", videoId:""},
-  {round:"Round of 16", home:"Portugal", away:"Spain", date:"Jul 6", score:"—", note:"Kicks off Jul 6 — the FOX highlight fills in automatically once it's posted.", venue:"", city:"", videoId:""},
-  {round:"Round of 16", home:"United States", away:"Belgium", date:"Jul 6", score:"—", note:"Kicks off Jul 6 — the FOX highlight fills in automatically once it's posted.", venue:"", city:"", videoId:""},
-  {round:"Round of 16", home:"Argentina", away:"Egypt", date:"Jul 7", score:"—", note:"Kicks off Jul 7 — the FOX highlight fills in automatically once it's posted.", venue:"", city:"", videoId:""},
-  {round:"Round of 16", home:"Switzerland", away:"Colombia", date:"Jul 7", score:"—", note:"Kicks off Jul 7 — the FOX highlight fills in automatically once it's posted.", venue:"", city:"", videoId:""},
+  {round:"Round of 16", home:"Brazil", away:"Norway", date:"Jul 5", score:"1–2", note:"Norway stunned Brazil 2-1 to reach the quarter-finals.", venue:"", city:"", videoId:"vpcukTVSD8Q"},
+  {round:"Round of 16", home:"Mexico", away:"England", date:"Jul 5", score:"2–3", note:"England beat co-hosts Mexico 3-2 to reach the quarter-finals.", venue:"", city:"", videoId:"n7cA4k6TJbs"},
+  {round:"Round of 16", home:"Portugal", away:"Spain", date:"Jul 6", score:"0–1", note:"Spain beat Portugal 1-0 to reach the quarter-finals.", venue:"", city:"", videoId:"xINJD9fo6BM"},
+  {round:"Round of 16", home:"United States", away:"Belgium", date:"Jul 6", score:"1–4", note:"Belgium beat the United States 4-1 to reach the quarter-finals.", venue:"", city:"", videoId:"QL3kCTgeVKA"},
+  {round:"Round of 16", home:"Argentina", away:"Egypt", date:"Jul 7", score:"3–2", note:"Argentina fought back from 2-0 down to beat Egypt 3-2 and reach the quarter-finals.", venue:"", city:"", videoId:"XO3x8vm0Ijc"},
+  {round:"Round of 16", home:"Switzerland", away:"Colombia", date:"Jul 7", score:"0–0", note:"0-0 after extra time; Switzerland won 4-3 on penalties to reach the quarter-finals.", venue:"", city:"", videoId:"_uEzppRKcd0"},
 ];
 
 function renderKnockoutsView(){
